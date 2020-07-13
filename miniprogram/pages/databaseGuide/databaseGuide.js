@@ -27,7 +27,7 @@ Page({
         count: 1
       },
       success: res => {
-        // 在返回结果中会包含新创建的记录的 _id
+        // 在返回结果中会包含新创建的记录的 _id test
         this.setData({
           counterId: res._id,
           count: 1
