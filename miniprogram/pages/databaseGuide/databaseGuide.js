@@ -57,7 +57,7 @@ Page({
         this.setData({
           queryResult: JSON.stringify(res.data, null, 2)
         })
-        console.log('[数据库] [查询记录] 成功: ', res)
+        console.log('[数据库] [查询记录] 成1功: ', res)
       },
       fail: err => {
         wx.showToast({
