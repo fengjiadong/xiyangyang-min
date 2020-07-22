@@ -1,0 +1,23 @@
+<!--miniprogram/pages/home-page/home-page.wxml-->
+<view class="home-image-box">
+  <swiper class="swiper-bottom" indicator-dots="true" autoplay="true" circular="true">
+    <block wx:for="{{background}}" wx:key="*this">
+      <swiper-item>
+        <image class="swiper-item" src="{{item}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="type-choose-box">
+    <view class="type-choose-list">
+      <view class="type-back"></view>
+      <view class="type-title">门店自取</view>
+      <view class="type-text">免排队  可预约</view>
+    </view>
+    <view class="type-choose-list">
+      <view class="type-back"></view>
+      <view class="type-title">上门配送</view>
+      <view class="type-text">无接触  更安心</view>
+    </view>
+  </view>
+  <view class="button" bindtap="goOrder">开始点单</view>
+</view>

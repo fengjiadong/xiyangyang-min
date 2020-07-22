@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/order/order",
+    "pages/home-page/home-page",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -12,14 +14,46 @@
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
-    "pages/im/room/room"
+    "pages/im/room/room",
+    "pages/shopping-list/shopping",
+    "pages/my/my"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "青春遇上喜羊羊",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#04ADEF",
+    "color":"#424242",
+    "list": [
+      {
+        "pagePath": "pages/home-page/home-page",
+        "text": "首页",
+        "iconPath": "images/tabbar/home.jpg",
+        "selectedIconPath": "images/tabbar/home-active.jpg"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "点单",
+        "iconPath": "images/tabbar/order.jpg",
+        "selectedIconPath": "images/tabbar/order-active.jpg"
+      },
+      {
+        "pagePath": "pages/shopping-list/shopping",
+        "text": "购物车",
+        "iconPath": "images/tabbar/shop.jpg",
+        "selectedIconPath": "images/tabbar/shop-active.jpg"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/tabbar/my.jpg",
+        "selectedIconPath": "images/tabbar/my-active.jpg"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"
