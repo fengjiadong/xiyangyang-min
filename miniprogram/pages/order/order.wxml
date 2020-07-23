@@ -7,7 +7,7 @@
   </view>
   <view class="order-list-container">
     <view class="left-select-list">
-      <view wx:for="{{selectList}}" wx:key="key" data-index='{{index}}' class="select-list {{selected===index?'select-active':''}}" bindtap="typeSelect">{{item.title}}</view>
+      <view wx:for="{{selectList}}" wx:key="key" data-index='{{index}}' class="select-list {{selected===index?'select-active':''}}" bindtap="typeSelect">{{item.name}}</view>
     </view>
     <view class="right-select-content">
       <view class="food-list" wx:for="{{foodTypeList}}" wx:key="key">
