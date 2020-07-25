@@ -1,1 +1,152 @@
 /* miniprogram/pages/shopping-list/shopping.wxss */
+.shop-container {
+  padding: 16px 16px 86px;
+}
+
+.shop-list-module {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.select-box {
+  width: 24px;
+  height: 24px;
+  margin: 0 20px;
+  border: 1px solid #BDBBBB;
+  border-radius: 50%;
+}
+
+.all-select-box {
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  border: 1px solid #BDBBBB;
+  border-radius: 50%;
+}
+
+.select-box-active {
+  background-color: #04ADEF;
+  border-color: #04ADEF;
+}
+
+.shop-image {
+  width: 64px;
+  height: 66px;
+}
+
+.right-info-box {
+  flex: 1;
+  padding: 0 10px 10px;
+}
+
+.top-box {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+}
+
+.title-name {
+  font-size: 14px;
+  color: #424242;
+}
+
+.delete-button {
+  font-size: 14px;
+  color: #B52E24;
+}
+
+.bottom-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-box {
+  flex: 1;
+  font-size: 22px;
+  color: #FF2424;
+}
+
+.price-tip {
+  font-size: 12px;
+}
+
+.bottom-right-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete {
+  width: 24px;
+  height: 24px;
+  color: #04ADEF;
+  font-size: 20px;
+  text-align: center;
+  line-height: 22px;
+  border: 1px solid #04ADEF;
+  border-radius: 50%;
+}
+
+.delete-dis {
+  color: #BDBBBB;
+  border-color: #BDBBBB;
+}
+
+.add {
+  color: #ffffff;
+  background-color: #04ADEF;
+}
+
+.number {
+  width: 40px;
+  text-align: center;
+}
+
+.bottom-price-box {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 48px);
+  padding: 20px 24px;
+  background-color: #fff;
+}
+
+.all-select-text {
+  font-size: 14px;
+  color: #424242;
+}
+.total-price-box {
+  font-size: 22px;
+  color: #FF2424;
+}
+.second-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 auto;
+  font-size: 14px;
+  color: #424242;
+  text-align: right;
+}
+.total-text {
+  line-height: 30px;
+}
+.buy-button {
+  width: 66px;
+  height: 34px;
+  margin-left: 20px;
+  text-align: center;
+  line-height: 34px;
+  font-size: 18px;
+  color: #ffffff;
+  background-color: #04ADEF;
+  border-radius: 4px;
+}

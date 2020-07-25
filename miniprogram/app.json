@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/order/order",
     "pages/home-page/home-page",
+    "pages/shopping-list/shopping",
+    "pages/order/order",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -15,19 +16,19 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-    "pages/shopping-list/shopping",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/food-detail/food-detail"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "青春遇上喜羊羊",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "selectedColor": "#04ADEF",
-    "color":"#424242",
+    "color": "#424242",
     "list": [
       {
         "pagePath": "pages/home-page/home-page",

@@ -1,33 +1,11 @@
-// miniprogram/pages/order/order.js
+// miniprogram/pages/food-detail/food-detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    selected: 0,
-    selectList: [{ // 饮料类型选择
-        title: '热销推荐'
-      },
-      {
-        title: '烧仙草'
-      },
-      {
-        title: '鲜奶果茶'
-      },
-      {
-        title: '芝士系列'
-      },
-      {
-        title: '魔王奶茶'
-      },
-      {
-        title: '冰爽夏日'
-      },
-      {
-        title: '羊羊加料'
-      },
-    ],
+    imageUrl: '/images/img/food.png',
     foodTypeList: [{
         image: '/images/img/medal.png',
         name: '蓝颜知己',
@@ -64,8 +42,6 @@ Page({
         type: '常规',
       }
     ],
-    sizeContentWindow: true,
-    sizeName: '蓝颜知己',
     glassList: [{
         name: '常规一人份'
       },
@@ -148,33 +124,6 @@ Page({
     foodType: '常规',
     sugarType: '正常糖',
     iceType: '正常冰',
-    price: '19',
-
-  },
-  // 饮料类型选择
-  typeSelect(e) {
-    console.log(e);
-    let that = this;
-    let index = e.currentTarget.dataset.index
-    console.log(index);
-    that.setData({
-      selected: index,
-    })
-  },
-  // 规格选择
-  sizeContent(e) {
-    console.log(e);
-    const name = e.currentTarget.dataset.name;
-    this.setData({
-      sizeContentWindow: false,
-      sizeName: name,
-    })
-  },
-  // 隐藏遮罩层
-  hiddenwindow() {
-    this.setData({
-      sizeContentWindow: true,
-    })
   },
   // 杯型选择
   glassSelect(e) {
@@ -220,69 +169,59 @@ Page({
       iceType: that.data.iceList[index].name
     })
   },
-  // 跳转至详情页面
-  goDetail() {
-    wx: wx.navigateTo({
-      url: '../food-detail/food-detail',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
-    })
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

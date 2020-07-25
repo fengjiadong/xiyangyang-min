@@ -204,12 +204,14 @@
 .have-select-box {
   padding: 0 18px;
   line-height: 80rpx;
+  font-size: 12px;
   background-color: rgb(187, 187, 189, 0.2);
 }
 
 .bottom-price-box {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 22px 18px;
   background-color: #fff;
   border-radius: 10px;

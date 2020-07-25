@@ -1,2 +1,33 @@
 <!--miniprogram/pages/shopping-list/shopping.wxml-->
-<text>miniprogram/pages/shopping-list/shopping.wxml</text>
+<view class="shop-container">
+	<view class="shop-list-module" wx:for="{{shopList}}" wx:key="key">
+		<view wx:if="{{item.isActive === false}}" class="select-box" bindtap="isSelect" data-index="{{index}}"></view>
+		<view wx:else class="select-box select-box-active" bindtap="isSelect" data-index="{{index}}"></view>
+		<image class="shop-image" src="{{item.image}}"></image>
+		<view class="right-info-box">
+			<view class="top-box">
+				<view class="title-name">{{item.name}}</view>
+				<view class="delete-button" bindtap="deleteFood" data-index="{{index}}">删除</view>
+			</view>
+			<view class="bottom-box">
+				<view class="price-box">
+					<text class="price-tip">¥</text>{{item.price}}
+				</view>
+				<view class="bottom-right-box">
+					<view class="delete" bindtap="deleteNumber" data-index="{{index}}">-</view>
+					<view class="number">{{item.number}}</view>
+					<view class="delete add" bindtap="addNumber" data-index="{{index}}">+</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+<view class="bottom-price-box">
+	<view class="all-select-box {{isActive ===true?'select-box-active':'' }}" bindtap="isAllSelect"></view>
+	<view class="all-select-text">全选</view>
+	<view class="second-box">
+		<view class="total-text">合计：</view>
+		<view class="total-price-box">¥ {{totalPrice}}</view>
+	</view>
+	<view class="buy-button">购买</view>
+</view>
