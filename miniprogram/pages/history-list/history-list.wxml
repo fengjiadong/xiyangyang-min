@@ -1,0 +1,19 @@
+<!--miniprogram/pages/history-list/history-list.wxml-->
+<view class="history-container" wx:if="{{historyList.length!==0}}">
+	<view class="history-list" wx:for="{{historyList}}" wx:key="key" bindtap="goListDetail" data-index="{{index}}">
+		<image class="list-image" src="{{item.imageUrl}}"></image>
+		<view class="right-module">
+			<view class="list-title">{{item.title}}</view>
+			<view class="list-time">下单时间：{{item.time}}</view>
+			<view class="list-time list-price">总价： ¥{{item.price}}</view>
+			<view class="delete">删除</view>
+			<view class="again-button" catchtap="againOrder">再来一单</view>
+		</view>
+	</view>
+</view>
+<view wx:else class="no-list-container">
+	<view class="no-image-box">
+		<image class="no-image" src="../../images/img/no-list.png"></image>
+	</view>
+	<view class="no-text">暂无购买订单</view>
+</view>

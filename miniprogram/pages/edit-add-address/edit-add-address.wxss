@@ -1,0 +1,82 @@
+/* pages/edit-add-address/edit-add-address.wxss */
+.edit-container {
+  height: 100%;
+  padding: 0 16px;
+  background-color: #ffffff;
+}
+
+.list-box {
+  display: flex;
+  align-items: center;
+  padding: 14px 0 12px 0;
+  font-size: 14px;
+  color: #1F0606;
+  border-bottom: 1rpx solid #E9E9E9;
+}
+
+.gender-box {
+  display: flex;
+  width: 150px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.last-list-box {
+  margin-bottom: 40px;
+}
+
+.list-title {
+  width: 100px;
+  /* padding-right: 30px; */
+  font-size: 14px;
+  color: #1F0606;
+}
+
+.place-text {
+  color: #BDBBBB;
+}
+
+.gender-list,
+.tip-list {
+  width: 66px;
+  height: 28px;
+  /* margin-right: 12px; */
+  line-height: 28px;
+  text-align: center;
+  color: #000000;
+  font-size: 14px;
+  border: 1rpx solid #D4D4D4;
+}
+
+.gender-list:last-child {
+  margin-right: 0;
+}
+
+.gender-active {
+  color: #ffffff;
+  border-color: #04ADEF;
+  background-color: #04ADEF;
+}
+
+.list-input {
+  flex: 1;
+}
+
+.tip-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.save-button {
+  width: 282px;
+  height: 44px;
+  margin: 0 auto;
+  line-height: 44px;
+  text-align: center;
+  font-size: 22px;
+  color: #ffffff;
+  background-color: #04ADEF;
+  border-radius: 20px;
+}

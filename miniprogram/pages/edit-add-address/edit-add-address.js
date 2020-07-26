@@ -1,28 +1,38 @@
-// miniprogram/pages/my/my.js
+// pages/edit-add-address/edit-add-address.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    genderList: ['男', '女'],
+    gender: 0,
+    tipList: ['家', '公司', '学校'],
+    tip: Number,
+    name: '',
+    phone: '',
+    address: ''
   },
-  // 调转至购物车
-  goShopTaxi() {
-    wx.switchTab({
-      url: '../shopping-list/shopping',
+  // 性别选择
+  genderSeclect(e) {
+    const index = e.currentTarget.dataset.index;
+    console.log(index);
+    this.setData({
+      gender: index
     })
   },
-  // 调转至订单历史
-  goHistoryList() {
-    wx.navigateTo({
-      url: '../history-list/history-list',
+  // 标签选择
+  tipSelect(e) {
+    const index = e.currentTarget.dataset.index;
+    console.log(index);
+    this.setData({
+      tip: index
     })
   },
-  // 调转至收获地址
-  goAddressList() {
-    wx.navigateTo({
-      url: '../address-list/address-list',
+  // 保存
+  save(){
+    wx.navigateBack({
+      delta: 1,
     })
   },
   /**

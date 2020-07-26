@@ -1,0 +1,100 @@
+/* miniprogram/pages/address-list/address-list.wxss */
+.address-container {
+  padding: 20px 16px 0;
+}
+
+.address-list {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.address-top {
+  padding-bottom: 4px;
+  font-size: 16px;
+  color: #1F0606;
+}
+
+.right-padding {
+  padding-right: 10px;
+}
+
+.address-bottom {
+  padding-right: 20px;
+  font-size: 12px;
+  color: #7B7B7B;
+}
+
+.address-type {
+  display: block;
+  float: left;
+  width: 32px;
+  margin-right: 4px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #04ADEF;
+  border-radius: 2px;
+}
+
+.left-module {
+  flex: 1;
+}
+
+.right-edit {
+  width: 30px;
+  height: 30px;
+  background-color: #04ADEF;
+}
+
+.add-address-button {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  font-size: 22px;
+  color: #ffffff;
+  background-color: #04ADEF;
+}
+
+.no-address-container {
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.address-image {
+  width: 60px;
+  height: 76px;
+  margin: 70px auto 10px;
+  background-color: #04ADEF;
+}
+
+.first-text {
+  padding-bottom: 5px;
+  text-align: center;
+  font-size: 18px;
+  color: #424242;
+}
+
+.second-text {
+  padding-bottom: 40px;
+  text-align: center;
+  font-size: 12px;
+  color: #424242;
+}
+
+.no-add-button {
+  width: 282px;
+  height: 44px;
+  margin: 0 auto;
+  line-height: 44px;
+  text-align: center;
+  font-size: 22px;
+  color: #ffffff;
+  background-color: #04ADEF;
+  border-radius: 20px;
+}

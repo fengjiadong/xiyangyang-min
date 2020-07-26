@@ -64,7 +64,19 @@ Page({
     ],
     isActive: false,
     deleteIs: false,
-    totalPrice: 123
+    totalPrice: 123,
+    sizeContentWindow: true,
+    time: '12:00',
+    titleList: [{
+        name: '上门自取'
+      },
+      {
+        name: '外卖配送'
+      }
+    ],
+    titltTabActive: 0,
+    addressArray: ['地址1', '地址2', '地址3'],
+    address: 0
   },
   // 是否选中
   isSelect(e) {
@@ -74,7 +86,7 @@ Page({
     list[index].isActive = !list[index].isActive;
     this.setData({
       shopList: list,
-      isActive:false
+      isActive: false
     })
   },
   // 是否全选
@@ -92,12 +104,12 @@ Page({
     };
     if (isActive === true) {
       for (let i = 0; i < list.length; i++) {
-         list[i].isActive = true
+        list[i].isActive = true
       }
     } else {
       for (let i = 0; i < list.length; i++) {
         list[i].isActive = false
-     }
+      }
     }
     this.setData({
       shopList: list,
@@ -137,8 +149,49 @@ Page({
       shopList: list
     })
   },
-
-
+  //购买
+  buy() {
+    this.setData({
+      sizeContentWindow: false
+    })
+    wx.setNavigationBarTitle({
+      title: '提交订单'
+    })
+  },
+  // 取消
+  hidden() {
+    this.setData({
+      sizeContentWindow: true
+    })
+  },
+  // 时间选择
+  bindTimeChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      time: e.detail.value
+    })
+  },
+  // 类型切换
+  titleTabSelect(e) {
+    console.log(e);
+    const index = e.currentTarget.dataset.index;
+    this.setData({
+      titltTabActive: index
+    })
+  },
+  // 地址选择
+  addressChange: function (e) {
+    console.log('地址选择', e.detail.value)
+    this.setData({
+      address: e.detail.value
+    })
+  },
+  // 立即支付
+  immediateBuy(){
+   wx.navigateTo({
+     url: '../shopping-list-detail/shopping-list-detail',
+   })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

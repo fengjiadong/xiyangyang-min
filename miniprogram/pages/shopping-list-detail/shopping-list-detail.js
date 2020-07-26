@@ -1,4 +1,4 @@
-// miniprogram/pages/my/my.js
+// miniprogram/pages/shopping-list-detail/shopping-list-detail.js
 Page({
 
   /**
@@ -7,24 +7,7 @@ Page({
   data: {
 
   },
-  // 调转至购物车
-  goShopTaxi() {
-    wx.switchTab({
-      url: '../shopping-list/shopping',
-    })
-  },
-  // 调转至订单历史
-  goHistoryList() {
-    wx.navigateTo({
-      url: '../history-list/history-list',
-    })
-  },
-  // 调转至收获地址
-  goAddressList() {
-    wx.navigateTo({
-      url: '../address-list/address-list',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,0 +1,27 @@
+<!--pages/edit-add-address/edit-add-address.wxml-->
+<view class="edit-container">
+	<view class="list-box">
+		<view class="list-title">收货人姓名</view>
+		<input class="list-input" placeholder-class="place-text" placeholder="请填写收货人姓名" value="{{name}}"></input>
+	</view>
+	<view class="list-box">
+		<view class="gender-box">
+			<view class="gender-list {{gender===index?'gender-active':''}}" wx:for="{{genderList}}" wx:key="key" bindtap="genderSeclect" data-index="{{index}}">{{item}}</view>
+		</view>
+	</view>
+	<view class="list-box">
+		<view class="list-title">手机号码</view>
+		<input type="number" class="list-input" placeholder-class="place-text" placeholder="请填写收货人手机号" value="{{phone}}"></input>
+	</view>
+	<view class="list-box">
+		<view class="list-title">详细地址</view>
+		<input class="list-input" placeholder-class="place-text" placeholder="门牌号、单元号" value="{{address}}"></input>
+	</view>
+	<view class="list-box last-list-box">
+		<view class="list-title">标签</view>
+		<view class="tip-box">
+			<view class="tip-list {{tip===index?'gender-active':''}}" wx:for="{{tipList}}" wx:key="key" bindtap="tipSelect" data-index="{{index}}">{{item}}</view>
+		</view>
+	</view>
+	<view class="save-button" bindtap="save">保存</view>
+</view>

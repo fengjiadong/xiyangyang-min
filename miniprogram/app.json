@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/home-page/home-page",
+    "pages/address-list/address-list",
+    "pages/history-list/history-list",
+    "pages/my/my",
     "pages/shopping-list/shopping",
     "pages/order/order",
     "pages/index/index",
@@ -16,8 +19,9 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-    "pages/my/my",
-    "pages/food-detail/food-detail"
+    "pages/food-detail/food-detail",
+    "pages/shopping-list-detail/shopping-list-detail",
+    "pages/edit-add-address/edit-add-address"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

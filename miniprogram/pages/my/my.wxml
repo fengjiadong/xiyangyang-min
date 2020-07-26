@@ -1,2 +1,24 @@
 <!--miniprogram/pages/my/my.wxml-->
-<text>miniprogram/pages/my/my.wxml</text>
+<view class="center-image-box">
+	<image class="image-my" src="../../images/img/my.png"></image>
+	<view class="my-title">喜羊羊</view>
+</view>
+<view class="center-container">
+	<view class="center-module-box">
+		<view class="module-list-box" bindtap="goShopTaxi">
+			<view class="iconfont title-before-icon">icon</view>
+			<view class="title-list">购物车</view>
+			<view class="iconfont right-icon">></view>
+		</view>
+		<view class="module-list-box" bindtap="goHistoryList">
+			<view class="iconfont title-before-icon">icon</view>
+			<view class="title-list">订单历史</view>
+			<view class="iconfont right-icon">></view>
+		</view>
+		<view class="module-list-box" bindtap="goAddressList">
+			<view class="iconfont title-before-icon">icon</view>
+			<view class="title-list">收获地址</view>
+			<view class="iconfont right-icon">></view>
+		</view>
+	</view>
+</view>
