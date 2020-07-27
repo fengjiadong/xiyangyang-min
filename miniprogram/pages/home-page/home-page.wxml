@@ -9,16 +9,18 @@
 	</swiper>
 	<view class="type-choose-box">
 		<view class="type-choose-list">
-			<view class="type-back">
+			<!-- <view class="type-back">
 				<view class="iconfont icon-kafei"></view>
-			</view>
+			</view> -->
+			<image class="type-back" src="../../images/img/home-two.png"></image>
 			<view class="type-title">门店自取</view>
 			<view class="type-text">免排队 可预约</view>
 		</view>
 		<view class="type-choose-list">
-			<view class="type-back">
+			<!-- <view class="type-back">
 				<view class="iconfont icon-cycleqiche"></view>
-			</view>
+			</view> -->
+			<image class="type-back" src="../../images/img/home-one.png"></image>
 			<view class="type-title">上门配送</view>
 			<view class="type-text">无接触 更安心</view>
 		</view>

@@ -30,9 +30,9 @@
   width: 80px;
   height: 80px;
   margin: 0 auto;
-  line-height: 80px;
+  /* line-height: 80px; */
   border-radius: 50%;
-  background-color: #04ADEF;
+  /* background-color: #04ADEF; */
 }
 
 .icon-kafei,

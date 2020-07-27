@@ -21,6 +21,7 @@
 <!-- 没有地址显示信息 -->
 <view wx:else class="no-address-container">
    <view class="address-image iconfont icon-weizhi"></view>
+	 <!-- <image class="address-image" src="../../images/img/address.png"></image> -->
    <view class="first-text">没有收获地址</view>
    <view class="second-text">点击添加新地址可添加</view>
    <view class="no-add-button" bindtap="addAddress">添加新地址</view>

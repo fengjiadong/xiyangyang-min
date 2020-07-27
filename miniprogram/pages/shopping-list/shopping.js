@@ -102,7 +102,7 @@ Page({
       this.setData({
         priceList: priceList
       })
-      let total = this.data.totalPrice;
+      let total = 0;
 
       this.data.priceList.forEach(ele => {
         total = total + ele.price * ele.num;
@@ -112,8 +112,18 @@ Page({
         totalPrice: total
       })
     } else if (list[index].isActive === false) {
+      console.log(this.data.shopList)
       priceList.splice(index, 1);
       console.log(priceList);
+      let total = 0;
+
+      this.data.priceList.forEach(ele => {
+        total = total + ele.price * ele.num;
+      })
+      this.setData({
+        totalPrice: total,
+        priceList: priceList
+      })
     }
 
   },

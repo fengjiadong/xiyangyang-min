@@ -31,7 +31,7 @@
 		<view wx:else class="iconfont icon-duihao2 icon-all-active" bindtap="isAllSelect"></view>
 		<view class="all-select-text">全选</view>
 		<view class="second-all-box">
-			<view class="have-choose-food">已选择{{totalNum}}份商品</view>
+			<view class="have-choose-food">已选择{{priceList.length}}份商品</view>
 			<view class="second-box">
 				<view class="total-text">合计：</view>
 				<view class="total-price-box">¥ {{totalPrice}}</view>

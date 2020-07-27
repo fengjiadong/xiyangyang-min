@@ -13,13 +13,15 @@
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
 		<view class="module-list-box" bindtap="goHistoryList">
-			<view class="iconfont title-before-icon icon-59"></view>
+			<!-- <view class="iconfont title-before-icon icon-59"></view> -->
+			<image class="taxi-image" src="../../images/img/time.png"></image>
 			<view class="title-list">订单历史</view>
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
 		<view class="module-list-box" bindtap="goAddressList">
-			<view class="iconfont title-before-icon icon-weizhi1"></view>
-			<view class="title-list">收获地址</view>
+			<!-- <view class="iconfont title-before-icon icon-weizhi1"></view> -->
+			<image class="taxi-image" src="../../images/img/position.png"></image>
+			<view class="title-list">收货地址</view>
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
 	</view>

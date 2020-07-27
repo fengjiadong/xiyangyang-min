@@ -5,7 +5,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    foodList: [{
+        image: '/images/img/medal.png',
+        name: '杨枝甘露',
+        selectType: '常规、正常冰、正常糖',
+        num: 1,
+        price: 9
+      },
+      {
+        image: '/images/img/medal.png',
+        name: '杨枝甘露',
+        selectType: '常规、正常冰、正常糖',
+        num: 1,
+        price: 9
+      },
+    ],
+    totalPrice: 18,
   },
 
   /**
