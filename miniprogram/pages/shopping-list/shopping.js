@@ -6,77 +6,80 @@ Page({
    */
   data: {
     shopList: [{
-        id: '123',
-        image: '/images/img/taxi-one.png',
-        price: '19',
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-two.png',
-        price: '19',
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-one.png',
-        price: '19',
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-one.png',
-        price: '19',
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-two.png',
-        price: '19',
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-one.png',
-        price: '19',
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-two.png',
-        price: '19',
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
+      id: '123',
+      image: '/images/img/taxi-one.png',
+      price: 10,
+      isActive: false,
+      name: '蓝颜知己',
+      number: 1,
+    },
+    {
+      id: '123',
+      image: '/images/img/taxi-two.png',
+      price: 11,
+      isActive: false,
+      name: '蓝颜知己',
+      number: 1,
+    },
+    {
+      id: '123',
+      image: '/images/img/taxi-one.png',
+      price: 12,
+      isActive: false,
+      name: '蓝颜知己',
+      number: 1,
+    },
+    {
+      id: '123',
+      image: '/images/img/taxi-one.png',
+      price: 13,
+      isActive: false,
+      name: '蓝颜知己',
+      number: 1,
+    },
+    {
+      id: '123',
+      image: '/images/img/taxi-two.png',
+      price: 14,
+      isActive: false,
+      name: '蓝颜知己',
+      number: 1,
+    },
+    {
+      id: '123',
+      image: '/images/img/taxi-one.png',
+      price: 15,
+      isActive: false,
+      name: '蓝颜知己',
+      number: 1,
+    },
+    {
+      id: '123',
+      image: '/images/img/taxi-two.png',
+      price: '16',
+      isActive: false,
+      name: '蓝颜知己',
+      number: 1,
+    },
     ],
     isActive: false,
     deleteIs: false,
-    totalPrice: 123,
+    totalPrice: 0, // 合计总价
     sizeContentWindow: true,
     time: '12:00',
     titleList: [{
-        name: '上门自取'
-      },
-      {
-        name: '外卖配送'
-      }
+      name: '上门自取'
+    },
+    {
+      name: '外卖配送'
+    }
     ],
     titltTabActive: 0,
+    titltTabName: '上门自取',
     addressArray: ['地址1', '地址2', '地址3'],
-    address: 0
+    address: 0,
+    totalNum: 7,
+    priceList: []
   },
   // 是否选中
   isSelect(e) {
@@ -88,6 +91,31 @@ Page({
       shopList: list,
       isActive: false
     })
+    let priceList = this.data.priceList;
+
+    if (list[index].isActive === true) {
+      console.log(list[index].price);
+      priceList.push({
+        price: list[index].price,
+        num: list[index].number
+      });
+      this.setData({
+        priceList: priceList
+      })
+      let total = this.data.totalPrice;
+
+      this.data.priceList.forEach(ele => {
+        total = total + ele.price * ele.num;
+      })
+      console.log(total);
+      this.setData({
+        totalPrice: total
+      })
+    } else if (list[index].isActive === false) {
+      priceList.splice(index, 1);
+      console.log(priceList);
+    }
+
   },
   // 是否全选
   isAllSelect() {
@@ -174,9 +202,13 @@ Page({
   // 类型切换
   titleTabSelect(e) {
     console.log(e);
-    const index = e.currentTarget.dataset.index;
+    // const index = e.currentTarget.dataset.index;
+    // this.setData({
+    //   titltTabActive: index
+    // })
+    const name = e.currentTarget.dataset.name;
     this.setData({
-      titltTabActive: index
+      titltTabName: name
     })
   },
   // 地址选择
@@ -187,10 +219,10 @@ Page({
     })
   },
   // 立即支付
-  immediateBuy(){
-   wx.navigateTo({
-     url: '../shopping-list-detail/shopping-list-detail',
-   })
+  immediateBuy() {
+    wx.navigateTo({
+      url: '../shopping-list-detail/shopping-list-detail',
+    })
   },
   /**
    * 生命周期函数--监听页面加载

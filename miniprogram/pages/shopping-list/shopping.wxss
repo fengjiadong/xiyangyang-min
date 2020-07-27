@@ -14,16 +14,16 @@
 }
 
 .select-box {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   margin: 0 20px;
   border: 1px solid #BDBBBB;
   border-radius: 50%;
 }
 
 .all-select-box {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   margin-right: 6px;
   border: 1px solid #BDBBBB;
   border-radius: 50%;
@@ -32,6 +32,23 @@
 .select-box-active {
   background-color: #04ADEF;
   border-color: #04ADEF;
+}
+
+.icon-active {
+  margin: 0 20px;
+  font-size: 24px;
+  color: #04ADEF;
+}
+
+.icon-all-active {
+  margin-right: 6px;
+  font-size: 24px;
+  color: #04ADEF;
+}
+
+.delete-icon {
+  font-size: 24px;
+  color: #04ADEF;
 }
 
 .shop-image {
@@ -128,8 +145,17 @@
   color: #FF2424;
 }
 
-.second-box {
+.second-all-box {
   flex: 1;
+}
+
+.have-choose-food {
+  font-size: 14px;
+  color: #424242;
+  text-align: center;
+}
+
+.second-box {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -172,9 +198,9 @@
   width: 332px;
   padding-bottom: 20px;
   margin: 0 auto;
-  /* border-radius: 10px; */
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 10px;
+  /* border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px; */
   background-color: #fff;
 }
 
@@ -193,9 +219,16 @@
   background-color: rgb(105, 118, 119, 0.1);
 }
 
-.blue-list {
+.left-blue-list {
   color: #fff;
   background-color: #04ADEF;
+  border-top-left-radius: 10px;
+}
+
+.right-blue-list {
+  color: #fff;
+  background-color: #04ADEF;
+  border-top-right-radius: 10px;
 }
 
 .padding-container {
@@ -216,6 +249,13 @@
 
 .time-input {
   flex: 1;
+  line-height: 24px;
+  font-size: 14px;
+  color: #424242;
+}
+
+.zhan-input {
+  flex: 1;
   font-size: 14px;
   color: #BDBBBB;
 }
@@ -231,6 +271,7 @@
   background-color: #04ADEF;
   border-radius: 12px;
 }
+
 .close-button {
   width: 100rpx;
   height: 100rpx;

@@ -1,40 +1,56 @@
 /* miniprogram/pages/my/my.wxss */
 
 .center-image-box {
-  padding: 20px 0 30px;
+  padding: 20px 0 0;
   margin: 0 auto;
 }
 
 .image-my {
   width: 100px;
   height: 100px;
-  margin-bottom: 10px;
   border-radius: 50%;
 }
 
 .my-title {
+  padding: 10px 20px 30px;
   text-align: center;
   font-size: 20px;
   color: #000000;
 }
+
 .center-container {
   padding: 0px 16px;
   border-radius: 6px;
 }
+
 .center-module-box {
   padding: 0 12px 0 20px;
   background-color: #fff;
 }
+
 .module-list-box {
-   display: flex;
-   align-items: center;
-   padding: 20px 0;
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
 }
+
+.taxi-image {
+  width: 26px;
+  height: 26px;
+}
+
 .title-before-icon {
   width: 26px;
   height: 26px;
+  font-size: 24px;
   color: #04ADEF;
 }
+
+.right-icon {
+  font-size: 20px;
+  color: #0D0D0D;
+}
+
 .title-list {
   flex: 1;
   padding-left: 18px;

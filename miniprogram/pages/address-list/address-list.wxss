@@ -44,9 +44,8 @@
 }
 
 .right-edit {
-  width: 30px;
-  height: 30px;
-  background-color: #04ADEF;
+  font-size: 22px;
+  color: #7B7B7B;
 }
 
 .add-address-button {
@@ -70,9 +69,12 @@
   width: 60px;
   height: 76px;
   margin: 70px auto 10px;
-  background-color: #04ADEF;
 }
-
+.address-image {
+  line-height: 76px;
+  font-size: 60px;
+  color: #04ADEF;
+}
 .first-text {
   padding-bottom: 5px;
   text-align: center;

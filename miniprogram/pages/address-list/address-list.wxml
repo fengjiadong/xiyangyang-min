@@ -13,14 +13,14 @@
 					<text>{{item.address}}</text>
 				</view>
 			</view>
-			<view class="right-edit"></view>
+			<view class="right-edit iconfont icon-bianji"></view>
 		</view>
 	</view>
 	<view class="add-address-button" bindtap="addAddress">添加新地址</view>
 </view>
 <!-- 没有地址显示信息 -->
 <view wx:else class="no-address-container">
-   <view class="address-image"></view>
+   <view class="address-image iconfont icon-weizhi"></view>
    <view class="first-text">没有收获地址</view>
    <view class="second-text">点击添加新地址可添加</view>
    <view class="no-add-button" bindtap="addAddress">添加新地址</view>

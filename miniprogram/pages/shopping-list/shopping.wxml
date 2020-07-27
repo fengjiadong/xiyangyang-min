@@ -3,7 +3,8 @@
 	<view class="shop-container">
 		<view class="shop-list-module" wx:for="{{shopList}}" wx:key="key">
 			<view wx:if="{{item.isActive === false}}" class="select-box" bindtap="isSelect" data-index="{{index}}"></view>
-			<view wx:else class="select-box select-box-active" bindtap="isSelect" data-index="{{index}}"></view>
+			<view wx:else class="iconfont icon-duihao2 icon-active" bindtap="isSelect" data-index="{{index}}"></view>
+			<!-- <view  class="select-box select-box-active" bindtap="isSelect" data-index="{{index}}"></view> -->
 			<image class="shop-image" src="{{item.image}}"></image>
 			<view class="right-info-box">
 				<view class="top-box">
@@ -15,20 +16,26 @@
 						<text class="price-tip">¥</text>{{item.price}}
 					</view>
 					<view class="bottom-right-box">
-						<view class="delete" bindtap="deleteNumber" data-index="{{index}}">-</view>
+						<!-- <view class="delete" bindtap="deleteNumber" data-index="{{index}}">-</view> -->
+						<view class="iconfont icon-remove delete-icon" bindtap="deleteNumber" data-index="{{index}}"></view>
 						<view class="number">{{item.number}}</view>
-						<view class="delete add" bindtap="addNumber" data-index="{{index}}">+</view>
+						<!-- <view class="delete add" bindtap="addNumber" data-index="{{index}}">+</view> -->
+						<view class="iconfont icon-jiahao delete-icon" bindtap="addNumber" data-index="{{index}}"></view>
 					</view>
 				</view>
 			</view>
 		</view>
 	</view>
 	<view class="bottom-price-box">
-		<view class="all-select-box {{isActive ===true?'select-box-active':'' }}" bindtap="isAllSelect"></view>
+		<view wx:if="{{isActive ===false}}" class="all-select-box " bindtap="isAllSelect"></view>
+		<view wx:else class="iconfont icon-duihao2 icon-all-active" bindtap="isAllSelect"></view>
 		<view class="all-select-text">全选</view>
-		<view class="second-box">
-			<view class="total-text">合计：</view>
-			<view class="total-price-box">¥ {{totalPrice}}</view>
+		<view class="second-all-box">
+			<view class="have-choose-food">已选择{{totalNum}}份商品</view>
+			<view class="second-box">
+				<view class="total-text">合计：</view>
+				<view class="total-price-box">¥ {{totalPrice}}</view>
+			</view>
 		</view>
 		<view class="buy-button" bindtap="buy">购买</view>
 	</view>
@@ -38,9 +45,11 @@
 <view class="window-container" hidden="{{sizeContentWindow}}">
 	<view class="list-container">
 		<view class="list-title-box">
-			<view class="title-list {{titltTabActive===index?'blue-list':''}}" wx:for="{{titleList}}" wx:key="key" catchtap="titleTabSelect" data-index="{{index}}">{{item.name}}</view>
+			<!-- <view class="title-list {{titltTabActive===idnex?'right-blue-list':''}}" wx:for="{{titleList}}" wx:key="key" catchtap="titleTabSelect" data-index="{{index}}">{{item.name}}</view> -->
+			<view class="title-list {{titltTabName==='上门自取'?'left-blue-list':''}}" catchtap="titleTabSelect" data-name="上门自取">上门自取</view>
+			<view class="title-list {{titltTabName==='外卖配送'?'right-blue-list':''}}" catchtap="titleTabSelect" data-name="外卖配送">外卖配送</view>
 		</view>
-		<view wx:if="{{titltTabActive===0}}" class="padding-container">
+		<view wx:if="{{titltTabName== '上门自取'}}" class="padding-container">
 			<view class="write-box">
 				<view class="write-title">自取时间：</view>
 				<picker class="time-input" mode="time" value="{{time}}" bindchange="bindTimeChange">
@@ -51,10 +60,10 @@
 			</view>
 			<view class="write-box">
 				<view class="write-title">预留电话：</view>
-				<input type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="time-input"></input>
+				<input type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="zhan-input"></input>
 			</view>
 		</view>
-		<view wx:if="{{titltTabActive===1}}" class="padding-container">
+		<view wx:if="{{titltTabName== '外卖配送'}}" class="padding-container">
 			<view class="write-box">
 				<view class="write-title">收获地址：</view>
 				<picker class="time-input" value="{{address}}" range="{{addressArray}}" bindchange="addressChange">
@@ -65,7 +74,7 @@
 			</view>
 			<view class="write-box">
 				<view class="write-title">预留电话：</view>
-				<input type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="time-input"></input>
+				<input type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="zhan-input"></input>
 			</view>
 		</view>
 		<view class="immediately-buy" catchtap="immediateBuy">立即支付</view>

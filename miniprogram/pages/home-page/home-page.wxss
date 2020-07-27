@@ -2,13 +2,16 @@
 .home-image-box {
   padding: 0 16px;
 }
+
 .swiper-bottom {
   margin-bottom: 50px;
 }
+
 .swiper-item {
   width: 343px;
   height: 150px;
 }
+
 .type-choose-box {
   display: flex;
   justify-content: space-between;
@@ -17,27 +20,43 @@
   margin-bottom: 50px;
   background-color: #ffffff;
 }
+
 .type-choose-list {
   width: 50%;
   text-align: center;
 }
+
 .type-back {
   width: 80px;
   height: 80px;
   margin: 0 auto;
+  line-height: 80px;
   border-radius: 50%;
   background-color: #04ADEF;
 }
+
+.icon-kafei,
+.icon-cycleqiche {
+  font-size: 36px;
+  color: #ffffff;
+}
+
+.icon-cycleqiche {
+  line-height: 88px;
+}
+
 .type-title {
-  padding-top:10px;
+  padding-top: 10px;
   font-size: 20px;
   color: #1F0606;
   font-weight: bold;
 }
+
 .type-text {
   font-size: 10px;
   color: #7E7B7B;
 }
+
 .button {
   width: 282px;
   height: 44px;
