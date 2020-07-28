@@ -60,7 +60,7 @@
 			</view>
 			<view class="write-box">
 				<view class="write-title">预留电话：</view>
-				<input type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="zhan-input"></input>
+				<input value="{{onePhone}}" bindinput="getOneValue" type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="zhan-input"></input>
 			</view>
 		</view>
 		<view wx:if="{{titltTabName== '外卖配送'}}" class="padding-container">
@@ -74,7 +74,7 @@
 			</view>
 			<view class="write-box">
 				<view class="write-title">预留电话：</view>
-				<input type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="zhan-input"></input>
+				<input bindinput="getTwoValue" value="{{twoPhone}}" type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="zhan-input"></input>
 			</view>
 		</view>
 		<view class="immediately-buy" catchtap="immediateBuy">立即支付</view>

@@ -6,61 +6,61 @@ Page({
    */
   data: {
     shopList: [{
-      id: '123',
-      image: '/images/img/taxi-one.png',
-      price: 10,
-      isActive: false,
-      name: '蓝颜知己',
-      number: 1,
-    },
-    {
-      id: '123',
-      image: '/images/img/taxi-two.png',
-      price: 11,
-      isActive: false,
-      name: '蓝颜知己',
-      number: 1,
-    },
-    {
-      id: '123',
-      image: '/images/img/taxi-one.png',
-      price: 12,
-      isActive: false,
-      name: '蓝颜知己',
-      number: 1,
-    },
-    {
-      id: '123',
-      image: '/images/img/taxi-one.png',
-      price: 13,
-      isActive: false,
-      name: '蓝颜知己',
-      number: 1,
-    },
-    {
-      id: '123',
-      image: '/images/img/taxi-two.png',
-      price: 14,
-      isActive: false,
-      name: '蓝颜知己',
-      number: 1,
-    },
-    {
-      id: '123',
-      image: '/images/img/taxi-one.png',
-      price: 15,
-      isActive: false,
-      name: '蓝颜知己',
-      number: 1,
-    },
-    {
-      id: '123',
-      image: '/images/img/taxi-two.png',
-      price: '16',
-      isActive: false,
-      name: '蓝颜知己',
-      number: 1,
-    },
+        id: '123',
+        image: '/images/img/taxi-one.png',
+        price: 10,
+        isActive: false,
+        name: '蓝颜知己',
+        number: 1,
+      },
+      {
+        id: '123',
+        image: '/images/img/taxi-two.png',
+        price: 11,
+        isActive: false,
+        name: '蓝颜知己',
+        number: 1,
+      },
+      {
+        id: '123',
+        image: '/images/img/taxi-one.png',
+        price: 12,
+        isActive: false,
+        name: '蓝颜知己',
+        number: 1,
+      },
+      {
+        id: '123',
+        image: '/images/img/taxi-one.png',
+        price: 13,
+        isActive: false,
+        name: '蓝颜知己',
+        number: 1,
+      },
+      {
+        id: '123',
+        image: '/images/img/taxi-two.png',
+        price: 14,
+        isActive: false,
+        name: '蓝颜知己',
+        number: 1,
+      },
+      {
+        id: '123',
+        image: '/images/img/taxi-one.png',
+        price: 15,
+        isActive: false,
+        name: '蓝颜知己',
+        number: 1,
+      },
+      {
+        id: '123',
+        image: '/images/img/taxi-two.png',
+        price: '16',
+        isActive: false,
+        name: '蓝颜知己',
+        number: 1,
+      },
     ],
     isActive: false,
     deleteIs: false,
@@ -68,18 +68,20 @@ Page({
     sizeContentWindow: true,
     time: '12:00',
     titleList: [{
-      name: '上门自取'
-    },
-    {
-      name: '外卖配送'
-    }
+        name: '上门自取'
+      },
+      {
+        name: '外卖配送'
+      }
     ],
     titltTabActive: 0,
     titltTabName: '上门自取',
     addressArray: ['地址1', '地址2', '地址3'],
     address: 0,
     totalNum: 7,
-    priceList: []
+    priceList: [],
+    onePhone: '', // 自取电话
+    twoPhone: '', //外卖配送电话 
   },
   // 是否选中
   isSelect(e) {
@@ -144,6 +146,14 @@ Page({
       for (let i = 0; i < list.length; i++) {
         list[i].isActive = true
       }
+      let total = 0;
+      list.forEach(ele => {
+        total = total + ele.price * ele.number;
+      })
+      console.log(total);
+      this.setData({
+        totalPrice: total
+      })
     } else {
       for (let i = 0; i < list.length; i++) {
         list[i].isActive = false
@@ -156,7 +166,26 @@ Page({
   },
   // 删除
   deleteFood(e) {
+    const that = this;
     console.log(e)
+    const index = e.currentTarget.dataset.index;
+    let list = that.data.shopList;
+    wx.showModal({
+      title: '提示',
+      content: '  确认删除吗',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          list.splice(index, 1)
+          that.setData({
+            shopList: list,
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+          return
+        }
+      }
+    })
 
   },
   // 数量减少
@@ -189,12 +218,21 @@ Page({
   },
   //购买
   buy() {
-    this.setData({
-      sizeContentWindow: false
-    })
-    wx.setNavigationBarTitle({
-      title: '提交订单'
-    })
+    console.log(this.data.priceList)
+    if (this.data.priceList.length === 0) {
+      wx.showToast({
+        title: '请选择商品',
+        icon: 'none',
+        duration: 2000
+      })
+    } else {
+      this.setData({
+        sizeContentWindow: false
+      })
+      wx.setNavigationBarTitle({
+        title: '提交订单'
+      })
+    }
   },
   // 取消
   hidden() {
@@ -228,11 +266,57 @@ Page({
       address: e.detail.value
     })
   },
+  // 获取上门自取电话
+  getOneValue(e) {
+    this.setData({
+      onePhone: e.detail.value
+    })
+  },
+  // 获取外卖配送电话
+  getTwoValue(e) {
+    this.setData({
+      twoPhone: e.detail.value
+    })
+  },
   // 立即支付
   immediateBuy() {
-    wx.navigateTo({
-      url: '../shopping-list-detail/shopping-list-detail',
-    })
+    switch (this.data.titltTabActive) {
+      case 0:
+        if (this.data.onePhone === '') {
+          wx.showToast({
+            title: '请填写收货人电话',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          console.log(this.data.time, this.data.onePhone);
+          wx.navigateTo({
+            url: '../shopping-list-detail/shopping-list-detail',
+          });
+          this.setData({
+            sizeContentWindow: true
+          })
+        }
+        break;
+      case 1:
+        if (this.data.twoPhone === '') {
+          wx.showToast({
+            title: '请填写收货人电话',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          console.log(this.data.time, this.data.addressArray[address]);
+          wx.navigateTo({
+            url: '../shopping-list-detail/shopping-list-detail',
+          });
+          this.setData({
+            sizeContentWindow: true
+          })
+        }
+        break;
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -251,9 +335,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏

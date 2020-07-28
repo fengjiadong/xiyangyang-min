@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    logged: false,
     userInfo: {
       nickName: '喜羊羊',
       avatarUrl: '../../images/img/my.png',
@@ -30,35 +29,16 @@ Page({
       url: '../address-list/address-list',
     })
   },
-  // 获取头像
-  onGetUserInfo: function (e) {
-    if (!this.data.logged && e.detail.userInfo) {
-      this.setData({
-        logged: true,
-        userInfo: e.detail.userInfo
-      })
-    }
-  },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              console.log(res);
-              this.setData({
-                userInfo: res.userInfo,
-              })
-            }
-          })
-        }
-      }
+    let info = wx.getStorageSync('userInfo');
+    console.log(info)
+    this.setData({
+      userInfo: info
     })
   },
 

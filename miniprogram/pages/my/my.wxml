@@ -1,6 +1,6 @@
 <!--miniprogram/pages/my/my.wxml-->
 <view class="center-image-box">
-	<image class="image-my" src="{{userInfo.avatarUrl}}" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" size="default"></image>
+	<image class="image-my" src="{{userInfo.avatarUrl}}" ></image>
 </view>
 <view class="my-title">{{userInfo.nickName}}</view>
 
