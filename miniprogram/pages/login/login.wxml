@@ -1,5 +1,5 @@
 <!--miniprogram/pages/login/login.wxml-->
-<view class="top-text">你来了，客户，今天点些什么？</view>
+<view class="top-text">你来了，客观，今天点些什么？</view>
 <view class="image-box">
 	<image class="image-pic" src="../../images/img/login.png"></image>
 </view>

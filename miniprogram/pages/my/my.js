@@ -8,9 +8,10 @@ Page({
   data: {
     userInfo: {
       nickName: '喜羊羊',
-      avatarUrl: '../../images/img/my.png',
+      avatarUrl: '',
     },
-    openId:""
+    logged: false,
+    openId: ""
   },
   // 调转至购物车
   goShopTaxi() {
@@ -35,18 +36,17 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let info = wx.getStorageSync('userInfo');
-    if (!info) {
-      wx.switchTab({
-        url: '../login/login',
-      })
+    let logged = false;
+    if (info) {
+      logged = true;
     }
     let openId = wx.getStorageSync('openId');
-    // console.log(info)
     this.setData({
       userInfo: info,
-      openId: openId
+      openId: openId,
+      logged: logged
     })
     let thes = this;
   },
@@ -54,52 +54,67 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: function() {
+    let openId = wx.getStorageSync('openId');
+    let info = wx.getStorageSync('userInfo');
+    let logged = false;
+    if (openId) {
+      logged = true;
+    }
+    this.setData({
+      openId: openId,
+      logged: logged,
+      userInfo: info,
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
-  goAdmin(){
+  goAdmin() {
     console.log('进入商户端')
+  },
+  goLogin() {
+    wx.navigateTo({
+      url: '../login/login',
+    })
   }
 })

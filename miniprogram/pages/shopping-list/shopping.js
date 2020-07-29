@@ -82,6 +82,8 @@ Page({
     priceList: [],
     onePhone: '', // 自取电话
     twoPhone: '', //外卖配送电话 
+    logged:false,
+    openId:''
   },
   // 是否选中
   isSelect(e) {
@@ -322,6 +324,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+   
 
   },
 
@@ -335,7 +338,17 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () {
+    let openId = wx.getStorageSync('openId');
+    let logged = false;
+    if (openId) {
+      logged = true;
+    }
+    this.setData({
+      openId: openId,
+      logged: logged
+    })
+  },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -370,5 +383,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  goLogin(){
+    wx.navigateTo({
+      url: '../login/login',
+    })
   }
 })
