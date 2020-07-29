@@ -1,4 +1,7 @@
 /**app.wxss**/
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";
+/* @import "./app.css"; */
 @font-face {font-family: "iconfont";
   src: url('iconfont.eot?t=1595820499619'); /* IE9 */
   src: url('iconfont.eot?t=1595820499619#iefix') format('embedded-opentype'), /* IE6-IE8 */
