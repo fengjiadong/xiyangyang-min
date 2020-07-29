@@ -1,29 +1,18 @@
-// miniprogram/pages/home-page/home-page.js
+// miniprogram/pages/test/test.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    background: ['/images/img/home-img.png', '/images/img/home-img.png', '/images/img/home-img.png'],
+
   },
-  // 跳转至点单页面
-  goOrder(){
-    wx.switchTab({
-      url: '/pages/order/order'
-    });  
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.cloud.callFunction({
-      name: 'test',
-      data: {},
-      success: res => {
-        console.log("云函数",res)
-      }
-    })
+
   },
 
   /**
@@ -73,5 +62,29 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  zhifu(){
+    console.log('支付')
+    // 小程序代码
+    wx.cloud.callFunction({
+      name: 'zhifu',
+      data: {
+        // ...
+      },
+      success: res => {
+        console.log(res)
+        // const payment = res.result.payment
+        // wx.requestPayment({
+        //   ...payment,
+        //   success(res) {
+        //     console.log('pay success', res)
+        //   },
+        //   fail(res) {
+        //     console.error('pay fail', err)
+        //   }
+        // })
+      },
+      fail: console.error,
+    })
   }
 })

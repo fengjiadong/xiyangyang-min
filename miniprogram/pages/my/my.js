@@ -1,4 +1,5 @@
 // miniprogram/pages/my/my.js
+const app = getApp()
 Page({
 
   /**
@@ -9,7 +10,7 @@ Page({
       nickName: '喜羊羊',
       avatarUrl: '../../images/img/my.png',
     },
-
+    openId:""
   },
   // 调转至购物车
   goShopTaxi() {
@@ -36,10 +37,18 @@ Page({
    */
   onLoad: function (options) {
     let info = wx.getStorageSync('userInfo');
-    console.log(info)
+    if (!info) {
+      wx.switchTab({
+        url: '../login/login',
+      })
+    }
+    let openId = wx.getStorageSync('openId');
+    // console.log(info)
     this.setData({
-      userInfo: info
+      userInfo: info,
+      openId: openId
     })
+    let thes = this;
   },
 
   /**
@@ -89,5 +98,8 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  goAdmin(){
+    console.log('进入商户端')
   }
 })

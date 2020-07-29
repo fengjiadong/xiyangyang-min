@@ -1,4 +1,6 @@
 // miniprogram/pages/login/login.js
+const app = getApp()
+
 Page({
 
   /**
@@ -6,10 +8,10 @@ Page({
    */
   data: {
     logged: false,
-
+    openId: ''
   },
   // 获取头像
-  onGetUserInfo: function (e) {
+  onGetUserInfo: function(e) {
     if (!this.data.logged && e.detail.userInfo) {
       this.setData({
         logged: true,
@@ -19,7 +21,50 @@ Page({
       wx.switchTab({
         url: '../home-page/home-page',
       })
+      const db = wx.cloud.database()
+      //获取openId
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {},
+        success: res => {
+          console.log(res)
+          wx.setStorageSync('openId', res.result.event.userInfo.openId)
+          db.collection('user').where({
+            openId: res.result.event.userInfo.openId
+          }).get({
+            success: res => {
+              console.log(res)
+              if (res.data.length < 1){
+                 this.addUser();
+              }
+            }
+          })
+
+        }
+      })
+      // this.infoUser()
     }
+  },
+  addUser() {
+    console.log('添加用户信息')
+    let data  = {
+      avatarUrl: this.data.userInfo.avatarUrl,
+      city: this.data.userInfo.city,
+      country: this.data.userInfo.country,
+      gender: this.data.userInfo.gender,
+      language: this.data.userInfo.language,
+      nickName: this.data.userInfo.nickName,
+      province: this.data.userInfo.province
+    }
+     //获取openId
+      wx.cloud.callFunction({
+        name: 'addUser',
+        data: data,
+        success: res => {
+          console.log(res)
+        }
+      })
+    console.log(data)
   },
   // 获取用户信息
   getInfo() {
@@ -44,7 +89,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let info = wx.getStorageSync('userInfo');
     if (info) {
       wx.switchTab({
@@ -57,49 +102,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
