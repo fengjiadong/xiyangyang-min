@@ -85,7 +85,8 @@
 				<input bindinput="getTwoValue" value="{{twoPhone}}" type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="zhan-input"></input>
 			</view>
 		</view>
-		<view class="immediately-buy" catchtap="immediateBuy">立即支付</view>
+		<!-- <view class="immediately-buy" catchtap="immediateBuy">立即支付</view> -->
+    <view class="immediately-buy" bindtap="payment">立即支付</view>
 	</view>
 	<view class="close-button" bindtap="hidden">
 		<text class="text-tan">+</text>

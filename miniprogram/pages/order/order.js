@@ -1,4 +1,5 @@
 // miniprogram/pages/order/order.js
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -7,62 +8,17 @@ Page({
   data: {
     background: ['/images/img/five.jpg', '/images/img/four.jpg', '/images/img/seven.jpg'],
     selected: 0,
+    selectedType:{},
     selectList: [{ // 饮料类型选择
         title: '热销推荐'
-      },
-      {
-        title: '烧仙草'
-      },
-      {
-        title: '鲜奶果茶'
-      },
-      {
-        title: '芝士系列'
-      },
-      {
-        title: '魔王奶茶'
-      },
-      {
-        title: '冰爽夏日'
-      },
-      {
-        title: '羊羊加料'
-      },
+      }
     ],
     foodTypeList: [{
         image: '/images/img/medal.png',
         name: '蓝颜知己',
         detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
         price: '18',
-        type: '常规',
-      },
-      {
-        image: '/images/img/medal.png',
-        name: '蓝颜知己',
-        detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-        price: '18',
-        type: '常规',
-      },
-      {
-        image: '/images/img/medal.png',
-        name: '蓝颜知己',
-        detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-        price: '18',
-        type: '常规',
-      },
-      {
-        image: '/images/img/medal.png',
-        name: '蓝颜知己',
-        detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-        price: '18',
-        type: '常规',
-      },
-      {
-        image: '/images/img/medal.png',
-        name: '蓝颜知己',
-        detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-        price: '18',
-        type: '常规',
+       
       }
     ],
     sizeContentWindow: true,
@@ -160,7 +116,9 @@ Page({
     console.log(index);
     that.setData({
       selected: index,
+      selectedType: this.data.selectList[index]
     })
+    this.searchCommodity(this.data.selectedType._id)
   },
   // 规格选择
   sizeContent(e) {
@@ -241,7 +199,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+      // 获取type
+    this.getType();
   },
 
   /**
@@ -293,5 +252,28 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  getType(){
+    db.collection('type').get({
+      success: res => {
+        this.setData({
+          selectList: res.data
+        })
+        this.searchCommodity(this.data.selectList[0]._id)
+        console.log('[数据库] [查询记录] 成1功: ', res)
+      }
+    })
+  },
+  searchCommodity(typeId){
+    db.collection('commodity').where({
+      type:typeId
+    }).get({
+      success: res => {
+        this.setData({
+          foodTypeList: res.data
+        })
+        console.log('[数据库] [查询记录] 成1功: ', res)
+      }
+    })
   }
 })

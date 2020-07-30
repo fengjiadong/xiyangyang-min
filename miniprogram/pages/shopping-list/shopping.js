@@ -82,8 +82,8 @@ Page({
     priceList: [],
     onePhone: '', // 自取电话
     twoPhone: '', //外卖配送电话 
-    logged:false,
-    openId:''
+    logged: false,
+    openId: ''
   },
   // 是否选中
   isSelect(e) {
@@ -243,7 +243,7 @@ Page({
     })
   },
   // 时间选择
-  bindTimeChange: function (e) {
+  bindTimeChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       time: e.detail.value
@@ -262,7 +262,7 @@ Page({
     })
   },
   // 地址选择
-  addressChange: function (e) {
+  addressChange: function(e) {
     console.log('地址选择', e.detail.value)
     this.setData({
       address: e.detail.value
@@ -279,6 +279,63 @@ Page({
     this.setData({
       twoPhone: e.detail.value
     })
+  },
+  // 微信支付
+  pay(payData) {
+    var that = this;
+    const payment = payData.payment //这里注意，上一个函数的result中直接整合了这里要用的参数，直接展开即可使用
+    console.log(payment)
+    wx.requestPayment({
+      appId:payment.appId,
+      nonceStr:payment.nonceStr,
+      package:payment.package,
+      paySign:payment.paySign,
+      signType:payment.signType,
+      timeStamp:payment.timeStamp,
+      success(res) {
+        console.log('pay success', res)
+        //跳转到支付成功页面
+      },
+      fail(res) {
+        console.error('pay fail', res)
+        //跳转到支付失败页面
+      }
+    })
+  },
+  // 微信支付
+  payment() {
+    console.log('开始支付')
+    wx.showLoading({
+      title: '加载中',
+    })
+    let that = this;
+    var uuid = this.uuid(16, 16) //调用自己的uuid函数
+    console.log("uuid:"+uuid)
+    var body = "喜羊羊-茶饮"
+    wx.cloud.callFunction({
+      name: "zhifu",
+      data: {
+        body: body,
+        orderid: "" + uuid,
+        money: 1, //支付金额
+        nonceStr: this.uuid(32, 32) //调用自己的uuid函数
+      },
+      success(res) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
+        console.log("提交成功", res.result)
+        //创建自己的未支付订单
+        that.pay(res.result)
+      },
+      fail(res) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
+        console.log("提交失败", res)
+      }
+    })
+
   },
   // 立即支付
   immediateBuy() {
@@ -323,22 +380,22 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-   
+  onLoad: function(options) {
+
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.setData({
       sizeContentWindow: true
     })
@@ -357,40 +414,62 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
-  goLogin(){
+  goLogin() {
     wx.navigateTo({
       url: '../login/login',
     })
+  },
+  uuid(len, radix) {
+    var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+    var uuid = [],i;
+    radix = radix || chars.length;
+    if (len) {
+      // Compact form
+      for (i = 0; i < len; i++){ 
+        uuid[i] = chars[0 | Math.random() * radix];
+      }
+    } else {
+      var r;
+      uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+      uuid[14] = '4';
+      for (i = 0; i < 36; i++) {
+        if (!uuid[i]) {
+          r = 0 | Math.random() * 16;
+          uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+        }
+      }
+    }
+    return uuid.join("");
   }
 })
