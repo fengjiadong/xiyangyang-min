@@ -1,0 +1,14 @@
+<view class="cu-list menu ">
+	<view class="cu-item arrow " data-index="{{index}}" wx:for="{{specifications}}" bindtap="upMaterial">
+		<view class="content" >
+			<text class="cuIcon-btn text-green"></text>
+			<text class="text-grey">{{item.name}} 价格: {{item.price}}元</text>
+		</view>
+	</view>
+</view>
+<view class="padding bg-white">
+  <view class="cu-tag radius">共{{specifications.length}}个小料。</view>
+</view>
+ <view class="padding-xl">
+    <button class="btn cu-btn bg-blue lg shadow" bindtap="addMaterial">添加</button>
+    </view>

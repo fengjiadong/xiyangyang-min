@@ -1,0 +1,21 @@
+<form>
+<view class="cu-form-group margin-top">
+		<view class="title">名称</view>
+		<input placeholder="小料名称" value="{{name}}" bindinput="updateValue" data-name='name'></input>
+	</view>
+  <view class="cu-form-group ">
+		<view class="title">价格</view>
+		<input placeholder="小料价格" type="digit" value="{{price}}" bindinput="updateValue" data-name='price'></input>
+	</view>
+	<view class="cu-form-group margin-top">
+		<view class="title">是否有效</view>
+		<switch   checked="{{!invalid}}" bindchange="invalid"></switch>
+			
+	</view>
+  <view class="padding-xl">
+  <button  wx:if="{{!id}}" class="btn bg-blue lg" bindtap="add">添加</button>
+	<button  wx:if="{{id}}" class="btn bg-blue lg" bindtap="save">保存</button>
+  <button wx:if="{{id}}" class="btn bg-red margin-tb-sm lg" bindtap="delete" >删除</button>
+  </view>
+</form>
+

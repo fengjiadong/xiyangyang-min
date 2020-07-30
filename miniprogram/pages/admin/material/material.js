@@ -1,23 +1,14 @@
-// miniprogram/pages/admin/index/index.js
-const app = getApp();
+// miniprogram/pages/admin/material/material.js
+const db = wx.cloud.database()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ColorList: app.globalData.ColorList,
-  }, 
-  SetShadow(e) {
-    this.setData({
-      shadow: e.detail.value
-    })
+    specifications:[]
   },
-  SetBorderSize(e) {
-    this.setData({
-      bordersize: e.detail.value
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -36,7 +27,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.searchMaterial()
   },
 
   /**
@@ -73,18 +64,28 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 调转至收获地址
-  goUserPage() {
-    console.log('跳转到用户管理页')
+  upMaterial(e){
+    let index = e.currentTarget.dataset.index;
+    let item = this.data.specifications[index];
     wx.navigateTo({
-      url: '../user/user',
+      url: 'materialDetail?id='+item._id+"&name="+item.name+'&price='+item.price,
     })
   },
-  goMaterialPage(){
-    console.log('跳转到小料管理页')
+  addMaterial(){
     wx.navigateTo({
-      url: '../material/material',
+      url: 'materialDetail'
+    })
+  },
+  searchMaterial(){
+    db.collection('specifications').where({
+      isDelete:false
+    }).get({
+      success: res => {
+        this.setData({
+          specifications: res.data
+        })
+        console.log('[数据库] [查询记录] 成1功: ', res)
+      }
     })
   }
-
 })
