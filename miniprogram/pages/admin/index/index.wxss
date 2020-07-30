@@ -1,0 +1,7 @@
+/* miniprogram/pages/admin/index/index.wxss */
+.text-lg {
+  font-size: 32rpx;
+}
+.padding-sm {
+  padding: 40rpx 20rpx;
+}
