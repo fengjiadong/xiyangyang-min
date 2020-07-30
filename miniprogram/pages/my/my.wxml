@@ -1,8 +1,20 @@
 <!--miniprogram/pages/my/my.wxml-->
-<view class="center-image-box">
-	<image class="image-my" src="{{userInfo.avatarUrl}}" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" size="default"></image>
-</view>
-<view class="my-title">{{userInfo.nickName}}</view>
+
+
+  <view  wx:if = "{{logged}}" class="center-image-box">
+    <image class="image-my" src="{{userInfo.avatarUrl}}" ></image>
+  </view>
+  <view wx:if = "{{logged}}" class="my-title">{{userInfo.nickName}}</view>
+
+  <!-- <view  class="center-image-box" bindtap="goLogin"> -->
+      
+     <view wx:if = "{{!logged}}" class="center-image-box" bindtap="goLogin">
+       <image class="image-my" src="../../images/img/login.png" ></image>
+     </view>
+      <view wx:if = "{{!logged}}"  class="my-title" bindtap="goLogin">点击登录</view>
+  <!-- </view> -->
+
+
 
 <view class="center-container">
 	<view class="center-module-box">
@@ -12,16 +24,21 @@
 			<view class="title-list">购物车</view>
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
-		<view class="module-list-box" bindtap="goHistoryList">
+		<view  wx:if = "{{logged}}" class="module-list-box" bindtap="goHistoryList">
 			<!-- <view class="iconfont title-before-icon icon-59"></view> -->
 			<image class="taxi-image" src="../../images/img/time.png"></image>
 			<view class="title-list">订单历史</view>
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
-		<view class="module-list-box" bindtap="goAddressList">
-			<!-- <view class="iconfont title-before-icon icon-weizhi1"></view> -->
+		<view  wx:if = "{{logged}}" class="module-list-box" bindtap="goAddressList">
 			<image class="taxi-image" src="../../images/img/position.png"></image>
 			<view class="title-list">收货地址</view>
+			<view class="iconfont right-icon icon-backward"></view>
+		</view>
+
+    <view  wx:if = "{{logged}}" class="module-list-box" bindtap="goAdmin">
+			<image class="taxi-image" src="../../images/img/position.png"></image>
+			<view class="title-list">商户端</view>
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
 	</view>

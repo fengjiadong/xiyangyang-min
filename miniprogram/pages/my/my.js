@@ -1,16 +1,17 @@
 // miniprogram/pages/my/my.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    logged: false,
     userInfo: {
       nickName: '喜羊羊',
-      avatarUrl: '../../images/img/my.png',
+      avatarUrl: '',
     },
-
+    logged: false,
+    openId: ""
   },
   // 调转至购物车
   goShopTaxi() {
@@ -30,84 +31,90 @@ Page({
       url: '../address-list/address-list',
     })
   },
-  // 获取头像
-  onGetUserInfo: function (e) {
-    if (!this.data.logged && e.detail.userInfo) {
-      this.setData({
-        logged: true,
-        userInfo: e.detail.userInfo
-      })
-    }
-  },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              console.log(res);
-              this.setData({
-                userInfo: res.userInfo,
-              })
-            }
-          })
-        }
-      }
+  onLoad: function(options) {
+    let info = wx.getStorageSync('userInfo');
+    let logged = false;
+    if (info) {
+      logged = true;
+    }
+    let openId = wx.getStorageSync('openId');
+    this.setData({
+      userInfo: info,
+      openId: openId,
+      logged: logged
     })
+    let thes = this;
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: function() {
+    let openId = wx.getStorageSync('openId');
+    let info = wx.getStorageSync('userInfo');
+    let logged = false;
+    if (openId) {
+      logged = true;
+    }
+    this.setData({
+      openId: openId,
+      logged: logged,
+      userInfo: info,
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
+  },
+  goAdmin() {
+    console.log('进入商户端')
+  },
+  goLogin() {
+    wx.navigateTo({
+      url: '../login/login',
+    })
   }
 })

@@ -1,0 +1,6 @@
+<!--miniprogram/pages/login/login.wxml-->
+<view class="top-text">你来了，客观，今天点些什么？</view>
+<view class="image-box">
+	<image class="image-pic" src="../../images/img/login.png"></image>
+</view>
+<button class="login-button" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" size="default">微信登录</button>

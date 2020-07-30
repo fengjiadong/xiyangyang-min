@@ -1,0 +1,2 @@
+<!--miniprogram/pages/test/test.wxml-->
+ <view class="order-text" bindtap="zhifu">点单</view>

@@ -1,4 +1,6 @@
 // miniprogram/pages/address-list/address-list.js
+const app = getApp()
+
 Page({
 
   /**
@@ -44,6 +46,9 @@ Page({
     wx.navigateTo({
       url: '../edit-add-address/edit-add-address',
     })
+  },
+  searchList(){
+
   },
   /**
    * 生命周期函数--监听页面加载
