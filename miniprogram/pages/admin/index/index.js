@@ -72,5 +72,13 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  // 调转至收获地址
+  goUserPage() {
+    console.log('跳转到用户管理页')
+    wx.navigateTo({
+      url: '../user/user',
+    })
+  },
+
 })

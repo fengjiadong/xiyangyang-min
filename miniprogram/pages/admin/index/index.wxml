@@ -13,8 +13,8 @@
       <!-- <view class="margin-top-sm text-Abc">#ff9700 - #ed1c24</view> -->
     </view>
   </view>
-  <view class="padding-sm">
-    <view class="bg-gradual-green padding radius text-center shadow-blur">
+  <view class="padding-sm" bindtap="goUserPage">
+    <view class="bg-gradual-green padding radius text-center shadow-blur" >
       <view class="text-lg">用户列表</view>
       <!-- <view class="margin-top-sm text-Abc">#39b54a - #8dc63f</view> -->
     </view>

@@ -9,8 +9,6 @@
     "pages/shopping-list/shopping",
     "pages/order/order",
     "pages/index/index",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",
     "pages/addFunction/addFunction",
     "pages/deployFunctions/deployFunctions",
@@ -23,7 +21,8 @@
     "pages/im/room/room",
     "pages/food-detail/food-detail",
     "pages/shopping-list-detail/shopping-list-detail",
-    "pages/edit-add-address/edit-add-address"
+    "pages/edit-add-address/edit-add-address",
+    "pages/admin/user/user"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

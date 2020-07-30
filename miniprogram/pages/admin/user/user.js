@@ -1,4 +1,4 @@
-// miniprogram/pages/test/test.js
+// miniprogram/pages/admin/user/user.js
 Page({
 
   /**
@@ -62,29 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  zhifu(){
-    console.log('支付')
-    // 小程序代码
-    wx.cloud.callFunction({
-      name: 'zhifu',
-      data: {
-        // ...
-      },
-      success: res => {
-        console.log(res)
-        // const payment = res.result.payment
-        // wx.requestPayment({
-        //   ...payment,
-        //   success(res) {
-        //     console.log('pay success', res)
-        //   },
-        //   fail(res) {
-        //     console.error('pay fail', err)
-        //   }
-        // })
-      },
-      fail: console.error,
-    })
   }
 })
