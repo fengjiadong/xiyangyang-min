@@ -111,6 +111,9 @@ Page({
   },
   goAdmin() {
     console.log('进入商户端')
+    wx.navigateTo({
+      url: '../admin/index/index',
+    })
   },
   goLogin() {
     wx.navigateTo({
