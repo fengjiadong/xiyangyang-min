@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    background: ['/images/img/five.jpg', '/images/img/four.jpg', '/images/img/seven.jpg'],
     selected: 0,
     selectList: [{ // 饮料类型选择
         title: '热销推荐'

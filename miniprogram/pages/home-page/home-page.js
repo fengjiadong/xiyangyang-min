@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    background: ['/images/img/home-img.png', '/images/img/home-img.png', '/images/img/home-img.png'],
+    background: ['/images/img/six.jpg', '/images/img/two.jpg', '/images/img/three.jpg','/images/img/one.jpg'],
   },
   // 跳转至点单页面
   goOrder(){

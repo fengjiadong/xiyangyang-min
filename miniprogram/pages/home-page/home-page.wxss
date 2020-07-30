@@ -8,7 +8,7 @@
 }
 
 .swiper-item {
-  width: 343px;
+  width:100%;
   height: 150px;
 }
 
