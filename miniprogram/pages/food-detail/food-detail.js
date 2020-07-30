@@ -18,40 +18,52 @@ Page({
     }
     ],
     foodList: [{
-      name: '常规'
+      name: '常规',
+      selectedFood: true
     },
     {
-      name: '豆花布丁'
+      name: '豆花布丁',
+      selectedFood: false
     },
     {
-      name: '红豆'
+      name: '红豆',
+      selectedFood: false
     },
     {
-      name: '焦糖冻'
+      name: '焦糖冻',
+      selectedFood: false
     },
     {
-      name: '晶球'
+      name: '晶球',
+      selectedFood: false
     },
     {
-      name: '咖啡冻'
+      name: '咖啡冻',
+      selectedFood: false
     },
     {
-      name: '烧仙草'
+      name: '烧仙草',
+      selectedFood: false
     },
     {
-      name: '燕麦'
+      name: '燕麦',
+      selectedFood: false
     },
     {
-      name: '椰果'
+      name: '椰果',
+      selectedFood: false
     },
     {
-      name: '芋圆'
+      name: '芋圆',
+      selectedFood: false
     },
     {
-      name: '珍珠'
+      name: '珍珠',
+      selectedFood: false
     },
     {
-      name: '芝士奶盖'
+      name: '芝士奶盖',
+      selectedFood: false
     }
     ],
     sugarList: [{ // 糖度选择
@@ -110,8 +122,10 @@ Page({
     let that = this;
     const index = e.currentTarget.dataset.index;
     console.log(index);
+    let list = that.data.foodList;
+    list[index].selectedFood = !list[index].selectedFood;
     that.setData({
-      selectedFood: index,
+      foodList: list,
       foodType: that.data.foodList[index].name
     })
   },

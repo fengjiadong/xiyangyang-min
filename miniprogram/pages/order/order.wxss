@@ -28,6 +28,7 @@
 
 .order-list-container {
   display: flex;
+  height: 100%;
 }
 
 .left-select-list {

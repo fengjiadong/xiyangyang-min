@@ -1,4 +1,8 @@
 /* miniprogram/pages/food-detail/food-detail.wxss */
+.food-detail-container {
+  width: 100%;
+  background-color: #fff;
+}
 .food-image-box {
   width: 100%;
   height: 270px;
@@ -10,7 +14,7 @@
 }
 
 .detail-container {
-  padding: 18px 16px 86px;
+  padding: 18px 16px 100px;
 }
 
 .title-box {
@@ -19,8 +23,10 @@
 }
 
 .food-title {
+  padding-bottom: 10px;
   font-size: 16px;
   color: #424242;
+  font-weight: bold;
 }
 
 .food-price {
@@ -47,7 +53,12 @@
   display: flex;
   flex-wrap: wrap;
 }
-
+.food-detail-title {
+  padding-top: 12px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: #424242;
+}
 .type-title {
   padding-bottom: 10px;
   font-size: 16px;
@@ -80,12 +91,7 @@
   border-color: #04adef;
 }
 
-.food-detail-title {
-  padding-top: 12px;
-  padding-bottom: 10px;
-  font-size: 14px;
-  color: #424242;
-}
+
 
 .detail-words {
   font-size: 12px;

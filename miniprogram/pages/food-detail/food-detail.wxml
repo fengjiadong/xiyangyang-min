@@ -1,40 +1,42 @@
 <!--miniprogram/pages/food-detail/food-detail.wxml-->
-<view class="food-image-box">
-	<image class="food-image" src="{{imageUrl}}"></image>
-</view>
-<view class="detail-container">
-	<view class="title-box">
-		<view class="food-title">{{name}}</view>
-		<view class="food-price">
-			¥<text class="price-number">{{price}}</text>
-			<text class="price-after">/常规</text>
+<view class="food-detail-container">
+	<view class="food-image-box">
+		<image class="food-image" src="{{imageUrl}}"></image>
+	</view>
+	<view class="detail-container">
+		<view class="title-box">
+			<view class="food-title">{{name}}</view>
+			<view class="food-price">
+				¥<text class="price-number">{{price}}</text>
+				<text class="price-after">/常规</text>
+			</view>
+		</view>
+		<view class="food-detail-title type-title">产品详情</view>
+		<view class="detail-words">{{detail}}</view>
+		<view class="type-content">
+			<view class="type-title">杯型</view>
+			<view class="type-list-content">
+				<view class="type-list {{selectedGlass===index?'type-list-active':''}}" bindtap="glassSelect" data-index="{{index}}" wx:for="{{glassList}}" wx:key="key">{{item.name}}</view>
+			</view>
+			<view class="type-title two-title">规格</view>
+			<view class="type-list-content">
+				<view class="type-list {{item.selectedFood===true?'type-list-active':''}}" bindtap="foodSelect" data-index="{{index}}" wx:for="{{foodList}}" wx:key="key">+{{item.name}}</view>
+			</view>
+			<view class="type-title two-title">精度</view>
+			<view class="type-list-content">
+				<view class="type-list {{selectedSugar===index?'type-list-active':''}}" bindtap="sugarSelect" data-index="{{index}}" wx:for="{{sugarList}}" wx:key="key">{{item.name}}</view>
+			</view>
+			<view class="type-title two-title">规格</view>
+			<view class="type-list-content">
+				<view class="type-list {{selectedIce===index?'type-list-active':''}}" bindtap="iceSelect" data-index="{{index}}" wx:for="{{iceList}}" wx:key="key">+{{item.name}}</view>
+			</view>
 		</view>
 	</view>
-	<view class="type-content">
-		<view class="type-title">杯型</view>
-		<view class="type-list-content">
-			<view class="type-list {{selectedGlass===index?'type-list-active':''}}" bindtap="glassSelect" data-index="{{index}}" wx:for="{{glassList}}" wx:key="key">{{item.name}}</view>
+	<view class="bottom-price-box">
+		<view class="price-box">
+			<text class="price-tip">¥</text>19
+			<view class="have-select-text">({{glassType}}、{{foodType}}、{{sugarType}}、{{iceType}})</view>
 		</view>
-		<view class="type-title two-title">规格</view>
-		<view class="type-list-content">
-			<view class="type-list {{selectedFood===index?'type-list-active':''}}" bindtap="foodSelect" data-index="{{index}}" wx:for="{{foodList}}" wx:key="key">+{{item.name}}</view>
-		</view>
-		<view class="type-title two-title">精度</view>
-		<view class="type-list-content">
-			<view class="type-list {{selectedSugar===index?'type-list-active':''}}" bindtap="sugarSelect" data-index="{{index}}" wx:for="{{sugarList}}" wx:key="key">{{item.name}}</view>
-		</view>
-		<view class="type-title two-title">规格</view>
-		<view class="type-list-content">
-			<view class="type-list {{selectedIce===index?'type-list-active':''}}" bindtap="iceSelect" data-index="{{index}}" wx:for="{{iceList}}" wx:key="key">+{{item.name}}</view>
-		</view>
+		<view class="shop-taxi" bindtap="goShopTaxi">+ 加入购物车</view>
 	</view>
-	<view class="food-detail-title">产品详情</view>
-	<view class="detail-words">{{detail}}.</view>
-</view>
-<view class="bottom-price-box">
-	<view class="price-box">
-		<text class="price-tip">¥</text>19
-		<view class="have-select-text">({{glassType}}、{{foodType}}、{{sugarType}}、{{iceType}})</view>
-	</view>
-	<view class="shop-taxi" bindtap="goShopTaxi">+ 加入购物车</view>
 </view>
