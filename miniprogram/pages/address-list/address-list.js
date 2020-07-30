@@ -1,36 +1,13 @@
 // miniprogram/pages/address-list/address-list.js
 const app = getApp()
-
+const db = wx.cloud.database()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    addressList: [{
-        name: '喜羊羊',
-        phone: '16787977897',
-        type: '家',
-        address: '青青草原羊村二号楼 301室'
-      },
-      {
-        name: '喜羊羊',
-        phone: '16787977897',
-        type: '家',
-        address: '青青草原羊村二号楼 301室'
-      },
-      {
-        name: '喜羊羊',
-        phone: '16787977897',
-        type: '家',
-        address: '青青草原羊村二号楼 301室'
-      },
-      {
-        name: '喜羊羊',
-        phone: '16787977897',
-        type: '家',
-        address: '青青草原羊村二号楼 301室'
-      },
+    addressList: [
     ]
   },
   // 地址编辑
@@ -38,7 +15,7 @@ Page({
     const index = e.currentTarget.dataset.index;
     console.log(index);
     wx.navigateTo({
-      url: '../edit-add-address/edit-add-address',
+      url: '../edit-add-address/edit-add-address?id='+this.data.addressList[index]._id,
     })
   },
   // 地址编辑
@@ -68,7 +45,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.searchAddress();
   },
 
   /**
@@ -104,5 +81,19 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  searchAddress(){
+    let userId = wx.getStorageSync('userId')
+    console.log(userId)
+    db.collection('address').where({
+      parentId:userId
+    }).get({
+      success: res => {
+        console.log(res)
+        this.setData({
+          addressList:res.data
+        })
+      }
+    })
   }
 })

@@ -4,9 +4,9 @@
 </view>
 <view class="detail-container">
 	<view class="title-box">
-		<view class="food-title">牛奶烧仙草（大杯）</view>
+		<view class="food-title">{{name}}</view>
 		<view class="food-price">
-			¥<text class="price-number">16</text>
+			¥<text class="price-number">{{price}}</text>
 			<text class="price-after">/常规</text>
 		</view>
 	</view>
@@ -29,7 +29,7 @@
 		</view>
 	</view>
 	<view class="food-detail-title">产品详情</view>
-	<view class="detail-words">蓝颜知己蓝颜知己颜知己蓝颜知己蓝颜知己蓝知己己蓝颜知己蓝颜知己蓝颜知己.</view>
+	<view class="detail-words">{{detail}}.</view>
 </view>
 <view class="bottom-price-box">
 	<view class="price-box">

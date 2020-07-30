@@ -36,6 +36,8 @@ Page({
               console.log(res)
               if (res.data.length < 1){
                  this.addUser();
+              }else{
+                wx.setStorageSync('userId', res.data[0]._id)
               }
             }
           })
@@ -62,6 +64,7 @@ Page({
         data: data,
         success: res => {
           console.log(res)
+          wx.setStorageSync('userId', res.data[0]._id)
         }
       })
     console.log(data)

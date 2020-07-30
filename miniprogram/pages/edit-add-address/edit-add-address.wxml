@@ -2,20 +2,21 @@
 <view class="edit-container">
 	<view class="list-box">
 		<view class="list-title">收货人姓名</view>
-		<input class="list-input" placeholder-class="place-text" placeholder="请填写收货人姓名" value="{{name}}"></input>
+		<input class="list-input" placeholder-class="place-text" placeholder="请填写收货人姓名" value="{{name}}" bindinput="updateValue" data-name='name'></input>
 	</view>
 	<view class="list-box">
+	<view class="list-title">性别</view>
 		<view class="gender-box">
 			<view class="gender-list {{gender===index?'gender-active':''}}" wx:for="{{genderList}}" wx:key="key" bindtap="genderSeclect" data-index="{{index}}">{{item}}</view>
 		</view>
 	</view>
 	<view class="list-box">
 		<view class="list-title">手机号码</view>
-		<input type="number" class="list-input" placeholder-class="place-text" placeholder="请填写收货人手机号" value="{{phone}}"></input>
+		<input type="number" class="list-input" placeholder-class="place-text" placeholder="请填写收货人手机号" value="{{phone}}" bindinput="updateValue" data-name='phone'></input>
 	</view>
 	<view class="list-box">
 		<view class="list-title">详细地址</view>
-		<input class="list-input" placeholder-class="place-text" placeholder="门牌号、单元号" value="{{address}}"></input>
+		<input class="list-input" placeholder-class="place-text" placeholder="门牌号、单元号" value="{{address}}" bindinput="updateValue" data-name='address'></input>
 	</view>
 	<view class="list-box last-list-box">
 		<view class="list-title">标签</view>

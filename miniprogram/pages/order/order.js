@@ -8,18 +8,19 @@ Page({
   data: {
     background: ['/images/img/five.jpg', '/images/img/four.jpg', '/images/img/seven.jpg'],
     selected: 0,
+    // specifications:[],
     selectedType:{},
     selectList: [{ // 饮料类型选择
         title: '热销推荐'
       }
     ],
-    foodTypeList: [{
-        image: '/images/img/medal.png',
-        name: '蓝颜知己',
-        detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-        price: '18',
-       
-      }
+    foodTypeList: [
+      // {
+      //   image: '/images/img/medal.png',
+      //   name: '蓝颜知己',
+      //   detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
+      //   price: '18',
+      // }
     ],
     sizeContentWindow: true,
     sizeName: '蓝颜知己',
@@ -30,42 +31,8 @@ Page({
         name: '大杯'
       }
     ],
-    foodList: [{
-        name: '常规'
-      },
-      {
-        name: '豆花布丁'
-      },
-      {
-        name: '红豆'
-      },
-      {
-        name: '焦糖冻'
-      },
-      {
-        name: '晶球'
-      },
-      {
-        name: '咖啡冻'
-      },
-      {
-        name: '烧仙草'
-      },
-      {
-        name: '燕麦'
-      },
-      {
-        name: '椰果'
-      },
-      {
-        name: '芋圆'
-      },
-      {
-        name: '珍珠'
-      },
-      {
-        name: '芝士奶盖'
-      }
+    // 小料列表
+    specifications: [
     ],
     sugarList: [{ // 糖度选择
         name: '正常糖'
@@ -154,7 +121,7 @@ Page({
     console.log(index);
     that.setData({
       selectedFood: index,
-      foodType: that.data.foodList[index].name
+      foodType: that.data.specifications[index].name
     })
   },
   // 精度选择
@@ -180,9 +147,10 @@ Page({
     })
   },
   // 跳转至详情页面
-  goDetail() {
+  goDetail(e) {
+    // console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
-      url: '../food-detail/food-detail',
+      url: '../food-detail/food-detail?id='+e.currentTarget.dataset.id,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
@@ -201,6 +169,7 @@ Page({
   onLoad: function(options) {
       // 获取type
     this.getType();
+    this.getSpecifications();
   },
 
   /**
@@ -271,6 +240,16 @@ Page({
       success: res => {
         this.setData({
           foodTypeList: res.data
+        })
+        console.log('[数据库] [查询记录] 成1功: ', res)
+      }
+    })
+  },
+  getSpecifications(){
+    db.collection('specifications').get({
+      success: res => {
+        this.setData({
+          specifications: res.data
         })
         console.log('[数据库] [查询记录] 成1功: ', res)
       }

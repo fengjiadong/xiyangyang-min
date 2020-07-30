@@ -1,14 +1,16 @@
 // pages/edit-add-address/edit-add-address.js
+const db = wx.cloud.database()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    genderList: ['男', '女'],
+    id:'',
+    genderList: ['先生', '女士'],
     gender: 0,
     tipList: ['家', '公司', '学校'],
-    tip: Number,
+    tip: 1,
     name: '',
     phone: '',
     address: ''
@@ -31,15 +33,62 @@ Page({
   },
   // 保存
   save(){
-    wx.navigateBack({
-      delta: 1,
-    })
+    let userId = wx.getStorageSync('userId')
+    let data = {
+      address: this.data.address,
+      gender: this.data.gender === 0?'先生':'女士',
+      name:this.data.name,
+      phone: this.data.phone,
+      type: this.data.tip===0?'家': this.data.tip===1?'公司':'学校',
+      userId:userId,
+      id:this.data.id
+    }
+    console.log(data)
+    if(!this.data.id){
+      console.log("添加")
+      wx.cloud.callFunction({
+        name: 'addAddress',
+        data: data,
+        success: res => {
+          console.log(res)
+           wx.navigateBack({
+              delta: 1,
+           })
+        }
+      })
+    }else{
+      console.log("修改")
+      wx.cloud.callFunction({
+        name: 'upAddress',
+        data: data,
+        success: res => {
+          console.log(res)
+           wx.navigateBack({
+              delta: 1,
+           })
+        }
+      })
+    }
+   
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      console.log(options)
+      if(options.id){
+        this.setData({
+          id:options.id
+        })
+        this.getAddress(options.id)
+      }
+     
+  },
+  updateValue(e) {
+    let name = e.currentTarget.dataset.name;
+    let nameMap = {}
+    nameMap[name] = e.detail && e.detail.value
+    this.setData(nameMap)
   },
 
   /**
@@ -89,5 +138,21 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  getAddress(id){
+    db.collection('address').where({
+      _id:id
+    }).get({
+      success: res => {
+        console.log(res)
+        this.setData({
+          address:res.data[0].address,
+          phone:res.data[0].phone,
+          gender:res.data[0].gender==='先生'?0:1,
+          name:res.data[0].name,
+          tip:res.data[0].type ==='家'?0:res.data[0].type ==='公司'?1:2
+        })
+      }
+    })
   }
 })

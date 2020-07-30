@@ -1,47 +1,15 @@
 // miniprogram/pages/food-detail/food-detail.js
+const db = wx.cloud.database()
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    imageUrl: '/images/img/food.png',
-    foodTypeList: [{
-      image: '/images/img/medal.png',
-      name: '蓝颜知己',
-      detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-      price: '18',
-      type: '常规',
-    },
-    {
-      image: '/images/img/medal.png',
-      name: '蓝颜知己',
-      detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-      price: '18',
-      type: '常规',
-    },
-    {
-      image: '/images/img/medal.png',
-      name: '蓝颜知己',
-      detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-      price: '18',
-      type: '常规',
-    },
-    {
-      image: '/images/img/medal.png',
-      name: '蓝颜知己',
-      detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-      price: '18',
-      type: '常规',
-    },
-    {
-      image: '/images/img/medal.png',
-      name: '蓝颜知己',
-      detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-      price: '18',
-      type: '常规',
-    }
-    ],
+    id:'',
+    imageUrl: '',
+    name:'',
+    price:0,
+    detail:'',
     glassList: [{
       name: '常规一人份'
     },
@@ -171,15 +139,18 @@ Page({
   },
   // 跳转至购物车
   goShopTaxi() {
-    wx.switchTab({
-      url: '../shopping-list/shopping',
-    })
+    // 存入购物车
+    // wx.switchTab({
+    //   url: '../shopping-list/shopping',
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var id = options.id;
+    console.log(id)
+    this.getCommodity(id);
   },
 
   /**
@@ -229,5 +200,20 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  getCommodity(id){
+    db.collection('commodity').where({
+      _id:id
+    }).get({
+      success: res => {
+        this.setData({
+          id:id,
+          imageUrl: res.data[0].image,
+          name: res.data[0].name,
+          detail: res.data[0].detail,
+          price: res.data[0].price
+        })
+      }
+    })
   }
 })
