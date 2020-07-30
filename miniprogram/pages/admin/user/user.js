@@ -1,18 +1,22 @@
 // miniprogram/pages/admin/user/user.js
+const db = wx.cloud.database()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    key:'',
+    queryResult:[],
+    pageNo:1,
+    maxNum:10
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.search();
   },
 
   /**
@@ -62,5 +66,26 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  bindconfirm(e){
+    this.setData({
+      key: e.detail.value
+    })
+  },
+  // 根据nickName关键字模糊查询匹配
+  search(){
+    db.collection('user').where({
+      nickName: db.RegExp({
+        regexp: this.data.key,
+        option: 'i'
+      })
+    }).skip((this.data.pageNo - 1) * this.data.maxNum).limit(this.data.maxNum).get({
+      success: res => {
+        this.setData({
+          queryResult: res.data
+        })
+        console.log('[数据库] [查询记录] 成1功: ', res)
+      }
+    })
   }
 })

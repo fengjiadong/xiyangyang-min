@@ -10,6 +10,7 @@ exports.main = async (event, context) => {
   let result = await db.collection('user')   //test 集合名称
     .add({
       data: [{
+        avatarUrl: event.avatarUrl,
         nickName: event.nickName,
         openId: wxContext.OPENID,
         city: event.city,

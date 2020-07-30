@@ -1,2 +1,32 @@
-<!--miniprogram/pages/admin/user/user.wxml-->
-<text>miniprogram/pages/admin/user/user.wxml</text>
+<view class="box">
+  <view class="cu-bar search bg-white">
+    <view class="search-form round">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="用户名" bindinput='bindconfirm' confirm-type="search"></input>
+    </view>
+    <view class="action">
+      <button class="cu-btn bg-green shadow-blur round" bindtap="search">搜索</button>
+    </view>
+  </view>
+</view>
+
+<view class="cu-list menu-avatar">
+  <view class="cu-item" wx:for="{{queryResult}}">
+    <view class="cu-avatar round lg " style="background-image:url({{item.avatarUrl}});">
+      <!-- <view class="cu-tag badge cuIcon-female bg-pink"></view> -->
+      <view class="cu-tag badge cuIcon-male bg-blue"></view>
+    </view>
+    <view class="content">
+      <view class="text-grey">{{item.nickName}}</view>
+      <view class="text-gray text-sm flex">
+        <text class="text-cut">
+							<text class="cuIcon-infofill text-red  margin-right-xs"></text> 我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。
+        </text>
+      </view>
+    </view>
+    <view class="action">
+      <view class="text-grey text-xs">22:20</view>
+      <view class="cu-tag round bg-grey sm">5</view>
+    </view>
+  </view>
+</view>

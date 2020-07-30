@@ -1,1 +1,3 @@
-/* miniprogram/pages/admin/user/user.wxss */
+.cu-bar .action {
+  max-width: 17%;
+}
