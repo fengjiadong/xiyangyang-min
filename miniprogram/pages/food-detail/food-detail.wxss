@@ -98,10 +98,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 32px);
+  /* width: calc(100% - 32px); */
+  width: 100%;
   padding: 20px 16px;
   background-color: #fff;
-  border-radius: 10px;
 }
 
 .price-box {

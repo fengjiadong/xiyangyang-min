@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    historyList:[
+    historyList: [
       {
         imageUrl: '../../images/img/history.png',
         title: '青春遇上喜羊羊',
@@ -52,13 +52,13 @@ Page({
         imageUrl: '../../images/img/history.png',
         title: '青春遇上喜羊羊',
         time: '2020-07-14 20:34',
-        price: '19'
+        price: '12'
       },
       {
         imageUrl: '../../images/img/history.png',
         title: '青春遇上喜羊羊',
         time: '2020-07-14 20:34',
-        price: '19'
+        price: '11'
       },
     ]
 
@@ -76,6 +76,17 @@ Page({
     wx.switchTab({
       url: '../order/order',
     })
+  },
+  // 删除
+  deleteFood(e) {
+    const index = e.currentTarget.dataset.index;
+    console.log(index);
+    let list = this.data.historyList;
+    list.splice(index, 1);
+    this.setData({
+      historyList: list
+    })
+
   },
   /**
    * 生命周期函数--监听页面加载

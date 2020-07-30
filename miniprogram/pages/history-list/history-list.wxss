@@ -44,6 +44,8 @@
   position: absolute;
   right: 12px;
   top: 12px;
+  width: 50px;
+  text-align: right;
   font-size: 14px;
   color: #B52E24;
 }

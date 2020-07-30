@@ -6,7 +6,7 @@
 			<view class="list-title">{{item.title}}</view>
 			<view class="list-time">下单时间：{{item.time}}</view>
 			<view class="list-time list-price">总价： ¥{{item.price}}</view>
-			<view class="delete">删除</view>
+			<view class="delete" catchtap="deleteFood" data-index="{{index}}">删除</view>
 			<view class="again-button" catchtap="againOrder">再来一单</view>
 		</view>
 	</view>

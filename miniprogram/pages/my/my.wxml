@@ -9,7 +9,7 @@
   <!-- <view  class="center-image-box" bindtap="goLogin"> -->
       
      <view wx:if = "{{!logged}}" class="center-image-box" bindtap="goLogin">
-       <image class="image-my" src="../../images/img/login.png" ></image>
+       <image class="image-my" src="../../images/img/no-list.png" ></image>
      </view>
       <view wx:if = "{{!logged}}"  class="my-title" bindtap="goLogin">点击登录</view>
   <!-- </view> -->

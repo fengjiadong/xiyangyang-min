@@ -3,7 +3,7 @@
   
   <view class="top-text">登录后才能访问奥~</view>
   <view class="image-box">
-	     <image class="image-pic" src="../../images/img/login.png"></image>
+	     <image class="image-pic" src="../../images/img/no-list.png"></image>
   </view>
   <button class="login-button" bindtap="goLogin" size="default">点击跳转登录页</button>
 </view>

@@ -223,12 +223,18 @@ Page({
   },
   // 跳转至详情页面
   goDetail() {
-    wx: wx.navigateTo({
+    wx.navigateTo({
       url: '../food-detail/food-detail',
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
     })
+  },
+  // 跳转至购物车
+  goShopTaxi() {
+   wx.switchTab({
+     url: '../shopping-list/shopping',
+   })
   },
 
   /**
@@ -249,7 +255,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.setData({
+      sizeContentWindow: true,
+    })
   },
 
   /**

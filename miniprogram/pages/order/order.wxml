@@ -2,7 +2,6 @@
 <!-- 弹窗没有出现 -->
 <view class="window-no-content {{sizeContentWindow===false?'window-have-content':''}}">
 	<view class="image-top-box">
-		<!-- <image class="order-img" src="/images/img/order-top.png"></image> -->
 		<swiper class="swiper-bottom" indicator-dots="true" autoplay="true" circular="true">
 			<block wx:for="{{background}}" wx:key="*this">
 				<swiper-item>
@@ -33,7 +32,7 @@
 	</view>
 </view>
 <!-- 弹窗 -->
-<view class="size-container" hidden="{{sizeContentWindow}}" catchtouchmove="true">
+<view class="size-container" hidden="{{sizeContentWindow}}">
 	<view class="size-content">
 		<view class="size-name">{{sizeName}}</view>
 		<view class="type-content">
@@ -62,7 +61,7 @@
 			<view class="price-box">
 				<text class="price-tip">¥</text>{{price}}
 			</view>
-			<view class="shop-taxi">+ 加入购物车</view>
+			<view class="shop-taxi" bindtap="goShopTaxi">+ 加入购物车</view>
 		</view>
 	</view>
 	<view class="close-button" bindtap="hiddenwindow">

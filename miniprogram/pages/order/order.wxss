@@ -7,11 +7,6 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.order-img {
-  width: 352px;
-  height: 183px;
-  margin-bottom: 6px;
-}
 .swiper-item {
   width:100%;
   height: 150px;
@@ -139,12 +134,15 @@
 
 .size-container {
   /* position: fixed; */
-  z-index: 1;
+  position: relative;
+  z-index: 100;
   width: 100%;
   height: 100%;
   padding-top: 100px;
-  padding-bottom: 250px;
+  padding-bottom: 50px;
   background-color: rgba(0, 0, 0, 0.8);
+  overflow-y: scroll;
+
 }
 
 .size-content {
@@ -259,5 +257,5 @@
 
 .text-tan {
   display: block;
-  line-height: 45px;
+  /* line-height: 45px; */
 }

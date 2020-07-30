@@ -7,100 +7,100 @@ Page({
   data: {
     imageUrl: '/images/img/food.png',
     foodTypeList: [{
-        image: '/images/img/medal.png',
-        name: '蓝颜知己',
-        detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-        price: '18',
-        type: '常规',
-      },
-      {
-        image: '/images/img/medal.png',
-        name: '蓝颜知己',
-        detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-        price: '18',
-        type: '常规',
-      },
-      {
-        image: '/images/img/medal.png',
-        name: '蓝颜知己',
-        detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-        price: '18',
-        type: '常规',
-      },
-      {
-        image: '/images/img/medal.png',
-        name: '蓝颜知己',
-        detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-        price: '18',
-        type: '常规',
-      },
-      {
-        image: '/images/img/medal.png',
-        name: '蓝颜知己',
-        detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
-        price: '18',
-        type: '常规',
-      }
+      image: '/images/img/medal.png',
+      name: '蓝颜知己',
+      detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
+      price: '18',
+      type: '常规',
+    },
+    {
+      image: '/images/img/medal.png',
+      name: '蓝颜知己',
+      detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
+      price: '18',
+      type: '常规',
+    },
+    {
+      image: '/images/img/medal.png',
+      name: '蓝颜知己',
+      detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
+      price: '18',
+      type: '常规',
+    },
+    {
+      image: '/images/img/medal.png',
+      name: '蓝颜知己',
+      detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
+      price: '18',
+      type: '常规',
+    },
+    {
+      image: '/images/img/medal.png',
+      name: '蓝颜知己',
+      detail: '蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己蓝颜知己',
+      price: '18',
+      type: '常规',
+    }
     ],
     glassList: [{
-        name: '常规一人份'
-      },
-      {
-        name: '大杯'
-      }
+      name: '常规一人份'
+    },
+    {
+      name: '大杯'
+    }
     ],
     foodList: [{
-        name: '常规'
-      },
-      {
-        name: '豆花布丁'
-      },
-      {
-        name: '红豆'
-      },
-      {
-        name: '焦糖冻'
-      },
-      {
-        name: '晶球'
-      },
-      {
-        name: '咖啡冻'
-      },
-      {
-        name: '烧仙草'
-      },
-      {
-        name: '燕麦'
-      },
-      {
-        name: '椰果'
-      },
-      {
-        name: '芋圆'
-      },
-      {
-        name: '珍珠'
-      },
-      {
-        name: '芝士奶盖'
-      }
+      name: '常规'
+    },
+    {
+      name: '豆花布丁'
+    },
+    {
+      name: '红豆'
+    },
+    {
+      name: '焦糖冻'
+    },
+    {
+      name: '晶球'
+    },
+    {
+      name: '咖啡冻'
+    },
+    {
+      name: '烧仙草'
+    },
+    {
+      name: '燕麦'
+    },
+    {
+      name: '椰果'
+    },
+    {
+      name: '芋圆'
+    },
+    {
+      name: '珍珠'
+    },
+    {
+      name: '芝士奶盖'
+    }
     ],
     sugarList: [{ // 糖度选择
-        name: '正常糖'
-      },
-      {
-        name: '七分糖'
-      },
-      {
-        name: '五分糖'
-      },
-      {
-        name: '三分糖'
-      },
-      {
-        name: '不加糖'
-      },
+      name: '正常糖'
+    },
+    {
+      name: '七分糖'
+    },
+    {
+      name: '五分糖'
+    },
+    {
+      name: '三分糖'
+    },
+    {
+      name: '不加糖'
+    },
     ],
     iceList: [ // 冰类型选择
       {
@@ -167,6 +167,12 @@ Page({
     that.setData({
       selectedIce: index,
       iceType: that.data.iceList[index].name
+    })
+  },
+  // 跳转至购物车
+  goShopTaxi() {
+    wx.switchTab({
+      url: '../shopping-list/shopping',
     })
   },
   /**

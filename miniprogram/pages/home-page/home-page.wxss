@@ -1,6 +1,6 @@
 /* miniprogram/pages/home-page/home-page.wxss */
 .home-image-box {
-  padding: 0 16px;
+  padding: 20px 16px 0;
 }
 
 .swiper-bottom {
