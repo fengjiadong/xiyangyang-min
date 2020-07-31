@@ -245,8 +245,12 @@ Page({
       }
     })
   },
+  // 查询小料
   getSpecifications(){
-    db.collection('specifications').get({
+    db.collection('specifications').where({
+      isDelete:false,
+      invalid:false
+    }).get({
       success: res => {
         this.setData({
           specifications: res.data

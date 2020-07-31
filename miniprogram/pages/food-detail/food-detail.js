@@ -10,62 +10,10 @@ Page({
     name:'',
     price:0,
     detail:'',
+    specifications:[],
     glassList: [{
       name: '常规一人份'
-    },
-    {
-      name: '大杯'
-    }
-    ],
-    foodList: [{
-      name: '常规',
-      selectedFood: true
-    },
-    {
-      name: '豆花布丁',
-      selectedFood: false
-    },
-    {
-      name: '红豆',
-      selectedFood: false
-    },
-    {
-      name: '焦糖冻',
-      selectedFood: false
-    },
-    {
-      name: '晶球',
-      selectedFood: false
-    },
-    {
-      name: '咖啡冻',
-      selectedFood: false
-    },
-    {
-      name: '烧仙草',
-      selectedFood: false
-    },
-    {
-      name: '燕麦',
-      selectedFood: false
-    },
-    {
-      name: '椰果',
-      selectedFood: false
-    },
-    {
-      name: '芋圆',
-      selectedFood: false
-    },
-    {
-      name: '珍珠',
-      selectedFood: false
-    },
-    {
-      name: '芝士奶盖',
-      selectedFood: false
-    }
-    ],
+    }],
     sugarList: [{ // 糖度选择
       name: '正常糖'
     },
@@ -122,11 +70,11 @@ Page({
     let that = this;
     const index = e.currentTarget.dataset.index;
     console.log(index);
-    let list = that.data.foodList;
+    let list = that.data.specifications;
     list[index].selectedFood = !list[index].selectedFood;
     that.setData({
-      foodList: list,
-      foodType: that.data.foodList[index].name
+      specifications: list,
+      foodType: that.data.specifications[index].name
     })
   },
   // 精度选择
@@ -165,6 +113,7 @@ Page({
     var id = options.id;
     console.log(id)
     this.getCommodity(id);
+    this.getSpecifications();
   },
 
   /**
@@ -227,6 +176,20 @@ Page({
           detail: res.data[0].detail,
           price: res.data[0].price
         })
+      }
+    })
+  },
+  // 查询小料
+  getSpecifications(){
+    db.collection('specifications').where({
+      isDelete:false,
+      invalid:false
+    }).get({
+      success: res => {
+        this.setData({
+          specifications: res.data
+        })
+        console.log('[数据库] [查询记录] 成1功: ', res)
       }
     })
   }

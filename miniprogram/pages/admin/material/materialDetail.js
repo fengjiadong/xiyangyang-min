@@ -22,7 +22,7 @@ Page({
         id:options.id,
         name:options.name,
         price:options.price,
-        invalid:options.invalid
+        invalid:options.invalid==='true'
       })
     }
   },
@@ -127,6 +127,7 @@ Page({
     this.setData({
       invalid: !e.detail.value
     })
+    console.log(this.data.invalid)
   },
   delete(){
     this.setData({

@@ -68,7 +68,7 @@ Page({
     let index = e.currentTarget.dataset.index;
     let item = this.data.specifications[index];
     wx.navigateTo({
-      url: 'materialDetail?id='+item._id+"&name="+item.name+'&price='+item.price,
+      url: 'materialDetail?id='+item._id+"&name="+item.name+'&price='+item.price+"&invalid="+item.invalid,
     })
   },
   addMaterial(){

@@ -10,7 +10,6 @@
 	<view class="cu-form-group margin-top">
 		<view class="title">是否有效</view>
 		<switch   checked="{{!invalid}}" bindchange="invalid"></switch>
-			
 	</view>
   <view class="padding-xl">
   <button  wx:if="{{!id}}" class="btn bg-blue lg" bindtap="add">添加</button>
