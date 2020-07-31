@@ -17,7 +17,8 @@ exports.main = async (event, context) => {
         price: event.price,
         totalPrice: event.totalPrice,
         specifications: event.specifications,
-        isDelete:false
+        isDelete:false,
+        createTime: new Date()
       }]
     })
   return {

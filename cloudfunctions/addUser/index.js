@@ -18,7 +18,8 @@ exports.main = async (event, context) => {
         gender: event.gender,
         language: event.language,
         province: event.province,
-        isDelete:false
+        isDelete:false,
+        createTime: new Date()
       }]
     })
   return {

@@ -6,7 +6,7 @@
       <!-- <view class="margin-top-sm text-Abc">#0081ff - #1cbbb4</view> -->
     </view>
   </view>
-  <view class="padding-sm">
+  <view class="padding-sm" bindtap="goCommodityPage">
     <view class="bg-gradual-red padding radius text-center shadow-blur">
       <view class="text-lg">商品管理</view>
        <view class="text-lg"></view>

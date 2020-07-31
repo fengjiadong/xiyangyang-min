@@ -17,7 +17,8 @@ exports.main = async (event, context) => {
         name: event.name,
         phone: event.phone,
         type: event.type,
-        isDelete:false
+        isDelete:false,
+        createTime: new Date()
       }]
     })
   return {

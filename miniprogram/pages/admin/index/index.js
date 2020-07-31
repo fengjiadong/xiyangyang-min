@@ -85,6 +85,12 @@ Page({
     wx.navigateTo({
       url: '../material/material',
     })
+  },
+  goCommodityPage(){
+    console.log('跳转到商品管理页')
+    wx.navigateTo({
+      url: '../commodity/commodity',
+    })
   }
 
 })
