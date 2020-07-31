@@ -24,7 +24,7 @@
 
 .food-title {
   padding-bottom: 10px;
-  font-size: 16px;
+  font-size: 32rpx;
   color: #424242;
   font-weight: bold;
 }
@@ -36,11 +36,11 @@
 
 .price-number {
   padding: 0 4px 0 4rpx;
-  font-size: 32rpx;
+  font-size: 46rpx;
 }
 
 .price-after {
-  font-size: 22rpx;
+  font-size: 32rpx;
   color: #7B7B7B;
 }
 
@@ -56,7 +56,7 @@
 .food-detail-title {
   padding-top: 12px;
   padding-bottom: 10px;
-  font-size: 14px;
+  font-size: 32rpx;
   color: #424242;
 }
 .type-title {
@@ -71,14 +71,17 @@
 
 .type-list {
   width: 94px;
-  margin-right: 12px;
-  margin-bottom: 10px;
+  margin-right: 30px;
+  margin-bottom: 20px;
   line-height: 28px;
   text-align: center;
   font-size: 24rpx;
   color: #000;
   border: 1rpx solid rgba(0, 0, 0, 0.06);
   border-radius: 14px;
+}
+.type-list:nth-child(3n) {
+  margin-right: 0;
 }
 
 .type-list:last-child {
@@ -111,7 +114,7 @@
 }
 
 .price-box {
-  font-size: 24px;
+  font-size: 46rpx;
   color: #ff2424;
 }
 
