@@ -64,7 +64,7 @@ Page({
   getOrderUserInfo(order,index){
     db.collection('user').doc(order.userId).get({
       success: res => {
-        console.log("用户信息",res)
+        // console.log("用户信息",res)
         this.data.pendingList[index].nickName = res.data.nickName
         this.data.pendingList[index].avatarUrl = res.data.avatarUrl
         this.data.pendingList[index].createTime = this.formatDate(this.data.pendingList[index].createTime,'yyyy-MM-dd hh:mm:ss')
@@ -80,7 +80,14 @@ Page({
   onReady: function () {
 
   },
-
+  // 进入订单详情
+  orderInfo(e){
+      console.log(e.currentTarget.dataset.info)
+      let info = e.currentTarget.dataset.info
+      wx.navigateTo({
+        url: 'orderInfo?id='+info._id+"&nickName="+info.nickName+"&image="+info.avatarUrl,
+      })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

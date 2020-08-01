@@ -2,6 +2,7 @@
   "pages": [
     "pages/home-page/home-page",
     "pages/admin/online/online",
+    "pages/admin/online/orderInfo",
     "pages/admin/commodity/editCommodity",
     "pages/admin/commodity/commodity",
     "pages/admin/material/material",

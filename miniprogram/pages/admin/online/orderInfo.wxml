@@ -1,0 +1,101 @@
+<view class="padding-xl radius shadow-warp bg-white margin-top" >
+        	<view class="write-module-box">
+              <view class="detail-img">
+               <image class="cu-avatar xl radius shadow-warp round margin-left" src="{{info.avatarUrl}}" ></image>
+              </view>
+              <!-- <view class="detail-list-box">
+                 <view class="detail-title">订单编号 </view>
+                 <view class="detail-text">{{info.orderNum}}</view>
+              </view> -->
+              <view class="detail-list-box">
+                 <view class="detail-title">微信用户 </view>
+                 <view class="detail-text">{{info.nickName}}</view>
+              </view>
+          	  <view class="detail-list-box">
+                <view class="detail-title">类型 </view>
+                <view class="detail-text">{{info.type}}</view>
+              </view>
+             	<view class="detail-list-box">
+                <view class="detail-title">下单时间 </view>
+                <view class="detail-text">{{info.createTime}}</view>
+              </view>
+              <view class="detail-list-box">
+                <view class="detail-title">总付款 </view>
+                <view class="detail-text" style="color:red;">¥<text class="price-num">{{info.totalPrice}}</text></view>
+              </view>
+          </view>
+     </view>
+
+
+     <!--miniprogram/pages/shopping-list-detail/shopping-list-detail.wxml-->
+<view class="detail-container padding-xl radius shadow-warp bg-white margin-top">
+	<view class="write-module-box">
+		<view class="store-name">商品详细列表</view>
+		<view class="list-box">
+			<view class="list-every" wx:for="{{info.commoditys}}" wx:key="key">
+				<image class="list-image" src="{{item.image}}"></image>
+				<view class="right-box">
+					<view class="list-name">{{item.name}}</view>
+					<view class="text-before">规格：<text class="text-words">{{item.glassType.name}} {{item.iceType}} {{item.sugarType}}</text></view>
+					<view class="text-before">加料：<text class="text-words" wx:for="{{item.specifications}}">{{item.name}} </text></view>
+					<view class="text-before">数量：<text class="text-words">{{item.number}}</text> 单价：<text class="text-words" style="color:red;">¥{{item.price}}</text></view>
+					<view class="list-price"><text class="price-num" style="color:red;">¥{{item.totalPrice}}</text></view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="write-module-box">
+		<view class="store-name">订单详情</view>
+		<view class="detail-list-box-left">
+			<view class="detail-title">订单编号 </view>
+			<view class="detail-text">{{info.orderNum}}</view>
+		</view>
+		<view class="detail-list-box-left">
+			<view class="detail-title">下单时间 </view>
+			<view class="detail-text">{{info.createTime}}</view>
+		</view>
+		<view class="detail-list-box-left">
+			<view class="detail-title">订单状态</view>
+			<view class="detail-text">{{info.status}}</view>
+		</view>
+		<view class="detail-list-box-left">
+			<view class="detail-title">订单类型</view>
+			<view class="detail-text">{{info.type}}</view>
+		</view>
+		<view wx:if="{{!info.type === '上门自取'}}" class="detail-list-box-left">
+			<view class="detail-title">配送地址</view>
+			<view class="detail-text">{{info.address.name}}{{info.address.gender}}</view>
+		</view>
+		<view wx:if="{{!info.type === '上门自取'}}" class="detail-list-box-left">
+			<view class="detail-title">配送地址</view>
+			<view class="detail-text">{{info.address.address}}</view>
+		</view>
+		<view wx:if="{{info.type === '上门自取'}}" class="detail-list-box-left">
+			<view class="detail-title">预计自取时间</view>
+			<view class="detail-text">{{info.time}}</view>
+		</view>
+		<view wx:if="{{info.type === '上门自取'}}" class="detail-list-box-left">
+			<view class="detail-title">预留手机号</view>
+			<view class="detail-text">{{info.phone}}</view>
+		</view>
+    <view class="detail-list-box-left">
+			<view class="detail-title">用户备注</view>
+			<view class="detail-text">{{info.remarks}}</view>
+		</view>
+	</view>
+</view>
+
+<view class="padding-xl radius shadow-warp bg-white margin-top" >
+ <view class="padding-sm" bindtap="addCommodity">
+    <view class="bg-gradual-blue padding radius text-center ">
+      <view class="text-lg">接收订单</view>
+       <view class="text-lg"></view>
+    </view>
+  </view>
+   <view class="padding-sm" bindtap="addCommodity">
+    <view class="bg-gradual-red padding radius text-center shadow-blur">
+      <view class="text-lg">拒绝接收</view>
+       <view class="text-lg"></view>
+    </view>
+  </view>
+    </view>

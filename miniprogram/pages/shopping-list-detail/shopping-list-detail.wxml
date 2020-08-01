@@ -50,21 +50,5 @@
 			<view class="detail-title">预留手机号</view>
 			<view class="detail-text">{{order.phone}}</view>
 		</view>
-		
 	</view>
-  	<!-- <view class="write-module-box">
-		<view class="store-name">订单详情</view>
-		<view class="detail-list-box">
-			<view class="detail-title">订单编号</view>
-			<view class="detail-text">001</view>
-		</view>
-		<view class="detail-list-box">
-			<view class="detail-title">下单时间 </view>
-			<view class="detail-text">2020-07-14 20:34</view>
-		</view>
-		<view class="detail-list-box">
-			<view class="detail-title">支付方式</view>
-			<view class="detail-text">在线支付</view>
-		</view>
-	</view> -->
 </view>
