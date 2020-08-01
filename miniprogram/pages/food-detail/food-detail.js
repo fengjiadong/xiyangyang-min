@@ -122,6 +122,10 @@ Page({
   },
   // 跳转至购物车
   goShopTaxi() {
+    wx.showLoading({ //显示加载提示框 不会自动关闭 只能wx.hideLoading关闭
+      title : '正在加入购物车', //提示框显示的提示信息
+      mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
+    });
     // 得到小料选择数量
     let list = this.data.specifications;
     let specifications = []
@@ -147,12 +151,14 @@ Page({
       name: "addShopping",
       data: shopping,
       success(res) {
+        // wx.hideLoading()
+        //存入购物车
+        wx.switchTab({
+          url: '../shopping-list/shopping',
+        })
       }
     })
-    //存入购物车
-    wx.switchTab({
-      url: '../shopping-list/shopping',
-    })
+    
   },
   /**
    * 生命周期函数--监听页面加载
