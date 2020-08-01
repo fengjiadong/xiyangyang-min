@@ -7,25 +7,18 @@ const db = cloud.database()    //链接数据库
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  let result = await db.collection('shoppingCart')   //集合名称
+  let result = await db.collection('order')   //集合名称
     .add({
       data: [{
         commodityId: event.commodityId,
-        name: event.name,
         userId: event.userId,
         openId: wxContext.OPENID,
-        number: 1,
-        price: parseFloat(event.price),
-        totalPrice: parseFloat(event.price),
-        isActive: false,
+        count: event.count,
+        price: event.price,
+        totalPrice: event.totalPrice,
         specifications: event.specifications,
-        image: event.image,
-        iceType: event.iceType,
-        glassType: event.glassType,
-        sugarType: event.sugarType,
-        specificationsPrice: event.specificationsPrice,
-        createTime: new Date(),
-        updateTime: new Date()
+        isDelete:false,
+        createTime: new Date()
       }]
     })
   return {

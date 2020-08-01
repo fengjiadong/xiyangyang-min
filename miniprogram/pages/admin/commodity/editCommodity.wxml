@@ -30,6 +30,14 @@
 		<view class="title">价格</view>
 		<input placeholder="商品价格" type="digit" value="{{info.price}}" bindinput="updateValue" data-name='info.price'></input>
 	</view>
+	<view class="cu-form-group ">
+		<view class="title">价格2</view>
+		<input placeholder="商品价格" type="digit" value="{{info.priceTow}}" bindinput="updateValue" data-name='info.priceTow'></input>
+	</view>
+	<view class="cu-form-group ">
+		<view class="title">价格3</view>
+		<input placeholder="商品价格" type="digit" value="{{info.priceThree}}" bindinput="updateValue" data-name='info.priceThree'></input>
+	</view>
    <view class="cu-form-group">
 		<view class="title">介绍</view>
 		<input placeholder="商品介绍" value="{{info.detail}}" bindinput="updateValue" data-name='info.detail'></input>
