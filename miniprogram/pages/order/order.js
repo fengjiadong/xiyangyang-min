@@ -8,7 +8,7 @@ Page({
   data: {
     background: ['/images/img/five.jpg', '/images/img/four.jpg', '/images/img/seven.jpg'],
     selected: 0,
-    // specifications:[],
+    specifications:[],
     selectedType:{},
     selectList: [{ // 饮料类型选择
         title: '热销推荐'
@@ -69,7 +69,7 @@ Page({
     selectedSugar: 0,
     selectedIce: 0,
     glassType: '常规',
-    foodType: '常规',
+    foodType: [],
     sugarType: '正常糖',
     iceType: '正常冰',
     price: '19',
@@ -119,9 +119,14 @@ Page({
     let that = this;
     const index = e.currentTarget.dataset.index;
     console.log(index);
+    let list = that.data.specifications;
+    list[index].selectedFood = !list[index].selectedFood;
+    let selectList = that.data.foodType;
+    selectList.push(that.data.specifications[index].name);
+    console.log(selectList)
     that.setData({
-      selectedFood: index,
-      foodType: that.data.specifications[index].name
+      specifications: list,
+      foodType: selectList
     })
   },
   // 精度选择

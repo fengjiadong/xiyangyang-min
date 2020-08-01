@@ -1,10 +1,10 @@
 /* miniprogram/pages/order/order.wxss */
 
 .image-top-box {
-  padding: 0 20rpx 32rpx;
-  margin-bottom: 12rpx;
+  padding: 20rpx 20rpx 30rpx;
+  /* margin-bottom: 12rpx; */
   background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .swiper-bottom {
@@ -74,7 +74,7 @@
 
 .food-list {
   display: flex;
-  padding: 4px 20px 12px 10px;
+  padding: 4px 10px 12px 10px;
 }
 
 .food-image {
@@ -88,11 +88,12 @@
 }
 
 .food-name {
-  padding-top: 4px;
+  /* padding-top: 4px; */
   padding-bottom: 6px;
   font-size: 32rpx;
   color: #424242;
   line-height: 32rpx;
+  font-weight: bold;
 }
 
 .food-detail {
@@ -108,8 +109,9 @@
 }
 
 .food-price {
-  font-size: 20rpx;
+  font-size: 22rpx;
   color: #ff2424;
+  font-weight: bold;
 }
 
 .price-number {
@@ -170,7 +172,7 @@
 }
 
 .type-content {
-  padding: 10px 0 20px 16px;
+  padding: 10px 16px 20px;
 }
 
 .type-title {
@@ -185,7 +187,7 @@
 
 .type-list {
   width: 94px;
-  margin-right: 12px;
+  margin-right: 14px;
   margin-bottom: 10px;
   line-height: 28px;
   text-align: center;
@@ -195,7 +197,7 @@
   border-radius: 14px;
 }
 
-.type-list:last-child {
+.type-list:nth-child(3n) {
   margin-right: 0;
 }
 
@@ -210,8 +212,7 @@
 }
 
 .have-select-box {
-  padding: 0 18px;
-  line-height: 80rpx;
+  padding: 12px 18px;
   font-size: 24rpx;
   background-color: rgb(187, 187, 189, 0.2);
 }
@@ -246,9 +247,9 @@
 }
 
 .close-button {
-  width: 100rpx;
-  height: 100rpx;
-  line-height: 100rpx;
+  width: 50px;
+  height: 50px;
+  line-height: 44px;
   text-align: center;
   color: #fff;
   font-size: 70rpx;

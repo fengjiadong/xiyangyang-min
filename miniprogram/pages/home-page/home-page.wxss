@@ -47,7 +47,7 @@
 }
 
 .type-title {
-  padding-top: 10px;
+  padding-top: 20px;
   font-size: 40rpx;
   color: #1F0606;
   font-weight: bold;

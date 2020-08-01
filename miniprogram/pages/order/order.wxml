@@ -42,7 +42,7 @@
 			</view>
 			<view class="type-title two-title">规格</view>
 			<view class="type-list-content">
-				<view class="type-list {{selectedFood===index?'type-list-active':''}}" bindtap="foodSelect" data-index="{{index}}" wx:for="{{specifications}}" wx:key="key">+{{item.name}}</view>
+				<view class="type-list {{item.selectedFood===true?'type-list-active':''}}" bindtap="foodSelect" data-index="{{index}}" wx:for="{{specifications}}" wx:key="key">+{{item.name}}</view>
 			</view>
 			<view class="type-title two-title">精度</view>
 			<view class="type-list-content">
