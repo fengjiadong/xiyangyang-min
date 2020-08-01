@@ -16,7 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    options.id = 'd1cc6d125f255a9e002df34c16b194fa'
+    // options.id = 'd1cc6d125f255a9e002df34c16b194fa'
      if(options.id){
         this.setData({
           id:options.id
