@@ -45,8 +45,8 @@
 }
 
 .type-content {
-  padding: 10px 0 0;
-  border-bottom: 1rpx solid rgb(112, 112, 112, 0.4);
+  padding: 12px 0 0;
+  /* border-bottom: 1rpx solid rgb(112, 112, 112, 0.4); */
 }
 
 .type-list-content {
@@ -73,7 +73,7 @@
   width: 94px;
   height: 28px;
   margin-right: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   line-height: 30px;
   text-align: center;
   font-size: 24rpx;
@@ -98,8 +98,10 @@
 
 
 .detail-words {
+  padding-bottom: 16px;
   font-size: 12px;
   color: #7B7B7B;
+  border-bottom: 1rpx solid rgb(112, 112, 112, 0.4);
 }
 
 .bottom-price-box {
