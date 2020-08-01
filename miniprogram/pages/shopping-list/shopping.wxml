@@ -74,9 +74,9 @@
 		<view wx:if="{{titltTabName== '外卖配送'}}" class="padding-container">
 			<view class="write-box">
 				<view class="write-title">收获地址：</view>
-				<picker class="time-input" value="{{address}}" range="{{addressArray}}" bindchange="addressChange">
+				<picker class="time-input" value="{{address}}"  range-key="address"  range="{{addressArray}}" bindchange="addressChange">
 					<view class="picker">
-						{{addressArray[address]}}
+						{{addressArray[address].address}}
 					</view>
 				</picker>
 			</view>

@@ -200,6 +200,7 @@ Page({
       this.setData({
         sizeContentWindow: false
       })
+      this.searchAddress()
       wx.setNavigationBarTitle({
         title: '提交订单'
       })
@@ -330,7 +331,7 @@ Page({
         break;
       case '外卖配送':
         console.log('外卖配送')
-          console.log(this.data.time, this.data.addressArray[address]);
+          // console.log(this.data.time, this.data.addressArray[address]);
           wx.navigateTo({
             url: '../shopping-list-detail/shopping-list-detail',
           });
@@ -361,7 +362,10 @@ Page({
    */
   onShow: function() {
     this.setData({
-      sizeContentWindow: true
+      sizeContentWindow: true,
+      isActive:false,
+      totalPrice:0,
+      priceList:[]
     })
     let openId = wx.getStorageSync('openId');
     let logged = false;
@@ -410,6 +414,21 @@ Page({
   onShareAppMessage: function() {
 
   },
+  searchAddress(){
+    let userId = wx.getStorageSync('userId')
+    console.log(userId)
+    db.collection('address').where({
+      parentId:userId
+    }).get({
+      success: res => {
+        console.log(res)
+        this.setData({
+          addressArray:res.data
+        })
+      }
+    })
+  }
+  ,
   upShopping(shopping){
     wx.cloud.callFunction({
       name: 'upShopping',
