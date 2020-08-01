@@ -1,6 +1,6 @@
 
 <view class="grid col-1 padding-sm">
- <view class="padding-sm">
+ <view class="padding-sm" bindtap="goOnlinePage">
     <view class="bg-gradual-blue padding radius text-center shadow-blur">
       <view class="text-lg">在线订单区</view>
       <!-- <view class="margin-top-sm text-Abc">#0081ff - #1cbbb4</view> -->

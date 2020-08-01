@@ -18,7 +18,7 @@
 	</view>
 	<view class="write-module-box">
 		<view class="store-name">订单详情</view>
-			<view class="detail-list-box">
+		<view class="detail-list-box">
 			<view class="detail-title">订单编号 </view>
 			<view class="detail-text">{{order.orderNum}}</view>
 		</view>

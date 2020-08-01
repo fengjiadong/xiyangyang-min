@@ -1,0 +1,33 @@
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{index==TabCur?'text-orange cur':''}}" wx:for="{{tab}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+      {{tab[index]}}
+    </view>
+  </view>
+</scroll-view>
+
+ <view wx:if="{{TabCur === 0}}">
+     <view class="padding-xl radius shadow-warp bg-white margin-top" wx:for="{{pendingList}}">
+        	<view class="write-module-box">
+              <view class="detail-img">
+               <image class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
+              </view>
+              <view class="detail-list-box">
+                 <view class="detail-title">微信名称 </view>
+                 <view class="detail-text">{{item.nickName}}</view>
+              </view>
+          	  <view class="detail-list-box">
+                <view class="detail-title">类型 </view>
+                <view class="detail-text">{{item.type}}</view>
+              </view>
+             	<view class="detail-list-box">
+                <view class="detail-title">下单时间 </view>
+                <view class="detail-text">{{item.createTime}}</view>
+              </view>
+              <view class="detail-list-box">
+                <view class="detail-title">总付款 </view>
+                <view class="detail-text total-price">¥<text class="price-num">{{item.totalPrice}}</text></view>
+              </view>
+          </view>
+     </view>
+  </view>

@@ -1,0 +1,44 @@
+.write-module-box {
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.detail-img {
+  position: relative;
+  float: left;
+  left: -60rpx;
+  top:10rpx;
+}
+ .detail-list-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  margin-left: 60px;
+}
+
+.detail-title {
+  font-size: 14px;
+  color: #7B7B7B;
+}
+.detail-text {
+  flex: 1;
+  padding-left: 16px;
+  text-align: right;
+  font-size: 12px;
+  color: #424242;
+}
+
+.total-price {
+  text-align: right;
+  font-size: 22px;
+  color: #FF0000;
+}
+.price-num {
+  font-size: 22px;
+}
+.cu-avatar.xl {
+  width: 181rpx;
+  height: 181rpx;
+}

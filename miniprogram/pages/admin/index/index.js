@@ -74,6 +74,13 @@ Page({
 
   },
   // 调转至收获地址
+  goOnlinePage() {
+    console.log('跳转到在线订单页')
+    wx.navigateTo({
+      url: '../online/online',
+    })
+  },
+  // 调转至收获地址
   goUserPage() {
     console.log('跳转到用户管理页')
     wx.navigateTo({
