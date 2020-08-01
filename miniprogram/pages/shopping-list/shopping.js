@@ -40,17 +40,22 @@ Page({
   },
   // 从数据库得到购物车
   getShopping(){
+    wx.showLoading({ //显示加载提示框 不会自动关闭 只能wx.hideLoading关闭
+      title : '加载中', //提示框显示的提示信息
+      mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
+    });
     // shopList
     let userId = wx.getStorageSync('userId')
     console.log("userId",userId)
     db.collection('shoppingCart').where({
       userId:userId
-    }).get({
+    }).orderBy('createTime','desc').get({
       success: res => {
         console.log('[数据库] [查询记录] 成1功: ', res)
         this.setData({
           shopList: res.data
         })
+        wx.hideLoading()
       }
     })
   },
@@ -136,11 +141,26 @@ Page({
       content: '  确认删除吗',
       success(res) {
         if (res.confirm) {
-          console.log('用户点击确定')
-          list.splice(index, 1)
-          that.setData({
-            shopList: list,
+          wx.showLoading({ //显示加载提示框 不会自动关闭 只能wx.hideLoading关闭
+            title : '删除中', //提示框显示的提示信息
+            mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
+          });
+          console.log(list[index]._id)
+          wx.cloud.callFunction({
+            name: "zhifu",
+            data: {
+              id: list[index]._id
+            },
+            success(res) {
+              wx.hideLoading()
+              console.log("删除云函数",res)
+              list.splice(index, 1)
+              that.setData({
+                shopList: list,
+              })
+            }
           })
+         
         } else if (res.cancel) {
           console.log('用户点击取消')
           return

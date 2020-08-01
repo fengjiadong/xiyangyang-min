@@ -12,7 +12,9 @@ exports.main = async (event, context) => {
       data: {
         openId: wxContext.OPENID,
         type: event.type,
-        price: event.price,
+        price: parseFloat(event.price),
+        priceTow: parseFloat(enevt.priceTow),
+        priceThree: parseFloat(event.priceThree),
         detail: event.detail,
         invalid: event.invalid,
         isDelete: event.isDelete,

@@ -15,6 +15,8 @@ Page({
       type:'',
       price:0,
       detail:'',
+      priceTow:0,
+      priceThree:0,
       isDelete:false
     },
     types:[],
@@ -180,6 +182,7 @@ Page({
       title : '加载中', //提示框显示的提示信息
       mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
     });
+    console.log( this.data.info)
     // console.log(this.data.info)
     wx.cloud.callFunction({
       name: 'upCommodity',
@@ -243,6 +246,8 @@ Page({
           detail:res.data[0].detail,
           invalid:res.data[0].invalid,
           isDelete:res.data[0].isDelete,
+          priceTow:res.data[0].priceTow,
+          priceThree:res.data[0].priceThree,
           name:res.data[0].name,
           image:res.data[0].image,
           id:res.data[0]._id

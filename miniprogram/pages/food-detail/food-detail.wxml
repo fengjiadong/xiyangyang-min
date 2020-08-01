@@ -34,7 +34,7 @@
 	</view>
 	<view class="bottom-price-box">
 		<view class="price-box">
-			<text class="price-tip">¥</text>19
+			<text class="price-tip">¥</text>{{price}}
 			<view class="have-select-text">({{glassType}}、{{foodType}}、{{sugarType}}、{{iceType}})</view>
 		</view>
 		<view class="shop-taxi" bindtap="goShopTaxi">+ 加入购物车</view>
