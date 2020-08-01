@@ -9,17 +9,19 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   let result = await db.collection('order')   //集合名称
     .add({
-      data: [{
-        commodityId: event.commodityId,
+      data: {
+        type: event.type,
         userId: event.userId,
         openId: wxContext.OPENID,
-        count: event.count,
-        price: event.price,
         totalPrice: event.totalPrice,
-        specifications: event.specifications,
-        isDelete:false,
-        createTime: new Date()
-      }]
+        status: event.status,
+        orderNum: event.orderNum,
+        commoditys: event.commoditys,
+        address: event.address,
+        createTime: event.createTime,
+        time: event.time,
+        phone: event.phone,
+      }
     })
   return {
     result:result

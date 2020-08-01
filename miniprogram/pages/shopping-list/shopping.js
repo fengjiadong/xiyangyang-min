@@ -46,7 +46,6 @@ Page({
     });
     // shopList
     let userId = wx.getStorageSync('userId')
-    console.log("userId",userId)
     db.collection('shoppingCart').where({
       userId:userId
     }).orderBy('createTime','desc').get({
@@ -128,6 +127,19 @@ Page({
     };
     this.setData({
       isActive: true
+    })
+  },
+  deletePayShoppingEntity(index){
+    let list = this.data.shopList;
+    console.log(list[index]._id);
+    wx.cloud.callFunction({
+      name: "deleteShopping",
+      data: {
+        id: list[index]._id
+      },
+      success(res) {
+        console.log("删除云函数",res)
+      }
     })
   },
   // 删除
@@ -275,6 +287,42 @@ Page({
       twoPhone: e.detail.value
     })
   },
+  // 删除已购买的购物车里面的内容
+  deletePayShopping(){
+    let list = this.data.shopList;
+    let orderList = []
+    for(let i = 0; i < list.length ; i ++){
+      if(list[i].isActive){
+          orderList.push(list[i])
+          this.deletePayShoppingEntity(i);
+      }
+    }
+    
+  },
+  // 在数据库中生成订单然后跳转到详情页
+  toOrderInfo(order){
+    wx.cloud.callFunction({
+      name: 'addOrder',
+      data: order,
+      success: res => {
+        console.log('订单以生成:',res)
+        if(res.result.result._id) {
+          wx.showToast({
+            title: '正在跳转订单详情页',
+            icon: 'success',
+            duration: 500,
+          })
+          // 删除购物车里已购买的商品
+          this.deletePayShopping()
+          setTimeout(function () {
+            wx.navigateTo({
+              url: '../shopping-list-detail/shopping-list-detail?id='+res.result.result._id
+            })
+          }, 500)
+        }
+      }
+    })
+  },
   // 微信支付
   pay(payData,order) {
     var that = this;
@@ -291,6 +339,7 @@ Page({
         console.log('pay success', res)
         //跳转到支付成功页面
         console.log('支付成功~',order)
+        this.toOrderInfo(order)
       },
       fail(res) {
         // console.error('pay fail', res)
@@ -310,6 +359,8 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    this.toOrderInfo(order);
+    return;
     let that = this;
     var uuid = order.orderNum //调用自己的uuid函数
     // var uuid = this.uuid(32,32)
@@ -388,6 +439,7 @@ Page({
           orderList.push(list[i])
       }
     }
+    let userId = wx.getStorageSync('userId')
     let order = {}
     order.commoditys = orderList;
     order.totalPrice = this.data.totalPrice;
@@ -395,8 +447,11 @@ Page({
     order.type = this.data.titltTabName
     order.status = '待商家确认订单'
     order.createTime = new Date()
+    order.userId = userId
     if(this.data.titltTabName === '上门自取'){
       order.phone = this.data.onePhone
+      order.time = this.data.time
+      console.log(this.data.time, this.data.onePhone);
     }else{
       order.address = this.data.addressArray[this.data.address]
     }

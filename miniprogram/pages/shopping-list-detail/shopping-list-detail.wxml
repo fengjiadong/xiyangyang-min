@@ -7,30 +7,52 @@
 				<image class="list-image" src="{{item.image}}"></image>
 				<view class="right-box">
 					<view class="list-name">{{item.name}}</view>
-					<view class="text-before">已选规格：<text class="text-words">{{item.selectType}}</text></view>
-					<view class="text-before">数量：<text class="text-words">{{item.num}}</text></view>
-					<view class="list-price">¥<text class="price-num">{{item.price}}</text></view>
+					<view class="text-before">规格：<text class="text-words">{{item.glassType.name}} {{item.iceType}} {{item.sugarType}}</text></view>
+					<view class="text-before">加料：<text class="text-words" wx:for="{{item.specifications}}">{{item.name}} </text></view>
+					<view class="text-before">数量：<text class="text-words">{{item.number}}</text> 单价：<text class="text-words">{{item.price}}</text></view>
+					<view class="list-price">¥<text class="price-num">{{item.totalPrice}}</text></view>
 				</view>
 			</view>
 		</view>
-		<view class="total-price"><text class="text-words">合计 ¥ </text>{{totalPrice}}</view>
+		<view class="total-price"><text class="text-words">合计 ¥ </text>{{order.totalPrice}}</view>
 	</view>
 	<view class="write-module-box">
-		<view class="store-name">配送详情</view>
-		<view class="detail-list-box">
-			<view class="detail-title">期望时间</view>
-			<view class="detail-text">立即配送</view>
+		<view class="store-name">订单详情</view>
+			<view class="detail-list-box">
+			<view class="detail-title">订单编号 </view>
+			<view class="detail-text">{{order.orderNum}}</view>
 		</view>
 		<view class="detail-list-box">
+			<view class="detail-title">下单时间 </view>
+			<view class="detail-text">{{order.createTime}}</view>
+		</view>
+		<view class="detail-list-box">
+			<view class="detail-title">订单状态</view>
+			<view class="detail-text">{{order.status}}</view>
+		</view>
+		<view class="detail-list-box">
+			<view class="detail-title">订单类型</view>
+			<view class="detail-text">{{order.type}}</view>
+		</view>
+		<view wx:if="{{!order.type === '上门自取'}}" class="detail-list-box">
 			<view class="detail-title">配送地址</view>
-			<view class="detail-text">青青草原羊村二号楼 301室</view>
+			<view class="detail-text">{{order.address.name}}{{order.address.gender}}</view>
 		</view>
-		<view class="detail-list-box">
-			<view class="detail-title">配送服务</view>
-			<view class="detail-text">商家配送</view>
+		<view wx:if="{{!order.type === '上门自取'}}" class="detail-list-box">
+			<view class="detail-title">配送地址</view>
+			<view class="detail-text">{{order.address.address}}</view>
 		</view>
+		<view wx:if="{{order.type === '上门自取'}}" class="detail-list-box">
+			<view class="detail-title">预计自取时间</view>
+			<view class="detail-text">{{order.time}}</view>
+		</view>
+		<view wx:if="{{order.type === '上门自取'}}" class="detail-list-box">
+			<view class="detail-title">预留手机号</view>
+			<view class="detail-text">{{order.phone}}</view>
+		</view>
+		
 	</view>
-  	<view class="write-module-box">
+  	<!-- <view class="write-module-box">
 		<view class="store-name">订单详情</view>
 		<view class="detail-list-box">
 			<view class="detail-title">订单编号</view>
@@ -44,5 +66,5 @@
 			<view class="detail-title">支付方式</view>
 			<view class="detail-text">在线支付</view>
 		</view>
-	</view>
+	</view> -->
 </view>
