@@ -320,3 +320,7 @@
   background-color: #04ADEF;
 
 }
+.center-box {
+  font-size: 14px;
+  color: #999;
+}

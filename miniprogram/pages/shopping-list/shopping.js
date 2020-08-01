@@ -147,7 +147,7 @@ Page({
           });
           console.log(list[index]._id)
           wx.cloud.callFunction({
-            name: "zhifu",
+            name: "deleteShopping",
             data: {
               id: list[index]._id
             },

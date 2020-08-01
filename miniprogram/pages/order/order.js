@@ -151,8 +151,19 @@ Page({
       iceType: that.data.iceList[index].name
     })
   },
+  // 跳转到登陆页
+  goLogin() {
+    wx.navigateTo({
+      url: '../login/login',
+    })
+  },
   // 跳转至详情页面
   goDetail(e) {
+    let userId = wx.getStorageSync('userId')
+    if(!userId){
+      this.goLogin();
+      return;
+    }
     // console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
       url: '../food-detail/food-detail?id='+e.currentTarget.dataset.id,

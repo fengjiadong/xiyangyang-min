@@ -122,6 +122,7 @@ Page({
   },
   // 跳转至购物车
   goShopTaxi() {
+    let userId = wx.getStorageSync('userId')
     wx.showLoading({ //显示加载提示框 不会自动关闭 只能wx.hideLoading关闭
       title : '正在加入购物车', //提示框显示的提示信息
       mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
@@ -134,7 +135,7 @@ Page({
         specifications.push(list[i]);
       }
     }
-    let userId = wx.getStorageSync('userId')
+   
     let shopping = {}
     shopping.commodityId= this.data.id;
     shopping.name = this.data.name;
@@ -181,7 +182,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -264,6 +265,12 @@ Page({
     })
   }
   ,
+  // 跳转到登陆页
+  goLogin() {
+    wx.navigateTo({
+      url: '../login/login',
+    })
+  },
   changeTwoDecimal_f(x) { 
     　　var f_x = parseFloat(x); 
       　　if (isNaN(f_x)) 
