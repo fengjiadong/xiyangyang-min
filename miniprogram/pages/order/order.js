@@ -8,12 +8,11 @@ Page({
   data: {
     background: ['/images/img/five.jpg', '/images/img/four.jpg', '/images/img/seven.jpg'],
     selected: 0,
-    specifications:[],
-    selectedType:{},
+    specifications: [],
+    selectedType: {},
     selectList: [{ // 饮料类型选择
-        title: '热销推荐'
-      }
-    ],
+      title: '热销推荐'
+    }],
     foodTypeList: [
       // {
       //   image: '/images/img/medal.png',
@@ -32,8 +31,7 @@ Page({
       }
     ],
     // 小料列表
-    specifications: [
-    ],
+    specifications: [],
     sugarList: [{ // 糖度选择
         name: '正常糖'
       },
@@ -121,13 +119,33 @@ Page({
     console.log(index);
     let list = that.data.specifications;
     list[index].selectedFood = !list[index].selectedFood;
-    let selectList = that.data.foodType;
-    selectList.push(that.data.specifications[index].name);
-    console.log(selectList)
     that.setData({
       specifications: list,
-      foodType: selectList
     })
+    if (list[index].selectedFood) {
+      let selectList = that.data.foodType;
+      selectList.push(that.data.specifications[index].name);
+      console.log(selectList)
+      this.setData({
+        foodType: selectList,
+        // specificationsPrice: this.data.specificationsPrice + that.data.specifications[index].price,
+        // price: this.changeTwoDecimal_f(this.changeTwoDecimal_f(this.data.price) + that.data.specifications[index].price)
+      })
+    } else {
+      let noselectList = that.data.foodType;
+      for (let i = 0; i <= noselectList.length; i++) {
+        if (noselectList[i] == that.data.specifications[index].name) {
+          noselectList.splice(i, 1)
+        }
+      }
+      console.log(noselectList)
+      this.setData({
+        foodType: noselectList,
+        // specificationsPrice: this.data.specificationsPrice - that.data.specifications[index].price,
+        // price: this.changeTwoDecimal_f(this.changeTwoDecimal_f(this.data.price) - that.data.specifications[index].price)
+      })
+    }
+    console.log(that.data.specifications)
   },
   // 精度选择
   sugarSelect(e) {
@@ -155,24 +173,24 @@ Page({
   goDetail(e) {
     // console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
-      url: '../food-detail/food-detail?id='+e.currentTarget.dataset.id,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      url: '../food-detail/food-detail?id=' + e.currentTarget.dataset.id,
+      success: function (res) {},
+      fail: function (res) {},
+      complete: function (res) {},
     })
   },
   // 跳转至购物车
   goShopTaxi() {
-   wx.switchTab({
-     url: '../shopping-list/shopping',
-   })
+    wx.switchTab({
+      url: '../shopping-list/shopping',
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-      // 获取type
+  onLoad: function (options) {
+    // 获取type
     this.getType();
     this.getSpecifications();
   },
@@ -180,14 +198,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.setData({
       sizeContentWindow: true,
     })
@@ -196,38 +214,38 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
-  getType(){
+  getType() {
     db.collection('type').get({
       success: res => {
         this.setData({
@@ -238,9 +256,9 @@ Page({
       }
     })
   },
-  searchCommodity(typeId){
+  searchCommodity(typeId) {
     db.collection('commodity').where({
-      type:typeId
+      type: typeId
     }).get({
       success: res => {
         this.setData({
@@ -251,10 +269,10 @@ Page({
     })
   },
   // 查询小料
-  getSpecifications(){
+  getSpecifications() {
     db.collection('specifications').where({
-      isDelete:false,
-      invalid:false
+      isDelete: false,
+      invalid: false
     }).get({
       success: res => {
         this.setData({
