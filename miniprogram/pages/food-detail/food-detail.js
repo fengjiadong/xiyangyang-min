@@ -300,7 +300,6 @@ Page({
     }
     return parseFloat(s_x);
   }
-<<<<<<< HEAD
   ,
   // 跳转到登陆页
   goLogin() {
@@ -328,6 +327,4 @@ Page({
       　　} 
     　　return parseFloat(s_x); 
       }
-=======
->>>>>>> b99c6265ac913219b04f7d93ea56362b981c1eb0
 })
