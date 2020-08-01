@@ -21,7 +21,7 @@
 				</view>
 				<view class="bottom-box">
 					<view class="price-box">
-						<text class="price-tip">¥</text>{{item.price}}
+						<text class="price-tip">¥</text>{{item.totalPrice}}
 					</view>
 					<view class="bottom-right-box">
 						<!-- <view class="delete" bindtap="deleteNumber" data-index="{{index}}">-</view> -->
@@ -80,13 +80,9 @@
 					</view>
 				</picker>
 			</view>
-			<view class="write-box">
-				<view class="write-title">预留电话：</view>
-				<input bindinput="getTwoValue" value="{{twoPhone}}" type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="zhan-input"></input>
-			</view>
 		</view>
 		<!-- <view class="immediately-buy" catchtap="immediateBuy">立即支付</view> -->
-    <view class="immediately-buy" bindtap="payment">立即支付</view>
+    <view class="immediately-buy" bindtap="immediateBuy">立即支付</view>
 	</view>
 	<view class="close-button" bindtap="hidden">
 		<text class="text-tan">+</text>

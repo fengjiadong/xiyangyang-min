@@ -1,4 +1,5 @@
 // miniprogram/pages/shopping-list/shopping.js
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -6,61 +7,13 @@ Page({
    */
   data: {
     shopList: [{
-        id: '123',
-        image: '/images/img/taxi-one.png',
-        price: 10,
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-two.png',
-        price: 11,
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-one.png',
-        price: 12,
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-one.png',
-        price: 13,
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-two.png',
-        price: 14,
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-one.png',
-        price: 15,
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
-      {
-        id: '123',
-        image: '/images/img/taxi-two.png',
-        price: '16',
-        isActive: false,
-        name: '蓝颜知己',
-        number: 1,
-      },
+        // id: '123',
+        // image: '/images/img/taxi-one.png',
+        // price: 10,
+        // isActive: false,
+        // name: '蓝颜知己',
+        // number: 1,
+      }
     ],
     isActive: false,
     deleteIs: false,
@@ -85,6 +38,23 @@ Page({
     logged: false,
     openId: ''
   },
+  // 从数据库得到购物车
+  getShopping(){
+    // shopList
+    let userId = wx.getStorageSync('userId')
+    console.log("userId",userId)
+    db.collection('shoppingCart').where({
+      userId:userId
+    }).get({
+      success: res => {
+        console.log('[数据库] [查询记录] 成1功: ', res)
+        this.setData({
+          shopList: res.data
+        })
+      }
+    })
+  },
+
   // 是否选中
   isSelect(e) {
     console.log(e);
@@ -131,39 +101,24 @@ Page({
     }
 
   },
-  // 是否全选
+  // 全选
   isAllSelect() {
     let isActive = this.data.isActive;
     let list = this.data.shopList;
     for (let i = 0; i < list.length; i++) {
-      list[i].isActive = !list[i].isActive;
-      isActive = !isActive;
-      console.log(list[i].isActive, isActive)
-
-      // if (list[i].isActive == false) {
-      //   list[i].isActive = true
-      // }
+      if(!list[i].isActive){
+        let e = {
+          currentTarget:{
+            dataset:{
+              index:i
+            }
+          }
+        }
+        this.isSelect(e)
+      }
     };
-    if (isActive === true) {
-      for (let i = 0; i < list.length; i++) {
-        list[i].isActive = true
-      }
-      let total = 0;
-      list.forEach(ele => {
-        total = total + ele.price * ele.number;
-      })
-      console.log(total);
-      this.setData({
-        totalPrice: total
-      })
-    } else {
-      for (let i = 0; i < list.length; i++) {
-        list[i].isActive = false
-      }
-    }
     this.setData({
-      shopList: list,
-      isActive: isActive
+      isActive: true
     })
   },
   // 删除
@@ -196,17 +151,21 @@ Page({
     const index = e.currentTarget.dataset.index;
     let list = this.data.shopList;
     if (list[index].number === 1) {
-      // this.setData({
-      //   deleteIs: false
-      // })
       return;
     }
     list[index].number--;
+    list[index].totalPrice = this.changeTwoDecimal_f( list[index].price * list[index].number);
+    if(list[index].isActive){
+      console.log(this.data.totalPrice)
+      this.data.totalPrice = parseFloat(this.data.totalPrice) - parseFloat(list[index].price);
+      this.setData({
+        totalPrice:  this.changeTwoDecimal_f(this.data.totalPrice)
+      })
+    }
     this.setData({
-      shopList: list,
+      shopList: list
     })
-
-
+    this.upShopping(list[index]);
   },
   // 数量增加
   addNumber(e) {
@@ -214,9 +173,19 @@ Page({
     const index = e.currentTarget.dataset.index;
     let list = this.data.shopList;
     list[index].number++;
+    list[index].totalPrice = this.changeTwoDecimal_f( list[index].price * list[index].number);
+    if(list[index].isActive){
+      console.log(this.data.totalPrice)
+      this.data.totalPrice = parseFloat(this.data.totalPrice) + parseFloat(list[index].price);
+      this.setData({
+        totalPrice:  this.changeTwoDecimal_f(this.data.totalPrice)
+      })
+    }
+   
     this.setData({
       shopList: list
     })
+    this.upShopping(list[index]);
   },
   //购买
   buy() {
@@ -339,8 +308,10 @@ Page({
   },
   // 立即支付
   immediateBuy() {
-    switch (this.data.titltTabActive) {
-      case 0:
+    // payment
+    switch (this.data.titltTabName) {
+      case '上门自取':
+        console.log('上门自取')
         if (this.data.onePhone === '') {
           wx.showToast({
             title: '请填写收货人电话',
@@ -357,14 +328,8 @@ Page({
           })
         }
         break;
-      case 1:
-        if (this.data.twoPhone === '') {
-          wx.showToast({
-            title: '请填写收货人电话',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
+      case '外卖配送':
+        console.log('外卖配送')
           console.log(this.data.time, this.data.addressArray[address]);
           wx.navigateTo({
             url: '../shopping-list-detail/shopping-list-detail',
@@ -372,7 +337,6 @@ Page({
           this.setData({
             sizeContentWindow: true
           })
-        }
         break;
     }
 
@@ -402,13 +366,14 @@ Page({
     let openId = wx.getStorageSync('openId');
     let logged = false;
     if (openId) {
+      this.getShopping();
       logged = true;
     }
     this.setData({
       openId: openId,
       logged: logged
     })
-
+   
   },
 
   /**
@@ -445,6 +410,16 @@ Page({
   onShareAppMessage: function() {
 
   },
+  upShopping(shopping){
+    wx.cloud.callFunction({
+      name: 'upShopping',
+      data: shopping,
+      success: res => {
+        // console.log('云函数更新',res)
+      }
+    })
+  },
+  // 跳转到登陆页
   goLogin() {
     wx.navigateTo({
       url: '../login/login',
@@ -471,5 +446,25 @@ Page({
       }
     }
     return uuid.join("");
+  },
+   changeTwoDecimal_f(x) { 
+　　var f_x = parseFloat(x); 
+  　　if (isNaN(f_x)) 
+  　　{ 
+  　　　　return 0; 
+  　　} 
+  　　var f_x = Math.round(x*100)/100; 
+  　　var s_x = f_x.toString(); 
+  　　var pos_decimal = s_x.indexOf('.'); 
+  　　if (pos_decimal < 0) 
+  　　{ 
+  　　　　pos_decimal = s_x.length; 
+  　　s_x += '.'; 
+  　　} 
+  　　while (s_x.length <= pos_decimal + 2) 
+  　　{ 
+  　　　　s_x += '0'; 
+  　　} 
+　　return parseFloat(s_x); 
   }
 })

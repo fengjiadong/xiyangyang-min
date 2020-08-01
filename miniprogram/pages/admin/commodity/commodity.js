@@ -21,7 +21,7 @@ Page({
    let info =  wx.getStorageSync('commodity');
    let addInfo =  wx.getStorageSync('addCommodity');
    if(info){
-    wx.clearStorageSync('commodity')
+    wx.removeStorageSync('commodity')
       console.log('info',info)
       let list = this.data.list;
       for(var i = 0; i <list.length; i++){
@@ -49,7 +49,7 @@ Page({
   },
   // 给某个分类添加一个商品
   moveInfo(addInfo){
-    wx.clearStorageSync('addCommodity')
+    wx.removeStorageSync('addCommodity')
     let list = this.data.list;
     for(var i = 0; i <list.length; i++){
       console.log(list[i])
