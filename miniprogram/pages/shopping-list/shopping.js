@@ -77,13 +77,15 @@ Page({
         priceList: priceList
       })
       let total = 0;
-
-      this.data.priceList.forEach(ele => {
-        total = total + ele.price * ele.num;
+      // this.data.shopList
+      this.data.shopList.forEach(ele => {
+        if(ele.isActive){
+          total = total + ele.totalPrice;
+        }
       })
       console.log(total);
       this.setData({
-        totalPrice: total
+        totalPrice:  this.changeTwoDecimal_f(total)
       })
     } else if (list[index].isActive === false) {
       console.log(this.data.shopList)
@@ -91,11 +93,13 @@ Page({
       console.log(priceList);
       let total = 0;
 
-      this.data.priceList.forEach(ele => {
-        total = total + ele.price * ele.num;
+      this.data.shopList.forEach(ele => {
+        if(ele.isActive){
+          total = total + ele.totalPrice;
+        }
       })
       this.setData({
-        totalPrice: total,
+        totalPrice:  this.changeTwoDecimal_f(total),
         priceList: priceList
       })
     }
@@ -200,7 +204,9 @@ Page({
       this.setData({
         sizeContentWindow: false
       })
-      this.searchAddress()
+      if(this.data.titltTabName === '外卖配送'){
+        this.searchAddress();
+      }
       wx.setNavigationBarTitle({
         title: '提交订单'
       })
@@ -222,11 +228,10 @@ Page({
   // 类型切换
   titleTabSelect(e) {
     console.log(e);
-    // const index = e.currentTarget.dataset.index;
-    // this.setData({
-    //   titltTabActive: index
-    // })
     const name = e.currentTarget.dataset.name;
+    if(name === '外卖配送'){
+      this.searchAddress()
+    }
     this.setData({
       titltTabName: name
     })
@@ -251,7 +256,7 @@ Page({
     })
   },
   // 微信支付
-  pay(payData) {
+  pay(payData,order) {
     var that = this;
     const payment = payData.payment //这里注意，上一个函数的result中直接整合了这里要用的参数，直接展开即可使用
     console.log(payment)
@@ -265,30 +270,38 @@ Page({
       success(res) {
         console.log('pay success', res)
         //跳转到支付成功页面
+        console.log('支付成功~',order)
       },
       fail(res) {
-        console.error('pay fail', res)
+        // console.error('pay fail', res)
         //跳转到支付失败页面
+        wx.showToast({
+          title: '取消支付',
+          icon: 'none',
+          duration: 1000,
+          mask:false
+        })
       }
     })
   },
   // 微信支付
-  payment() {
-    console.log('开始支付')
+  payment(order) {
+    console.log('开始调用微信支付')
     wx.showLoading({
       title: '加载中',
     })
     let that = this;
-    var uuid = this.uuid(16, 16) //调用自己的uuid函数
-    console.log("uuid:"+uuid)
+    var uuid = order.orderNum //调用自己的uuid函数
+    // var uuid = this.uuid(32,32)
     var body = "喜羊羊-茶饮"
+    console.log("uuid",uuid)
     wx.cloud.callFunction({
       name: "zhifu",
       data: {
         body: body,
-        orderid: "" + uuid,
-        money: 1, //支付金额
-        nonceStr: this.uuid(32, 32) //调用自己的uuid函数
+        orderid: uuid,
+        money: order.totalPrice, //支付金额
+        nonceStr: uuid //调用自己的uuid函数
       },
       success(res) {
         wx.hideLoading({
@@ -296,7 +309,7 @@ Page({
         })
         console.log("提交成功", res.result)
         //创建自己的未支付订单
-        that.pay(res.result)
+        that.pay(res.result,order)
       },
       fail(res) {
         wx.hideLoading({
@@ -307,7 +320,7 @@ Page({
     })
 
   },
-  // 立即支付
+  // 立即支付按钮
   immediateBuy() {
     // payment
     switch (this.data.titltTabName) {
@@ -321,9 +334,11 @@ Page({
           })
         } else {
           console.log(this.data.time, this.data.onePhone);
-          wx.navigateTo({
-            url: '../shopping-list-detail/shopping-list-detail',
-          });
+          // wx.navigateTo({
+          //   url: '../shopping-list-detail/shopping-list-detail',
+          // });
+          // 生成订单然后支付
+          this.generate()
           this.setData({
             sizeContentWindow: true
           })
@@ -332,15 +347,41 @@ Page({
       case '外卖配送':
         console.log('外卖配送')
           // console.log(this.data.time, this.data.addressArray[address]);
-          wx.navigateTo({
-            url: '../shopping-list-detail/shopping-list-detail',
-          });
+          // wx.navigateTo({
+          //   url: '../shopping-list-detail/shopping-list-detail',
+          // });
+          // 生成订单然后支付
+          this.generate()
           this.setData({
             sizeContentWindow: true
           })
         break;
     }
-
+  },
+  // 生成订单信息，然后跳转支付页面
+  // 
+  generate(){
+    let list = this.data.shopList;
+    let orderList = []
+    for(let i = 0; i < list.length ; i ++){
+      if(list[i].isActive){
+          orderList.push(list[i])
+      }
+    }
+    let order = {}
+    order.commoditys = orderList;
+    order.totalPrice = this.data.totalPrice;
+    order.orderNum = this.uuid(32,32)
+    order.type = this.data.titltTabName
+    order.status = '待商家确认订单'
+    order.createTime = new Date()
+    if(this.data.titltTabName === '上门自取'){
+      order.phone = this.data.onePhone
+    }else{
+      order.address = this.data.addressArray[this.data.address]
+    }
+    this.payment(order)
+    //  console.log(order)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -414,6 +455,7 @@ Page({
   onShareAppMessage: function() {
 
   },
+  // 获取配送地址
   searchAddress(){
     let userId = wx.getStorageSync('userId')
     console.log(userId)
@@ -422,6 +464,12 @@ Page({
     }).get({
       success: res => {
         console.log(res)
+        if(res.data.length < 0){
+          // 如果配送地址小于1 那么就跳转到管理地址页面
+          wx.navigateTo({
+            url: '../address-list/address-list',
+          })
+        }
         this.setData({
           addressArray:res.data
         })
