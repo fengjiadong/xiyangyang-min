@@ -146,10 +146,13 @@ Page({
     console.log(this.data.info.invalid)
   },
   add(){
-    wx.showLoading({ //显示加载提示框 不会自动关闭 只能wx.hideLoading关闭
-      title : '加载中', //提示框显示的提示信息
-      mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
-    });
+    // wx.showLoading({ //显示加载提示框 不会自动关闭 只能wx.hideLoading关闭
+    //   title : '加载中', //提示框显示的提示信息
+    //   mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
+    // });
+    if(!this.check()){
+      return;
+   }
     // console.log(this.data.info)
     wx.cloud.callFunction({
       name: 'addCommodity',
@@ -182,6 +185,9 @@ Page({
       title : '加载中', //提示框显示的提示信息
       mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
     });
+    if(!this.check()){
+        return;
+    }
     console.log( this.data.info)
     // console.log(this.data.info)
     wx.cloud.callFunction({
@@ -242,12 +248,12 @@ Page({
       success: res => {
         let info = {
           type:res.data[0].type,
-          price:res.data[0].price,
+          price:parseFloat(res.data[0].price),
           detail:res.data[0].detail,
-          invalid:res.data[0].invalid,
+          invalid: res.data[0].invalid,
           isDelete:res.data[0].isDelete,
-          priceTow:res.data[0].priceTow,
-          priceThree:res.data[0].priceThree,
+          priceTow:parseFloat(res.data[0].priceTow),
+          priceThree:parseFloat(res.data[0].priceThree),
           name:res.data[0].name,
           image:res.data[0].image,
           id:res.data[0]._id
@@ -270,8 +276,45 @@ Page({
   },
   check(){
     let info = this.data.info;
+    console.log(this.data.info)
     if(!info.name){
-
+      wx.showToast({
+        title: '请输入商品名称',
+        duration: 1000,
+        icon: 'none'
+      })
+      return false;
     }
+    if(!info.price){
+      wx.showToast({
+        title: '请输入商品价格',
+        duration: 1000,
+        icon: 'none'
+      })
+      return false;
+    }
+    if(!info.image){
+      wx.showToast({
+        title: '请上传商品图片',
+        duration: 1000,
+        icon: 'none'
+      })
+      return false;
+    }
+    this.data.info.price = parseFloat(this.data.info.price);
+    if(info.priceTow){
+      this.data.info.priceTow = parseFloat(this.data.info.priceTow);
+    }else{
+      this.data.info.priceTow = 0;
+    }
+    if(info.priceThree){
+      this.data.info.priceThree = parseFloat(this.data.info.priceThree);
+    }else{
+      this.data.info.priceThree = 0;
+    }
+    this.setData({
+      info:this.data.info
+    })
+    return true;
   }
 })

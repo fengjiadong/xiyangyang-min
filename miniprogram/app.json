@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/home-page/home-page",
-    "pages/admin/commodity/commodity",
     "pages/admin/commodity/editCommodity",
+    "pages/admin/commodity/commodity",
     "pages/admin/material/material",
     "pages/admin/user/user",
     "pages/admin/index/index",
