@@ -65,6 +65,7 @@
 		</view>
 	</view>
 	<view class="close-button" bindtap="hiddenwindow">
-		<text class="text-tan">+</text>
+		<!-- <text class="text-tan">+</text> -->
+		<image class="close-image" src="../../images/img/close.png"></image>
 	</view>
 </view>

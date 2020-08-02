@@ -61,7 +61,7 @@
 }
 .type-title {
   padding-bottom: 10px;
-  font-size: 16px;
+  font-size: 32rpx;
   color: #7b7b7b;
 }
 
@@ -70,11 +70,11 @@
 }
 
 .type-list {
-  width: 94px;
-  height: 28px;
-  margin-right: 30px;
+  width: calc((100% - 120rpx) / 3);
+  /* height: 28px; */
+  margin-right: 60rpx;
   margin-bottom: 16px;
-  line-height: 30px;
+  line-height: 28px;
   text-align: center;
   font-size: 24rpx;
   color: #000;
@@ -99,7 +99,7 @@
 
 .detail-words {
   padding-bottom: 16px;
-  font-size: 12px;
+  font-size: 24rpx;
   color: #7B7B7B;
   border-bottom: 1rpx solid rgb(112, 112, 112, 0.4);
 }

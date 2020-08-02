@@ -14,7 +14,7 @@
 .my-title {
   padding: 10px 20px 30px;
   text-align: center;
-  font-size: 20px;
+  font-size: 40rpx;
   color: #000000;
 }
 
@@ -42,18 +42,18 @@
 .title-before-icon {
   width: 26px;
   height: 26px;
-  font-size: 24px;
+  font-size: 48rpx;
   color: #04ADEF;
 }
 
 .right-icon {
-  font-size: 20px;
+  font-size: 40rpx;
   color: #0D0D0D;
 }
 
 .title-list {
   flex: 1;
   padding-left: 18px;
-  font-size: 16px;
+  font-size: 32rpx;
   color: #000000;
 }

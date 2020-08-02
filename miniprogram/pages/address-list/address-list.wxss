@@ -14,7 +14,7 @@
 
 .address-top {
   padding-bottom: 4px;
-  font-size: 16px;
+  font-size: 32rpx;
   color: #1F0606;
 }
 
@@ -24,7 +24,7 @@
 
 .address-bottom {
   padding-right: 20px;
-  font-size: 12px;
+  font-size: 24rpx;
   color: #7B7B7B;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .right-edit {
-  font-size: 22px;
+  font-size: 44rpx;
   color: #7B7B7B;
 }
 
@@ -55,7 +55,7 @@
   height: 70px;
   line-height: 70px;
   text-align: center;
-  font-size: 22px;
+  font-size: 44rpx;
   color: #ffffff;
   background-color: #04ADEF;
 }
@@ -72,20 +72,20 @@
 }
 .address-image {
   line-height: 76px;
-  font-size: 60px;
+  font-size: 120rpx;
   color: #04ADEF;
 }
 .first-text {
   padding-bottom: 5px;
   text-align: center;
-  font-size: 18px;
+  font-size: 36rpx;
   color: #424242;
 }
 
 .second-text {
   padding-bottom: 40px;
   text-align: center;
-  font-size: 12px;
+  font-size: 24rpx;
   color: #424242;
 }
 
@@ -95,7 +95,7 @@
   margin: 0 auto;
   line-height: 44px;
   text-align: center;
-  font-size: 22px;
+  font-size: 44rpx;
   color: #ffffff;
   background-color: #04ADEF;
   border-radius: 20px;

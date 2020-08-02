@@ -5,7 +5,7 @@
 		<input class="list-input" placeholder-class="place-text" placeholder="请填写收货人姓名" value="{{name}}" bindinput="updateValue" data-name='name'></input>
 	</view>
 	<view class="list-box">
-	<view class="list-title">性别</view>
+	<!-- <view class="list-title">性别</view> -->
 		<view class="gender-box">
 			<view class="gender-list {{gender===index?'gender-active':''}}" wx:for="{{genderList}}" wx:key="key" bindtap="genderSeclect" data-index="{{index}}">{{item}}</view>
 		</view>

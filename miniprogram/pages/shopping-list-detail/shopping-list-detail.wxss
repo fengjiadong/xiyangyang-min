@@ -11,7 +11,7 @@
 }
 .store-name {
   padding-bottom: 10px;
-  font-size: 16px;
+  font-size: 32rpx;
   color: #1F0606;
 }
 .list-every, .detail-list-box {
@@ -30,41 +30,41 @@
 }
 .list-name {
   padding-bottom: 5px;
-  font-size: 14px;
+  font-size: 28rpx;
   color: #424242;
 }
 .text-before {
   padding-bottom: 5px;
-  font-size: 12px;
+  font-size: 24rpx;
   color: #7B7B7B;
 }
 .text-words {
-  font-size: 12px;
+  font-size: 24rpx;
   color: #000000;
 }
 .list-price {
   position: absolute;
   top: 0;
   right: 0;
-  font-size: 12px;
+  font-size: 24rpx;
   color: #424242;
 }
 .price-num {
-  font-size: 22px;
+  font-size: 44rpx;
 }
 .total-price {
   text-align: right;
-  font-size: 22px;
+  font-size: 44rpx;
   color: #FF0000;
 }
 .detail-title {
-  font-size: 14px;
+  font-size: 28rpx;
   color: #7B7B7B;
 }
 .detail-text {
   flex: 1;
   padding-left: 16px;
   text-align: right;
-  font-size: 12px;
+  font-size: 24rpx;
   color: #424242;
 }
