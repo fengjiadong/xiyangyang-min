@@ -34,11 +34,11 @@
 			<view class="detail-title">订单类型</view>
 			<view class="detail-text">{{order.type}}</view>
 		</view>
-		<view wx:if="{{!order.type === '上门自取'}}" class="detail-list-box">
-			<view class="detail-title">配送地址</view>
+		<view wx:if="{{order.type !== '上门自取'}}" class="detail-list-box">
+			<view class="detail-title">联系人</view>
 			<view class="detail-text">{{order.address.name}}{{order.address.gender}}</view>
 		</view>
-		<view wx:if="{{!order.type === '上门自取'}}" class="detail-list-box">
+		<view wx:if="{{order.type !== '上门自取'}}" class="detail-list-box">
 			<view class="detail-title">配送地址</view>
 			<view class="detail-text">{{order.address.address}}</view>
 		</view>

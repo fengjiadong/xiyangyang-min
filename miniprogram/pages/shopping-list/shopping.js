@@ -445,7 +445,7 @@ Page({
     order.totalPrice = this.data.totalPrice;
     order.orderNum = this.uuid(32,32)
     order.type = this.data.titltTabName
-    order.status = '待商家确认订单'
+    order.status = '待商家确认'
     order.createTime = new Date()
     order.userId = userId
     if(this.data.titltTabName === '上门自取'){

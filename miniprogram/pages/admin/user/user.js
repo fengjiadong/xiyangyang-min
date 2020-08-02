@@ -9,7 +9,7 @@ Page({
     key:'',
     queryResult:[],
     pageNo:1,
-    maxNum:10
+    maxNum:20
   },
 
   /**
