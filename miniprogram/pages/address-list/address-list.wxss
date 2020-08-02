@@ -90,7 +90,7 @@
 }
 
 .no-add-button {
-  width: 282px;
+  width: 90%;
   height: 44px;
   margin: 0 auto;
   line-height: 44px;

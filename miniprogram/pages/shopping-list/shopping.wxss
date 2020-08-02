@@ -307,7 +307,7 @@
   height: 100%;
 }
 .login-button {
-  width: 282px;
+  width: 90%;
   height: 44px;
   padding: 0;
   margin: 0 auto;
