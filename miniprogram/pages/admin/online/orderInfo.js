@@ -6,7 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-      info:{}
+      info:{
+        _id:''
+      }
   },
 
   /**
@@ -31,6 +33,17 @@ Page({
       }
     })
   },
+  // 监控页面显示时去获取订单信息
+  showGetOrder(){
+    db.collection('order').doc(this.data.info._id).get({
+      success: res => {
+        res.data.createTime = this.formatDate(res.data.createTime,'yyyy-MM-dd hh:mm:ss')
+        this.setData({
+          info: res.data
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -42,7 +55,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if(this.data.info._id){
+      this.showGetOrder()
+    }
   },
 
   /**
@@ -77,7 +92,14 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+  
+  },
+   // 进入退款页面
+   refund(){
+     let info = this.data.info;
+    wx.navigateTo({
+      url: 'refund?id='+info._id+"&orderNum="+info.orderNum+"&price="+info.totalPrice,
+    })
   },
   // 接收订单
   receiveOrder(){

@@ -339,7 +339,7 @@ Page({
         console.log('pay success', res)
         //跳转到支付成功页面
         console.log('支付成功~',order)
-        this.toOrderInfo(order)
+        that.toOrderInfo(order)
       },
       fail(res) {
         // console.error('pay fail', res)
@@ -359,8 +359,8 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    this.toOrderInfo(order);
-    return;
+    // this.toOrderInfo(order);
+    // return;
     let that = this;
     var uuid = order.orderNum //调用自己的uuid函数
     // var uuid = this.uuid(32,32)

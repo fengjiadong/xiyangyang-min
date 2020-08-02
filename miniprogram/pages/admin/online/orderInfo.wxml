@@ -88,13 +88,18 @@
 		</view>
 		<view class="detail-list-box-left">
 			<view class="detail-title">用户备注</view>
-			<view class="detail-text">{{info.remarks}}</view>
+			<view class="detail-text">{{info.remarks?info.remarks:'无备注'}}</view>
+		</view>
+		<view wx:if="{{info.status ==='订单已退回'}}" class="detail-list-box-left">
+			<view class="detail-title">退回理由</view>
+			<view class="detail-text">{{info.refundDesc}}</view>
 		</view>
 	</view>
 </view>
 
 <view class="padding-xl radius shadow-warp bg-white margin-top">
- <view wx:if="{{info.status ==='订单已完成'}}">该订单已完成了奥~</view>
+	<view wx:if="{{info.status ==='订单已完成'}}">该订单已完成了奥~</view>
+	<view wx:if="{{info.status ==='订单已退回'}}">该订单已退回~</view>
 	<view wx:if="{{info.status==='待商家确认'}}" class="padding-sm" bindtap="receiveOrder">
 		<view class="bg-gradual-blue padding radius text-center ">
 			<view class="text-lg">接收订单</view>
@@ -102,24 +107,24 @@
 		</view>
 	</view>
 	<view wx:if="{{info.status==='商家已确认正在处理中'}}" class="padding-sm" bindtap="processedOrder">
-    <view class="bg-gradual-blue padding radius text-center ">
-      <view class="text-lg">处理完成</view>
-       <view class="text-lg"></view>
-    </view>
-  </view>
+		<view class="bg-gradual-blue padding radius text-center ">
+			<view class="text-lg">处理完成</view>
+			<view class="text-lg"></view>
+		</view>
+	</view>
 	<view wx:if="{{info.status==='已处理完成待上门自取'}}" class="padding-sm" bindtap="finish">
-    <view class="bg-gradual-blue padding radius text-center ">
-      <view class="text-lg">用户已取货</view>
-       <view class="text-lg"></view>
-    </view>
-  </view>
+		<view class="bg-gradual-blue padding radius text-center ">
+			<view class="text-lg">用户已取货</view>
+			<view class="text-lg"></view>
+		</view>
+	</view>
 	<view wx:if="{{info.status==='已处理完成待骑手送达'}}" class="padding-sm" bindtap="finish">
-    <view class="bg-gradual-blue padding radius text-center ">
-      <view class="text-lg">已送达</view>
-       <view class="text-lg"></view>
-    </view>
-  </view>
-	<view wx:if="{{info.status !=='订单已完成'}}" class="padding-sm" bindtap="addCommodity">
+		<view class="bg-gradual-blue padding radius text-center ">
+			<view class="text-lg">已送达</view>
+			<view class="text-lg"></view>
+		</view>
+	</view>
+	<view wx:if="{{info.status !=='订单已完成' && info.status !=='订单已退回'}}" class="padding-sm" bindtap="refund">
 		<view class="bg-gradual-red padding radius text-center shadow-blur">
 			<view class="text-lg">退回订单</view>
 			<view class="text-lg"></view>

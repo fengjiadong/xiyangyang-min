@@ -18,8 +18,8 @@
     "pages/food-detail/food-detail",
     "pages/shopping-list-detail/shopping-list-detail",
     "pages/edit-add-address/edit-add-address",
-    "pages/admin/material/materialDetail"
-    
+    "pages/admin/material/materialDetail",
+    "pages/admin/online/refund"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

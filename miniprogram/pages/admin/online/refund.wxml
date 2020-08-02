@@ -1,0 +1,13 @@
+<form>
+
+   <!-- end -->
+   <view class="cu-form-group margin-top">
+		<view class="title">退回原因</view>
+		<input placeholder="退回原因" value="{{refundDesc}}" bindinput="updateValue" data-name='refundDesc'></input>
+	</view>
+	
+  <view class="padding-xl">
+	<button  class="btn bg-blue lg" bindtap="refund">确定退单</button>
+  </view>
+</form>
+

@@ -11,7 +11,8 @@ exports.main = async (event, context) => {
     .doc(event.id).update({
       data: {
         status: event.status,
-        finishTime: event.finishTime ,
+        finishTime: event.finishTime,
+        refundDesc: event.refundDesc,
         updateTime: new Date()
       }
     })

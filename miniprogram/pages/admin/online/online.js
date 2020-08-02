@@ -52,9 +52,9 @@ Page({
     // 发起监听
     .watch({
       onChange: function(snapshot) {
-        // console.log('snapshot', snapshot.docChanges)
+        console.log('snapshot', snapshot.docChanges[0])
         that.searchPendingList()
-        if(that.data.initPage > 0){
+        if(snapshot.docChanges[0].dataType === 'add'){
           let innerAudioContext = wx.createInnerAudioContext();
           innerAudioContext.autoplay = true
           innerAudioContext.src = 'cloud://xiyangyang-l5zon.7869-xiyangyang-l5zon-1302640380/634.wav';//获取音频地址

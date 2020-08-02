@@ -30,6 +30,10 @@
 			<view class="detail-title">订单状态</view>
 			<view class="detail-text">{{order.status}}</view>
 		</view>
+		<view wx:if="{{order.status === '订单已退回'}}" class="detail-list-box">
+			<view class="detail-title">退回理由</view>
+			<view class="detail-text">{{order.refundDesc}}</view>
+		</view>
 		<view class="detail-list-box">
 			<view class="detail-title">订单类型</view>
 			<view class="detail-text">{{order.type}}</view>
@@ -50,5 +54,10 @@
 			<view class="detail-title">预留手机号</view>
 			<view class="detail-text">{{order.phone}}</view>
 		</view>
+		<view class="detail-list-box">
+			<view class="detail-title">备注</view>
+			<view class="detail-text">{{order.remarks?order.remarks:'无备注'}}</view>
+		</view>
 	</view>
+
 </view>
