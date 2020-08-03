@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    background: ['/images/img/five.jpg', '/images/img/four.jpg', '/images/img/seven.jpg'],
+    background: ['cloud://xiyangyang-l5zon.7869-xiyangyang-l5zon-1302640380/image/five.jpg', '/images/img/four.jpg', '/images/img/seven.jpg'],
     price:0, //显示在弹窗里的
     selected: 0,
     specificationsPrice:0,
