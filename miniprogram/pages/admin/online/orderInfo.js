@@ -38,6 +38,8 @@ Page({
     db.collection('order').doc(this.data.info._id).get({
       success: res => {
         res.data.createTime = this.formatDate(res.data.createTime,'yyyy-MM-dd hh:mm:ss')
+        res.data.avatarUrl = this.data.info.avatarUrl
+        res.data.nickName = this.data.info.nickName
         this.setData({
           info: res.data
         })
