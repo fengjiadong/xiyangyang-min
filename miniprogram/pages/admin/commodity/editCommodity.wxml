@@ -57,9 +57,9 @@
 		<switch  checked="{{!info.invalid}}" bindchange="invalid"></switch>
 	</view>
   <view class="padding-xl">
-  <button  wx:if="{{!info.id}}" class="btn bg-blue lg" bindtap="add">添加</button>
-	<button  wx:if="{{info.id}}" class="btn bg-blue lg" bindtap="save">保存</button>
-  <button wx:if="{{info.id}}" class="btn bg-red margin-tb-sm lg" bindtap="delete" >删除</button>
+  <button   wx:if="{{!info.id && !isDj}}" class="btn bg-blue lg" bindtap="add">添加</button>
+	<button  wx:if="{{info.id && !isDj}}" class="btn bg-blue lg" bindtap="save">保存</button>
+  <button wx:if="{{info.id && !isDj}}" class="btn bg-red margin-tb-sm lg" bindtap="delete" >删除</button>
   </view>
 </form>
 

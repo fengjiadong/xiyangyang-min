@@ -76,11 +76,17 @@ Page({
 
   },
   add(){
+    wx.showLoading({
+      title: '正在添加..',
+    })
     wx.cloud.callFunction({
       name: 'addMaterial',
       data: this.data,
       success: res => {
         console.log(res)
+        wx.hideLoading({
+          success: (res) => {},
+        })
         if(res.result.result._id){
           wx.showToast({
             title: '成功',

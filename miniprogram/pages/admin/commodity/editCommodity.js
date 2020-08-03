@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isDj:false,
     imgList:[],
     info:{
       image:'',
@@ -146,11 +147,17 @@ Page({
     console.log(this.data.info.invalid)
   },
   add(){
-    // wx.showLoading({ //显示加载提示框 不会自动关闭 只能wx.hideLoading关闭
-    //   title : '加载中', //提示框显示的提示信息
-    //   mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
-    // });
+    this.setData({
+      isDj:true
+    })
+    wx.showLoading({ //显示加载提示框 不会自动关闭 只能wx.hideLoading关闭
+      title : '加载中', //提示框显示的提示信息
+      mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
+    });
     if(!this.check()){
+      this.setData({
+        isDj:false
+      })
       return;
    }
     // console.log(this.data.info)
@@ -176,16 +183,26 @@ Page({
               delta: 1
             })
           }, 500)
+        }else{
+          this.setData({
+            isDj:false
+          })
         }
       }
     })
   },
   save(){
+    this.setData({
+      isDj:true
+    })
     wx.showLoading({ //显示加载提示框 不会自动关闭 只能wx.hideLoading关闭
       title : '加载中', //提示框显示的提示信息
       mask : true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
     });
     if(!this.check()){
+        this.setData({
+          isDj:false
+        })
         return;
     }
     console.log( this.data.info)
@@ -208,11 +225,18 @@ Page({
               delta: 1
             })
           }, 500)
+        }else{
+          this.setData({
+            isDj:true
+          })
         }
       }
     })
   },
   delete(){
+    this.setData({
+      isDj:true
+    })
     wx.showModal({
       title: '操作提示',
       content: '确定要删除本商品吗',
@@ -225,6 +249,9 @@ Page({
           this.save();
         } else if (res.cancel) {
           console.log('用户点击取消')
+          this.setData({
+            isDj: false
+          })
         }
       }
     })
