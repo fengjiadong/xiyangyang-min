@@ -26,10 +26,13 @@ Page({
  refund(){
    let that = this;
   wx.showModal({
-    title: '确认接收吗？',
-    content: '注:接收后订单进入处理中状态.',
+    title: '确认退单吗？',
+    content: '注:订单将进入已退单状态.',
     success(res) {
       if (res.confirm) {
+        wx.showLoading({
+          title: '正在退单中。。',
+        })
         wx.cloud.callFunction({
           name: "refund",
           data: {
@@ -41,7 +44,6 @@ Page({
             out_refund_no: that.data.orderNum
           },
           success(res) {
-            console.log('退款申请',res.result)
             if(res.result.returnCode === 'SUCCESS'){
               that.upOrder()
               wx.showToast({
@@ -57,7 +59,7 @@ Page({
             }else{
               // 退款失败
               wx.showToast({
-                title: '退单失败:'+res.result.errCodeDes,
+                title: '退单失败:'+res.result.returnMsg,
                 icon: 'none',
                 duration: 2000
               })

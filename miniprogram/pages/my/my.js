@@ -12,7 +12,8 @@ Page({
       avatarUrl: '',
     },
     logged: false,
-    openId: ""
+    openId: "",
+    isAdmin:false
   },
   // 调转至购物车
   goShopTaxi() {
@@ -49,7 +50,19 @@ Page({
       openId: openId,
       logged: logged
     })
-    let thes = this;
+    let userId = wx.getStorageSync('userId');
+    db.collection('admin').where({
+      userId:userId
+    }).get({
+      success: res => {
+        console.log(res)
+        if(res.data.length > 0){
+          this.setData({
+            isAdmin:true
+          })
+        }
+      }
+    })
     // db
   },
 
@@ -65,6 +78,7 @@ Page({
    */
   onShow: function() {
     let openId = wx.getStorageSync('openId');
+
     let info = wx.getStorageSync('userInfo');
     let logged = false;
     if (openId) {
@@ -75,6 +89,7 @@ Page({
       logged: logged,
       userInfo: info,
     })
+    
   },
 
   /**

@@ -10,11 +10,18 @@ Page({
     TabCur: 0,
     scrollLeft:0,
     pendingList:[], // 待确认订单列表
+    pendingPageNo:0, // 待确认显示页码
     processingList:[], // 处理中订单列表,
+    processingPageNo:0, // 处理中订单显示页码
     processedList:[], // 处理完成待配送
+    processedPageNo:0, // 处理完成待配送订单显示页码
     takeOwnList:[], // 待上门自取，
-    finishList:[], // 已完成订单
-    tab:['待确认','处理中','配送中','待自取','已完成']
+    takeOwnPageNo:0, //待上门自取订单显示页码
+    finishList:[], // 已完成订单,
+    finishPageNo:0, // 订单显示页码
+    refundList:[], // 已退单订单
+    refundPageNo:0, // 已退单订单显示页码
+    tab:['待确认','处理中','配送中','待自取','已完成','已退回']
   },
   tabSelect(e) {
     this.setData({
@@ -36,6 +43,9 @@ Page({
     if(this.data.TabCur === 4){
       this.searchFinishList()
     }
+    if(this.data.TabCur === 5){
+      this.searchRefundList()
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -43,10 +53,8 @@ Page({
   onLoad: function (options) {
     var that = this;
     const watcher = db.collection('order')
-    // 按 progress 降序
     .orderBy('createTime', 'desc')
     .where({
-      // 填入当前用户 openid，或如果使用了安全规则，则 {openid} 即代表当前用户 openid
       status: '待商家确认'
     })
     // 发起监听
@@ -69,6 +77,27 @@ Page({
       },
       onError: function(err) {
         console.error('the watch closed because of error', err)
+      }
+    })
+  },
+  
+  // 已完成列表
+  searchRefundList(){
+    wx.showLoading({ 
+      title : '加载中',
+      mask : true, 
+    });
+    db.collection('order').orderBy('createTime', 'desc')
+    .where({ status: '订单已退回' }).get({
+      success: res => {
+        this.setData({
+          refundList: res.data
+        })
+        console.log( res.data)
+        for (let i = 0;i < res.data.length;i++){
+            this.searchRefundListGetUser(res.data[i],i)   
+        }
+        wx.hideLoading()
       }
     })
   },
@@ -171,6 +200,19 @@ Page({
         }
         // console.log(this.data.pendingList)
         wx.hideLoading()
+      }
+    })
+  },
+  // 订单已退回列表用户获取用户信息
+  searchRefundListGetUser(order,index){
+    db.collection('user').doc(order.userId).get({
+      success: res => {
+        this.data.refundList[index].nickName = res.data.nickName
+        this.data.refundList[index].avatarUrl = res.data.avatarUrl
+        this.data.refundList[index].createTime = this.formatDate(this.data.refundList[index].createTime,'yyyy-MM-dd hh:mm:ss')
+        this.setData({
+          refundList: this.data.refundList
+        })
       }
     })
   },

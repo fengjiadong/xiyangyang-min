@@ -1,5 +1,6 @@
 // miniprogram/pages/admin/index/index.js
 const app = getApp();
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -7,6 +8,7 @@ Page({
    */
   data: {
     ColorList: app.globalData.ColorList,
+    admin:{}
   }, 
   SetShadow(e) {
     this.setData({
@@ -22,9 +24,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
-
+  getAdmin(){
+    // 获取管理员权限
+    let userId = wx.getStorageSync('userId');
+    db.collection('admin').where({
+      userId:userId
+    }).get({
+      success: res => {
+        console.log(res)
+        if(res.data.length > 0){
+          this.setData({
+            admin:res.data[0]
+          })
+        }else{
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -36,7 +57,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getAdmin()
   },
 
   /**
