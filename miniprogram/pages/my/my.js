@@ -1,5 +1,6 @@
 // miniprogram/pages/my/my.js
 const app = getApp()
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -49,6 +50,7 @@ Page({
       logged: logged
     })
     let thes = this;
+    // db
   },
 
   /**

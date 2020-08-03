@@ -31,7 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -45,6 +45,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '正在加载数据',
+    })
     this.searchAddress();
   },
 
@@ -92,6 +95,9 @@ Page({
         console.log(res)
         this.setData({
           addressList:res.data
+        })
+        wx.hideLoading({
+          success: (res) => {},
         })
       }
     })

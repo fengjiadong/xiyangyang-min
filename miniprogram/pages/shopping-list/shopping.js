@@ -440,6 +440,10 @@ Page({
       }
     }
     let userId = wx.getStorageSync('userId')
+    if(!userId){
+      this.goLogin();
+      return;
+    }
     let order = {}
     order.commoditys = orderList;
     order.totalPrice = this.data.totalPrice;
@@ -539,11 +543,19 @@ Page({
     }).get({
       success: res => {
         console.log(res)
-        if(res.data.length < 0){
-          // 如果配送地址小于1 那么就跳转到管理地址页面
-          wx.navigateTo({
-            url: '../address-list/address-list',
+        if(res.data.length < 1){
+          wx.showLoading({
+            title: '正在跳转配送地址管理页面',
           })
+          setTimeout(function () {
+              // 如果配送地址小于1 那么就跳转到管理地址页面
+              wx.navigateTo({
+                url: '../address-list/address-list',
+              })
+              wx.hideLoading({
+                success: (res) => {},
+              })
+          },500)
         }
         this.setData({
           addressArray:res.data
@@ -561,11 +573,19 @@ Page({
       }
     })
   },
-  // 跳转到登陆页
+ // 跳转到登陆页
   goLogin() {
-    wx.navigateTo({
-      url: '../login/login',
+    wx.showLoading({
+      title: '正在加载',
     })
+    setTimeout(function(){
+      wx.navigateTo({
+        url: '../login/login',
+      })
+      wx.hideLoading({
+        success: (res) => {},
+      })
+    },500)
   },
   uuid(len, radix) {
     var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');

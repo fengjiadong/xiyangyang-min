@@ -34,6 +34,9 @@ Page({
   // 保存
   save(){
     let userId = wx.getStorageSync('userId')
+    if(!this.check()){
+      return
+    }
     let data = {
       address: this.data.address,
       gender: this.data.gender === 0?'先生':'女士',
@@ -46,22 +49,34 @@ Page({
     console.log(data)
     if(!this.data.id){
       console.log("添加")
+      wx.showLoading({
+        title: '正在添加，请稍等。',
+      })
       wx.cloud.callFunction({
         name: 'addAddress',
         data: data,
         success: res => {
           console.log(res)
+          wx.hideLoading({
+            success: (res) => {},
+          })
            wx.navigateBack({
               delta: 1,
            })
         }
       })
     }else{
+      wx.showLoading({
+        title: '正在修改，请稍等。',
+      })
       console.log("修改")
       wx.cloud.callFunction({
         name: 'upAddress',
         data: data,
         success: res => {
+          wx.hideLoading({
+            success: (res) => {},
+          })
           console.log(res)
            wx.navigateBack({
               delta: 1,
@@ -154,5 +169,33 @@ Page({
         })
       }
     })
+  },
+  // 校验方法
+   check(){
+    if(!this.data.address || this.data.address.length < 5){
+      wx.showToast({
+        title: '地址最少五个字以上奥~',
+        duration: 1000,
+        icon: 'none'
+      })
+      return false;
+    }
+    if(!this.data.name || this.data.name.length < 1){
+      wx.showToast({
+        title: '名称最少需要一个字奥~',
+        duration: 1000,
+        icon: 'none'
+      })
+      return false;
+    }
+    if(!this.data.phone || this.data.phone.length != 11){
+      wx.showToast({
+        title: '请输入正确的手机号~',
+        duration: 1000,
+        icon: 'none'
+      })
+      return false;
+    }
+    return true;
   }
 })

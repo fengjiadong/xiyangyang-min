@@ -212,15 +212,27 @@ Page({
   },
   // 跳转到登陆页
   goLogin() {
-    wx.navigateTo({
-      url: '../login/login',
+    wx.showLoading({
+      title: '正在加载',
     })
+    setTimeout(function(){
+      wx.navigateTo({
+        url: '../login/login',
+      })
+      wx.hideLoading({
+        success: (res) => {},
+      })
+    },500)
+    
   },
   // 跳转至详情页面
   goDetail(e) {
     let userId = wx.getStorageSync('userId')
     if(!userId){
       this.goLogin();
+      return;
+    }
+    if(this.data.selectedType.name === '羊羊加料'){
       return;
     }
     // console.log(e.currentTarget.dataset.id)
@@ -237,6 +249,10 @@ Page({
       title: '正在加入购物车',
     })
     let userId = wx.getStorageSync('userId')
+    if(!userId){
+      this.goLogin();
+      return;
+    }
     // 得到小料选择数量
     let list = this.data.specifications;
     let specifications = []
@@ -272,7 +288,6 @@ Page({
     })
    
   },
-
   /**
    * 生命周期函数--监听页面加载
    */

@@ -13,9 +13,11 @@
 	</view>
 	<view class="order-list-container">
 		<view class="left-select-list">
+		<!-- 类型 -->
 			<view wx:for="{{selectList}}" wx:key="key" data-index='{{index}}' class="select-list {{selected===index?'select-active':''}}" bindtap="typeSelect">{{item.name}}</view>
 		</view>
 		<view class="right-select-content">
+		<!-- 对应的商品，最多加载二十条 -->
 			<view class="food-list" wx:for="{{foodTypeList}}" wx:key="key" bindtap="goDetail" data-id="{{item._id}}">
 				<image class="food-image" src="{{item.image}}"></image>
 				<view class="right-content">
