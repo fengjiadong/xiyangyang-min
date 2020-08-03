@@ -7,7 +7,10 @@ Page({
    */
   data: {
     background: ['/images/img/five.jpg', '/images/img/four.jpg', '/images/img/seven.jpg'],
+    price:0, //显示在弹窗里的
     selected: 0,
+    specificationsPrice:0,
+    selectedCommoity:{},
     specifications: [],
     selectedType: {},
     selectList: [{ // 饮料类型选择
@@ -25,9 +28,6 @@ Page({
     sizeName: '蓝颜知己',
     glassList: [{
         name: '常规一人份'
-      },
-      {
-        name: '大杯'
       }
     ],
     // 小料列表
@@ -70,8 +70,6 @@ Page({
     foodType: [],
     sugarType: '正常糖',
     iceType: '正常冰',
-    price: '19',
-
   },
   // 饮料类型选择
   typeSelect(e) {
@@ -84,20 +82,62 @@ Page({
       selectedType: this.data.selectList[index]
     })
     this.searchCommodity(this.data.selectedType._id)
+   
   },
   // 规格选择
   sizeContent(e) {
     console.log(e);
     const name = e.currentTarget.dataset.name;
+    const index = e.currentTarget.dataset.index;
+    const info = this.data.foodTypeList[index];
+    console.log(this.data.foodTypeList[index])
+    for(var i = 0; i < this.data.specifications.length;i++){
+      this.data.specifications[i].selectedFood = false
+    }
     this.setData({
       sizeContentWindow: false,
       sizeName: name,
+      price:info.price,
+      specifications:this.data.specifications
+    })
+    let glassList = [];
+    let type = {
+      name: '常规',
+      price: info.price
+    }
+    glassList.push(type)
+    if (info.priceTow && info.priceTow > 0) {
+      let typeTow = {
+        name: '大份',
+        price: info.priceTow
+      }
+      glassList.push(typeTow)
+    }
+    if (info.priceThree && info.priceThree > 0) {
+      let typeThree = {
+        name: '超大份',
+        price: info.priceThree
+      }
+      glassList.push(typeThree)
+    }
+    console.log(glassList)
+    this.setData({
+      glassList: glassList,
+      selectedCommoity:info
     })
   },
   // 隐藏遮罩层
   hiddenwindow() {
     this.setData({
       sizeContentWindow: true,
+      selectedGlass:0,
+      selectedSugar:0,
+      selectedIce:0,
+      glassList:[],
+      specificationsPrice:0,
+      price:0,
+      sizeName:'',
+      selectedCommoity:{}
     })
   },
   // 杯型选择
@@ -108,10 +148,11 @@ Page({
     console.log(indexOne);
     that.setData({
       selectedGlass: indexOne,
-      glassType: that.data.glassList[indexOne].name
+      glassType: that.data.glassList[indexOne].name,
+      price: this.changeTwoDecimal_f(this.changeTwoDecimal_f(that.data.glassList[indexOne].price) + this.data.specificationsPrice)
     })
   },
-  // 规格选择
+  // 小料选择
   foodSelect(e) {
     console.log(e);
     let that = this;
@@ -128,8 +169,8 @@ Page({
       console.log(selectList)
       this.setData({
         foodType: selectList,
-        // specificationsPrice: this.data.specificationsPrice + that.data.specifications[index].price,
-        // price: this.changeTwoDecimal_f(this.changeTwoDecimal_f(this.data.price) + that.data.specifications[index].price)
+        specificationsPrice: this.data.specificationsPrice + that.data.specifications[index].price,
+        price: this.changeTwoDecimal_f(this.changeTwoDecimal_f(this.data.price) + that.data.specifications[index].price)
       })
     } else {
       let noselectList = that.data.foodType;
@@ -141,8 +182,8 @@ Page({
       console.log(noselectList)
       this.setData({
         foodType: noselectList,
-        // specificationsPrice: this.data.specificationsPrice - that.data.specifications[index].price,
-        // price: this.changeTwoDecimal_f(this.changeTwoDecimal_f(this.data.price) - that.data.specifications[index].price)
+        specificationsPrice: this.data.specificationsPrice - that.data.specifications[index].price,
+        price: this.changeTwoDecimal_f(this.changeTwoDecimal_f(this.data.price) - that.data.specifications[index].price)
       })
     }
     console.log(that.data.specifications)
@@ -192,9 +233,44 @@ Page({
   },
   // 跳转至购物车
   goShopTaxi() {
-    wx.switchTab({
-      url: '../shopping-list/shopping',
+    wx.showLoading({
+      title: '正在加入购物车',
     })
+    let userId = wx.getStorageSync('userId')
+    // 得到小料选择数量
+    let list = this.data.specifications;
+    let specifications = []
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].selectedFood) {
+        specifications.push(list[i]);
+      }
+    }
+   
+    let shopping = {}
+    shopping.commodityId = this.data.selectedCommoity._id;
+    shopping.name = this.data.selectedCommoity.name;
+    shopping.userId = userId;
+    shopping.image = this.data.selectedCommoity.image;
+    shopping.iceType = this.data.iceType;
+    shopping.glassType = this.data.glassList[this.data.selectedGlass];
+    shopping.specifications = specifications;
+    shopping.sugarType = this.data.sugarType;
+    shopping.price = this.data.price;
+    shopping.specificationsPrice = this.data.specificationsPrice;
+    shopping.selectedType = this.data.selectedType.name
+    console.log(shopping)
+    wx.cloud.callFunction({
+      name: "addShopping",
+      data: shopping,
+      success(res) {
+        wx.hideLoading()
+        //存入购物车
+        wx.switchTab({
+          url: '../shopping-list/shopping',
+        })
+      }
+    })
+   
   },
 
   /**
@@ -292,5 +368,25 @@ Page({
         console.log('[数据库] [查询记录] 成1功: ', res)
       }
     })
-  }
+  },
+  changeTwoDecimal_f(x) { 
+    　　var f_x = parseFloat(x); 
+      　　if (isNaN(f_x)) 
+      　　{ 
+      　　　　return 0; 
+      　　} 
+      　　var f_x = Math.round(x*100)/100; 
+      　　var s_x = f_x.toString(); 
+      　　var pos_decimal = s_x.indexOf('.'); 
+      　　if (pos_decimal < 0) 
+      　　{ 
+      　　　　pos_decimal = s_x.length; 
+      　　s_x += '.'; 
+      　　} 
+      　　while (s_x.length <= pos_decimal + 2) 
+      　　{ 
+      　　　　s_x += '0'; 
+      　　} 
+    　　return parseFloat(s_x); 
+      }
 })

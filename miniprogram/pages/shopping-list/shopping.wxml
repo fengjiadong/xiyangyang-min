@@ -19,8 +19,11 @@
 					<view class="title-name">{{item.name}}</view>
 					<view class="delete-button" bindtap="deleteFood" data-index="{{index}}">删除</view>
 				</view>
-			 	<view class="center-box">
+			 	<view class="center-box" wx:if="{{item.selectedType !== '羊羊加料'}}">
 				 {{item.iceType}},{{item.sugarType}},{{item.glassType.name}}
+				</view>
+				<view class="center-box" wx:if="{{item.selectedType === '羊羊加料'}}">
+				{{item.selectedType}}
 				</view>
 				<view class="center-box">
 				 	<p wx:for="{{item.specifications}}"> {{item.name}}</p>

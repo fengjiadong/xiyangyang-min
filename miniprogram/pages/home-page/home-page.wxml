@@ -8,7 +8,7 @@
 		</block>
 	</swiper>
 	<view class="type-choose-box">
-		<view class="type-choose-list">
+		<view class="type-choose-list" bindtap="goOrder">
 			<!-- <view class="type-back">
 				<view class="iconfont icon-kafei"></view>
 			</view> -->
@@ -16,7 +16,7 @@
 			<view class="type-title">门店自取</view>
 			<view class="type-text">免排队 可预约</view>
 		</view>
-		<view class="type-choose-list">
+		<view class="type-choose-list" bindtap="goOrder">
 			<!-- <view class="type-back">
 				<view class="iconfont icon-cycleqiche"></view>
 			</view> -->

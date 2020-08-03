@@ -24,6 +24,7 @@ exports.main = async (event, context) => {
         glassType: event.glassType,
         sugarType: event.sugarType,
         specificationsPrice: event.specificationsPrice,
+        selectedType: event.selectedType,
         createTime: new Date(),
         updateTime: new Date()
       }]

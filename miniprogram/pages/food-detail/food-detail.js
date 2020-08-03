@@ -88,7 +88,7 @@ Page({
       selectList.push(that.data.specifications[index].name);
       console.log(selectList)
       this.setData({
-      foodType: selectList,
+        foodType: selectList,
         specificationsPrice: this.data.specificationsPrice + that.data.specifications[index].price,
         price: this.changeTwoDecimal_f(this.changeTwoDecimal_f(this.data.price) + that.data.specifications[index].price)
       })
