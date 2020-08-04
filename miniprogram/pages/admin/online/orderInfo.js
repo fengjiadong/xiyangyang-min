@@ -116,7 +116,7 @@ Page({
       })
   },
   displayRecord(data){
-    let length = data.length;
+    let length = data.length-1;
     for(let i = 0; i <data.length; i ++){
       data[i].status2 = data[i].status;
       data[i].status = data[i].status==='待商家确认'?'用户已下单':data[i].status==='商家已确认正在处理中'?'正在处理中':
@@ -184,6 +184,7 @@ Page({
               that.setData({
                 info: that.data.info
               })
+              
             }
           })
         } else {
@@ -240,6 +241,7 @@ Page({
     let userId = wx.getStorageSync('userId')
     let adminInfo = wx.getStorageSync('admin')
     console.log(adminInfo)
+    let that = this
     wx.cloud.callFunction({
       name: "addRecord",
       data: {
@@ -252,7 +254,7 @@ Page({
         wx.hideLoading({
           complete: (res) => { },
         })
-
+        that.searchOrderRecord();
       },
       fail(res) {
         wx.hideLoading({
