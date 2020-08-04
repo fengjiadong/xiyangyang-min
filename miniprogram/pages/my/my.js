@@ -50,19 +50,7 @@ Page({
       openId: openId,
       logged: logged
     })
-    let userId = wx.getStorageSync('userId');
-    db.collection('admin').where({
-      userId:userId
-    }).get({
-      success: res => {
-        console.log(res)
-        if(res.data.length > 0){
-          this.setData({
-            isAdmin:true
-          })
-        }
-      }
-    })
+  
     // db
   },
 
@@ -89,7 +77,19 @@ Page({
       logged: logged,
       userInfo: info,
     })
-    
+    let userId = wx.getStorageSync('userId');
+    db.collection('admin').where({
+      userId:userId
+    }).get({
+      success: res => {
+        console.log(res)
+        if(res.data.length > 0){
+          this.setData({
+            isAdmin:true
+          })
+        }
+      }
+    })
   },
 
   /**
