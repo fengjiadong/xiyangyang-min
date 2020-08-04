@@ -18,7 +18,7 @@
 		</view>
 		<view class="right-select-content">
 		<!-- 对应的商品，最多加载二十条 -->
-			<view class="food-list" wx:for="{{foodTypeList}}" wx:key="key" bindtap="goDetail" data-id="{{item._id}}">
+			<view class="food-list" wx:for="{{foodTypeList}}" wx:key="key" bindtap="goDetail" data-id="{{item._id}}" data-index="{{index}}" data-name="{{item.name}}">
 				<image class="food-image" src="{{item.image}}"></image>
 				<view class="right-content">
 					<view class="food-name">{{item.name}}</view>

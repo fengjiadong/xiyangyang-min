@@ -233,6 +233,7 @@ Page({
       return;
     }
     if(this.data.selectedType.name === '羊羊加料'){
+      this.sizeContent(e)
       return;
     }
     // console.log(e.currentTarget.dataset.id)
