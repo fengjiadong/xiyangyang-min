@@ -6,9 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-      info:{
-        _id:''
-      }
+    info: {
+      _id: ''
+    },
+    scroll: 0,
+    orderRecord:[]
+    
   },
 
   /**
@@ -21,28 +24,30 @@ Page({
     // options.image = 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKGnJf2QzzEKm0LEcpA66V9fLbwvNqljKsOqtb9ACq3o6YfRYCaFB5t3gm2xoY0F1ModjHMgibOXgQ/132'
     this.getOrder(options);
   },
-  getOrder(options){
+  getOrder(options) {
     db.collection('order').doc(options.id).get({
       success: res => {
         res.data.avatarUrl = options.image
         res.data.nickName = options.nickName
-        res.data.createTime = this.formatDate(res.data.createTime,'yyyy-MM-dd hh:mm:ss')
+        res.data.createTime = this.formatDate(res.data.createTime, 'yyyy-MM-dd hh:mm:ss')
         this.setData({
           info: res.data
         })
+        this.searchOrderRecord()
       }
     })
   },
   // 监控页面显示时去获取订单信息
-  showGetOrder(){
+  showGetOrder() {
     db.collection('order').doc(this.data.info._id).get({
       success: res => {
-        res.data.createTime = this.formatDate(res.data.createTime,'yyyy-MM-dd hh:mm:ss')
+        res.data.createTime = this.formatDate(res.data.createTime, 'yyyy-MM-dd hh:mm:ss')
         res.data.avatarUrl = this.data.info.avatarUrl
         res.data.nickName = this.data.info.nickName
         this.setData({
           info: res.data
         })
+        this.searchOrderRecord()
       }
     })
   },
@@ -57,7 +62,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if(this.data.info._id){
+    if (this.data.info._id) {
       this.showGetOrder()
     }
   },
@@ -94,17 +99,66 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   },
-   // 进入退款页面
-   refund(){
-     let info = this.data.info;
+  // 查询流转记录
+  searchOrderRecord(){
+    console.log("this.data.info._id",this.data.info._id)
+      db.collection('orderRecord').where({
+        orderId:this.data.info._id
+      }).get({
+        success: res =>{
+          
+          this.displayRecord(res.data)
+          console.log(res.data)
+         
+        }
+      })
+  },
+  displayRecord(data){
+    let length = data.length;
+    for(let i = 0; i <data.length; i ++){
+      data[i].status2 = data[i].status;
+      data[i].status = data[i].status==='待商家确认'?'用户已下单':data[i].status==='商家已确认正在处理中'?'正在处理中':
+      data[i].status==='已处理完成待上门自取'?'已处理完成':data[i].status==='已处理完成待骑手送达'?'已处理完成':data[i].status;
+      // data[i].status = data[i].status==='商家已确认正在处理中'?'正在处理中':data[i].status==='已处理完成待上门自取'?'待客户自取':data[i].status;
+    }
+    if(data[data.length -1 ].status === '用户已下单'){
+      data.push({
+        status:'待商家确认'
+      })
+    }else if(data[data.length -1 ].status === '正在处理中'){
+      data.push({
+        status:'待处理完成'
+       })
+    }else if(data[data.length -1 ].status2 === '已处理完成待上门自取'){
+      data.push({
+        status:'待自取'
+       })
+    }else if(data[data.length -1 ].status2 === '已处理完成待骑手送达'){
+      data.push({
+        status:'待送达'
+       })
+    }else{
+      length = data.length-1
+    }
+    this.setData({
+      orderRecord:data,
+    })
+    this.setData({
+      scroll: length
+    })
+   
+  },
+  // 进入退款页面
+  refund() {
+    let info = this.data.info;
     wx.navigateTo({
-      url: 'refund?id='+info._id+"&orderNum="+info.orderNum+"&price="+info.totalPrice,
+      url: 'refund?id=' + info._id + "&orderNum=" + info.orderNum + "&price=" + info.totalPrice,
     })
   },
   // 接收订单
-  receiveOrder(){
+  receiveOrder() {
     const that = this;
     wx.showModal({
       title: '确认接收吗？',
@@ -123,12 +177,12 @@ Page({
             },
             success(res) {
               wx.hideLoading({
-                success: (res) => {},
+                success: (res) => { },
               })
               that.data.info.status = '商家已确认正在处理中';
               that.addRecord("商家已确认正在处理中")
               that.setData({
-                info:that.data.info
+                info: that.data.info
               })
             }
           })
@@ -140,12 +194,12 @@ Page({
   }
   ,
   // 处理完成转入下一个状态
-  processedOrder(){
+  processedOrder() {
     const that = this;
     let type = ''
-    if(that.data.info.type ==='上门自取'){
+    if (that.data.info.type === '上门自取') {
       type = '已处理完成待上门自取'
-    }else{
+    } else {
       type = '已处理完成待骑手送达'
     }
     wx.showModal({
@@ -165,12 +219,12 @@ Page({
             },
             success(res) {
               wx.hideLoading({
-                success: (res) => {},
+                success: (res) => { },
               })
               that.data.info.status = type;
               that.addRecord(type)
               that.setData({
-                info:that.data.info
+                info: that.data.info
               })
             }
           })
@@ -182,7 +236,7 @@ Page({
   }
   ,
   // 给订单创建流转记录
-  addRecord(status){
+  addRecord(status) {
     let userId = wx.getStorageSync('userId')
     let adminInfo = wx.getStorageSync('admin')
     console.log(adminInfo)
@@ -191,25 +245,25 @@ Page({
       data: {
         userId: userId,
         orderId: this.data.info._id,
-        operator: adminInfo.name, 
-        status: status 
+        operator: adminInfo.name,
+        status: status
       },
       success(res) {
         wx.hideLoading({
-          complete: (res) => {},
+          complete: (res) => { },
         })
-      
+
       },
       fail(res) {
         wx.hideLoading({
-          complete: (res) => {},
+          complete: (res) => { },
         })
         console.log("提交失败", res)
       }
     })
   },
   // 完成订单(客户已取/送达~)
-  finish(){
+  finish() {
     const that = this;
     let type = ''
     wx.showModal({
@@ -230,13 +284,13 @@ Page({
             },
             success(res) {
               wx.hideLoading({
-                success: (res) => {},
+                success: (res) => { },
               })
               that.data.info.status = '订单已完成';
-              that.data.info.finishTime = that.formatDate(new Date(),'yyyy-MM-dd hh:mm:ss');
+              that.data.info.finishTime = that.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss');
               that.addRecord('订单已完成')
               that.setData({
-                info:that.data.info
+                info: that.data.info
               })
             }
           })
@@ -249,9 +303,9 @@ Page({
     if (typeof date == 'string') {
       date = new Date(date)
     }
-  
+
     if (!fmt) fmt = "yyyy-MM-dd hh:mm:ss";
-  
+
     if (!date || date == null) return null;
     var o = {
       'M+': date.getMonth() + 1, // 月份
