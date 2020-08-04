@@ -143,13 +143,14 @@ Page({
     for(let i =0;i < data.length;i++){
       userIds.push(data[i]._id)
     }
+    console.log("userIds",userIds)
     // 查询用户的下单次数以及下单金额
     db.collection('order').aggregate().
+    // 微信的一个bug, 模拟器使用$.操作符，手机端无效，手机端必须使用_.操作符。
     match({
-      userId: $.in(userIds),
-      status: $.neq('订单已退回')
+      userId: _.in(userIds),
+      status: _.neq('订单已退回')
     })
-      //  match({userId: 'b31a516f5f2237560007d5494b55aeb8'})
     .group({
       _id: '$userId',
       sum: $.sum('$totalPrice'),
@@ -157,7 +158,7 @@ Page({
     })
     .end({
       success: res => {
-        
+        console.log("res",res)
         for(let i =0;i < data.length;i++){
           if(res.list.length < 1){
             data[i].sum = 0;

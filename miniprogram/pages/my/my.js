@@ -87,6 +87,7 @@ Page({
           this.setData({
             isAdmin:true
           })
+          wx.setStorageSync('admin', res.data[0])
         }
       }
     })

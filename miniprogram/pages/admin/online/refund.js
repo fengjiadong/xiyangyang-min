@@ -63,6 +63,7 @@ Page({
                 icon: 'none',
                 duration: 2000
               })
+              // that.upOrder()
             }
             
           }
@@ -73,6 +74,7 @@ Page({
     
  },
  upOrder(){
+  let that = this;
   wx.cloud.callFunction({
     name: "upOrder",
     data: {
@@ -82,6 +84,7 @@ Page({
     },
     success(res) {
        console.log('更新订单信息')
+       that.addRecord('订单已退回')
     }
   })
  },
@@ -138,5 +141,32 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+   // 给订单创建流转记录
+   addRecord(status){
+    let that = this;
+    let userId = wx.getStorageSync('userId')
+    let adminInfo = wx.getStorageSync('admin')
+    wx.cloud.callFunction({
+      name: "addRecord",
+      data: {
+        userId: userId,
+        orderId: that.data.id,
+        operator: adminInfo.name, 
+        status: status 
+      },
+      success(res) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
+      
+      },
+      fail(res) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
+        console.log("提交失败", res)
+      }
+    })
+  },
 })

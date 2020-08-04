@@ -111,6 +111,9 @@ Page({
       content: '注:接收后订单进入处理中状态.',
       success(res) {
         if (res.confirm) {
+          wx.showLoading({
+            title: '处理中',
+          })
           console.log(that.data.info)
           wx.cloud.callFunction({
             name: "upOrder",
@@ -119,7 +122,11 @@ Page({
               status: '商家已确认正在处理中'
             },
             success(res) {
+              wx.hideLoading({
+                success: (res) => {},
+              })
               that.data.info.status = '商家已确认正在处理中';
+              that.addRecord("商家已确认正在处理中")
               that.setData({
                 info:that.data.info
               })
@@ -146,6 +153,9 @@ Page({
       content: '注:处理完成后订单进入配送中/待取货状态.',
       success(res) {
         if (res.confirm) {
+          wx.showLoading({
+            title: '处理中',
+          })
           console.log(that.data.info)
           wx.cloud.callFunction({
             name: "upOrder",
@@ -154,7 +164,11 @@ Page({
               status: type
             },
             success(res) {
+              wx.hideLoading({
+                success: (res) => {},
+              })
               that.data.info.status = type;
+              that.addRecord(type)
               that.setData({
                 info:that.data.info
               })
@@ -167,6 +181,33 @@ Page({
     })
   }
   ,
+  // 给订单创建流转记录
+  addRecord(status){
+    let userId = wx.getStorageSync('userId')
+    let adminInfo = wx.getStorageSync('admin')
+    console.log(adminInfo)
+    wx.cloud.callFunction({
+      name: "addRecord",
+      data: {
+        userId: userId,
+        orderId: this.data.info._id,
+        operator: adminInfo.name, 
+        status: status 
+      },
+      success(res) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
+      
+      },
+      fail(res) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
+        console.log("提交失败", res)
+      }
+    })
+  },
   // 完成订单(客户已取/送达~)
   finish(){
     const that = this;
@@ -176,6 +217,9 @@ Page({
       content: '注:处理完成后订单进入已完成状态.',
       success(res) {
         if (res.confirm) {
+          wx.showLoading({
+            title: '处理中',
+          })
           console.log(that.data.info)
           wx.cloud.callFunction({
             name: "upOrder",
@@ -185,8 +229,12 @@ Page({
               status: '订单已完成'
             },
             success(res) {
+              wx.hideLoading({
+                success: (res) => {},
+              })
               that.data.info.status = '订单已完成';
               that.data.info.finishTime = that.formatDate(new Date(),'yyyy-MM-dd hh:mm:ss');
+              that.addRecord('订单已完成')
               that.setData({
                 info:that.data.info
               })

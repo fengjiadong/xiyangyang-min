@@ -305,13 +305,14 @@ Page({
       name: 'addOrder',
       data: order,
       success: res => {
-        console.log('订单以生成:',res)
+        console.log('订单已生成:',res)
         if(res.result.result._id) {
           wx.showToast({
             title: '正在跳转订单详情页',
             icon: 'success',
             duration: 500,
           })
+          this.addRecord(res.result.result._id ,order)
           // 删除购物车里已购买的商品
           this.deletePayShopping()
           setTimeout(function () {
@@ -320,6 +321,33 @@ Page({
             })
           }, 500)
         }
+      }
+    })
+  },
+  // 给订单创建流转记录
+  addRecord(orderId,order){
+    let userId = wx.getStorageSync('userId')
+    let info = wx.getStorageSync('userInfo');
+    wx.cloud.callFunction({
+      name: "addRecord",
+      data: {
+        userId: userId,
+        orderId: orderId,
+        operator: info.name, 
+        describe: '用户昵称：'+info.nickName+'下单,下单金额:'+order.totalPrice+'。' ,//
+        status: order.status 
+      },
+      success(res) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
+      
+      },
+      fail(res) {
+        wx.hideLoading({
+          complete: (res) => {},
+        })
+        console.log("提交失败", res)
       }
     })
   },
@@ -391,6 +419,7 @@ Page({
     })
 
   },
+  
   // 立即支付按钮
   immediateBuy() {
     // payment
