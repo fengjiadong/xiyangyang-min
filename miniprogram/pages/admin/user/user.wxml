@@ -1,38 +1,38 @@
   <view class="top"></view>
-  <view class="box topnavFixed" >
-    <view class="cu-bar search bg-white" >
-      <view class="search-form round">
-        <text class="cuIcon-search"></text>
-        <input type="text" placeholder="用户名" bindinput='bindconfirm' confirm-type="search"></input>
-      </view>
-      <view class="action">
-        <button class="cu-btn bg-green shadow-blur round" bindtap="searchByKey">搜索</button>
-      </view>
-    </view>
-    <view class="bg-white solid-bottom text-xs padding">
-        <text class="text-gray">共{{count}}条用户数据哦.注：下单次数与下单金额不包括已退回的订单奥。</text>
-     </view>
+  <view class="box topnavFixed">
+  	<view class="cu-bar search bg-white">
+  		<view class="search-form round">
+  			<text class="cuIcon-search"></text>
+  			<input type="text" placeholder="用户名" bindinput='bindconfirm' confirm-type="search"></input>
+  		</view>
+  		<view class="action">
+  			<button class="cu-btn bg-green shadow-blur round" bindtap="searchByKey">搜索</button>
+  		</view>
+  	</view>
+  	<view class="bg-white solid-bottom text-xs padding">
+  		<text class="text-gray">共{{count}}条用户数据哦.注：下单次数与下单金额不包括已退回的订单奥。</text>
+  	</view>
   </view>
-<scroll-view scroll-y class="bg-white nav"  >
-  <view class="cu-list menu-avatar">
-    <view class="cu-item" wx:for="{{queryResult}}">
-      <view  class="cu-avatar round lg " style="background-image:url({{item.avatarUrl}});">
-        <view wx:if='{{item.gender === 2}}' class="cu-tag badge cuIcon-female bg-pink"></view>
-        <view wx:else class="cu-tag badge cuIcon-male bg-blue"></view>
-      </view>
-      <view class="content">
-        <view class="text-grey">{{item.nickName}}</view>
-        <view class="text-gray text-sm flex">
-          <text class="text-cut">
+  <scroll-view scroll-y class="bg-white nav">
+  	<view class="cu-list menu-avatar">
+  		<view class="cu-item" wx:for="{{queryResult}}" bindtap="userChange" data-index="{{index}}">
+  			<view class="cu-avatar round lg " style="background-image:url({{item.avatarUrl}});">
+  				<view wx:if='{{item.gender === 2}}' class="cu-tag badge cuIcon-female bg-pink"></view>
+  				<view wx:else class="cu-tag badge cuIcon-male bg-blue"></view>
+  			</view>
+  			<view class="content">
+  				<view class="text-grey">{{item.nickName}}</view>
+  				<view class="text-gray text-sm flex">
+  					<text class="text-cut">
                 <text class="margin-right-xs">来自：{{item.province}}-{{item.city}}</text>
-          </text>
-        </view>
-      </view>
-        <!-- <view class="text-grey text-xs">共下单次数</view> -->
-        <view class="cu-tag radius">共下单{{item.count}}次</view>
-        <view class="cu-tag radius">总消费{{item.sum}}元</view>
-    </view>
-  </view>
-  <view wx:if="{{isLoad}}" class="cu-load  loading"></view>
-  <view  wx:if="{{isOver}}"  class="cu-load  over"></view>
-</scroll-view>
+  					</text>
+  				</view>
+  			</view>
+  			<!-- <view class="text-grey text-xs">共下单次数</view> -->
+  			<view class="cu-tag radius">共下单{{item.count}}次</view>
+  			<view class="cu-tag radius">总消费{{item.sum}}元</view>
+  		</view>
+  	</view>
+  	<view wx:if="{{isLoad}}" class="cu-load  loading"></view>
+  	<view wx:if="{{isOver}}" class="cu-load  over"></view>
+  </scroll-view>

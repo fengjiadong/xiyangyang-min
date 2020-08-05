@@ -30,9 +30,9 @@
       <!-- <view class="margin-top-sm text-Abc">#39b54a - #8dc63f</view> -->
     </view>
   </view>
-  <view class="padding-sm" wx:if="{{admin.roleNum == 0}}">
+  <view class="padding-sm" bindtap="goStuffPage" wx:if="{{admin.roleNum == 0}}">
     <view class="bg-gradual-pink padding radius text-center shadow-blur">
-      <view class="text-lg">员工管理(功能待开放)</view>
+      <view class="text-lg">员工管理</view>
     </view>
   </view>
 </view>

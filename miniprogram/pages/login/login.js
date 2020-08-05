@@ -18,9 +18,6 @@ Page({
         userInfo: e.detail.userInfo
       })
       wx.setStorageSync('userInfo', this.data.userInfo)
-      wx.switchTab({
-        url: '../home-page/home-page',
-      })
       const db = wx.cloud.database()
       //获取openId
       wx.cloud.callFunction({
@@ -38,6 +35,9 @@ Page({
                  this.addUser();
               }else{
                 wx.setStorageSync('userId', res.data[0]._id)
+                wx.switchTab({
+                  url: '../home-page/home-page',
+                })
               }
             }
           })
@@ -63,8 +63,11 @@ Page({
         name: 'addUser',
         data: data,
         success: res => {
-          console.log(res)
-          wx.setStorageSync('userId', res.data[0]._id)
+          console.log(res.result.result)
+          wx.setStorageSync('userId', res.result.result._ids[0])
+          wx.switchTab({
+            url: '../home-page/home-page',
+          })
         }
       })
     console.log(data)
@@ -94,7 +97,8 @@ Page({
    */
   onLoad: function(options) {
     let info = wx.getStorageSync('userInfo');
-    if (info) {
+    let userId = wx.getStorageSync('userId');
+    if (info && userId) {
       wx.switchTab({
         url: '../home-page/home-page',
       })

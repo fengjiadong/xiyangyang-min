@@ -120,5 +120,11 @@ Page({
       url: '../commodity/commodity',
     })
   }
-
+  ,
+  goStuffPage(){
+    console.log('跳转到用户管理页')
+    wx.navigateTo({
+      url: '../stuff/stuff',
+    })
+  }
 })

@@ -79,7 +79,9 @@ Page({
     })
     let userId = wx.getStorageSync('userId');
     db.collection('admin').where({
-      userId:userId
+      userId:userId,
+      invalid:false,
+      isDelete:false
     }).get({
       success: res => {
         console.log(res)

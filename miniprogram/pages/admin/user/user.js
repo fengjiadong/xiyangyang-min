@@ -7,22 +7,37 @@ Page({
    */
   data: {
     key: '',
-    keyWord:'',
+    keyWord: '',
     queryResult: [],
     pageNo: 1,
     maxNum: 10,
     isLoad: true,
     isOver: false,
-    count:0
+    count: 0,
+    isWxSelect: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.wxName) {
+      this.setData({
+        isWxSelect: true
+      })
+    }
     this.search();
   },
-
+  // 用户信息被点击
+  userChange(e) {
+    console.log()
+    if (this.data.isWxSelect) {
+      wx.setStorageSync('selectUser', this.data.queryResult[e.currentTarget.dataset.index])
+      wx.navigateBack({
+        delta: 1
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -62,14 +77,14 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(!this.data.isOver){
+    if (!this.data.isOver) {
       this.setData({
-        pageNo: this.data.pageNo+1,
+        pageNo: this.data.pageNo + 1,
         isLoad: true
       })
       this.search();
     }
-   
+
   },
 
   /**
@@ -81,15 +96,15 @@ Page({
   bindconfirm(e) {
     this.setData({
       key: e.detail.value,
-      keyWord:''
+      keyWord: ''
     })
   },
-  searchByKey(){
+  searchByKey() {
     this.setData({
       keyWord: this.data.key,
-      pageNo:1,
-      queryResult:[],
-      isOver:false
+      pageNo: 1,
+      queryResult: [],
+      isOver: false
     })
     console.log(this.data.keyWord)
     this.search()
@@ -102,7 +117,7 @@ Page({
         option: 'i'
       })
     }).count({
-      success: res =>{
+      success: res => {
         console.log(res)
         this.setData({
           count: res.total
@@ -135,55 +150,55 @@ Page({
       }
     })
   },
-  searchOrderCount(data){
+  searchOrderCount(data) {
     console.log('进入方法')
     const _ = db.command
     const $ = _.aggregate
     let userIds = []
-    for(let i =0;i < data.length;i++){
+    for (let i = 0; i < data.length; i++) {
       userIds.push(data[i]._id)
     }
-    console.log("userIds",userIds)
+    console.log("userIds", userIds)
     // 查询用户的下单次数以及下单金额
     db.collection('order').aggregate().
-    // 微信的一个bug, 模拟器使用$.操作符，手机端无效，手机端必须使用_.操作符。
-    match({
-      userId: _.in(userIds),
-      status: _.neq('订单已退回')
-    })
-    .group({
-      _id: '$userId',
-      sum: $.sum('$totalPrice'),
-      count: $.sum(1)
-    })
-    .end({
-      success: res => {
-        console.log("res",res)
-        for(let i =0;i < data.length;i++){
-          if(res.list.length < 1){
-            data[i].sum = 0;
-            data[i].count = 0;
-            continue;
-          }
-          for(let j =0;j < res.list.length;j++){
-            if(data[i]._id === res.list[j]._id){
-              data[i].sum = res.list[j].sum;
-              data[i].count = res.list[j].count;
-            }else{
+      // 微信的一个bug, 模拟器使用$.操作符，手机端无效，手机端必须使用_.操作符。
+      match({
+        userId: _.in(userIds),
+        status: _.neq('订单已退回')
+      })
+      .group({
+        _id: '$userId',
+        sum: $.sum('$totalPrice'),
+        count: $.sum(1)
+      })
+      .end({
+        success: res => {
+          console.log("res", res)
+          for (let i = 0; i < data.length; i++) {
+            if (res.list.length < 1) {
               data[i].sum = 0;
               data[i].count = 0;
+              continue;
+            }
+            for (let j = 0; j < res.list.length; j++) {
+              if (data[i]._id === res.list[j]._id) {
+                data[i].sum = res.list[j].sum;
+                data[i].count = res.list[j].count;
+              } else {
+                data[i].sum = 0;
+                data[i].count = 0;
+              }
             }
           }
+          console.log("user", data)
+          // 查询下单次数
+          let list = this.data.queryResult.concat(data)
+          this.setData({
+            queryResult: list,
+            isLoad: false,
+          })
         }
-        console.log("user",data)
-        // 查询下单次数
-        let list = this.data.queryResult.concat(data)
-        this.setData({
-          queryResult: list,
-          isLoad: false,
-        })
-      }
-    })
-    
+      })
+
   }
 })

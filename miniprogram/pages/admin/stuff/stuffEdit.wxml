@@ -1,0 +1,70 @@
+<form>
+	<!-- 图片上传开始 -->
+	<view class="cu-bar bg-white margin-top">
+		<view class="action">
+			员工本人照片
+		</view>
+		<view class="action">
+			{{imgList.length}}/1
+		</view>
+	</view>
+	
+	<view class="cu-form-group">
+		<view class="grid col-4 grid-square flex-sub">
+			<view class="bg-img" wx:for="{{imgList}}" wx:key="{{imgIndex}}" bindtap="ViewImage" data-url="{{imgList[imgIndex]}}">
+				<image src='{{imgList[imgIndex]}}' mode='aspectFill'></image>
+				<view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+					<text class="cuIcon-close"></text>
+				</view>
+			</view>
+			<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
+				<text class="cuIcon-cameraadd"></text>
+			</view>
+		</view>
+	</view>
+	<!-- end -->
+	<view class="cu-form-group margin-top" bindtap="wxChange">
+			<view class="title">员工所属微信用户</view>
+				<view class="picker">
+					{{info.nickName}}
+				</view>
+		</view>
+	<view class="cu-form-group margin-top">
+		<view class="title">名称</view>
+		<input placeholder="员工名称" value="{{info.name}}" bindinput="updateValue" data-name='info.name'></input>
+	</view>
+	<view class="cu-form-group ">
+		<view class="title">职位</view>
+		<input placeholder="员工职位" value="{{info.post}}" bindinput="updateValue" data-name='info.post'></input>
+	</view>
+	<view class="cu-form-group ">
+		<view class="title">电话</view>
+		<input placeholder="联系方式" value="{{info.phone}}" bindinput="updateValue" data-name='info.phone'></input>
+	</view>
+	<view class="cu-form-group ">
+		<view class="title">性别</view>
+		<picker bindchange="GenderChange" range-key="name" value="{{index}}" range="{{gender}}">
+			<view class="picker">
+				{{gender[genderIndex].name}}
+			</view>
+		</picker>
+	</view>
+	<view class="cu-form-group margin-top">
+		<view class="title">权限</view>
+		<picker bindchange="PickerChange" range-key="name" value="{{index}}" range="{{types}}">
+			<view class="picker">
+				{{types[index].name}}
+			</view>
+		</picker>
+	</view>
+	<!-- <view>{{info.id}}</view> -->
+	<view class="cu-form-group margin-top">
+		<view class="title">是否有效</view>
+		<switch checked="{{!info.invalid}}" bindchange="invalid"></switch>
+	</view>
+	<view class="padding-xl">
+		<button wx:if="{{!info._id }}" class="btn bg-blue lg" bindtap="add">添加</button>
+		<button wx:if="{{info._id }}" class="btn bg-blue lg" bindtap="save">保存</button>
+		<button wx:if="{{info._id }}" class="btn bg-red margin-tb-sm lg" bindtap="delete">删除</button>
+	</view>
+</form>

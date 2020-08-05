@@ -1,1 +1,4 @@
 /* miniprogram/pages/admin/stuff/stuff.wxss */
+.btn:not([size='mini']) {
+  width: 100%;
+}

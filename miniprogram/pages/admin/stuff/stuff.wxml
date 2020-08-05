@@ -1,2 +1,31 @@
-<!--miniprogram/pages/admin/stuff/stuff.wxml-->
-<text>miniprogram/pages/admin/stuff/stuff.wxml</text>
+<scroll-view scroll-y class="page show">
+  	<view class="bg-white solid-bottom text-xs padding">
+  		<text class="text-gray">左滑编辑员工信息</text>
+  	</view>
+	<view class="cu-list menu-avatar">
+		<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{list}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+		
+			 <image class="cu-avatar round lg" src="{{item.image}}" ></image>
+			<view class="content">
+				<view class="text-grey">{{item.name}}<text wx:if="{{item.invalid}}" class="cuIcon-infofill text-red">已失效</text></view>
+				<view class="text-gray text-sm">
+					创建时间:{{item.createTime}}
+          </view>
+			</view>
+			<view class="action">
+				<view class="text-grey text-xs">{{item.role}}</view>
+				<!-- <view class="cu-tag round bg-grey sm">5</view> -->
+			</view>
+			<view class="move">
+				<view class="bg-blue" bindtap="toEdit" data-id="{{item._id}}">编辑</view>
+				<view class="bg-red">删除</view>
+			</view>
+		</view>
+	</view>
+	<view class="padding bg-white">
+  <view class="cu-tag radius">共{{list.length}}个员工账号。</view>
+	 <view class="padding-xl">
+    <button class="btn cu-btn bg-blue lg shadow" bindtap="addStuff">添加</button>
+    </view>
+</view>
+</scroll-view>
