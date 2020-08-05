@@ -126,5 +126,11 @@ Page({
     wx.navigateTo({
       url: '../stuff/stuff',
     })
+  },
+  goDataInfoPage(){
+    console.log('跳转到商家日报页')
+    wx.navigateTo({
+      url: '../dataInfo/dataInfo',
+    })
   }
 })

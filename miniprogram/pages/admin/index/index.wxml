@@ -13,9 +13,9 @@
       <!-- <view class="margin-top-sm text-Abc"></view> -->
     </view>
   </view>
-  <view class="padding-sm">
+  <view class="padding-sm" bindtap="goDataInfoPage">
     <view class="bg-gradual-orange padding radius text-center shadow-blur">
-      <view class="text-lg">订单管理(功能待开放)</view>
+      <view class="text-lg">商家日报</view>
       <!-- <view class="margin-top-sm text-Abc">#ff9700 - #ed1c24</view> -->
     </view>
   </view>
