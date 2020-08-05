@@ -151,7 +151,8 @@ Page({
   },
   searchCommodity(typeId){
     db.collection('commodity').where({
-      type:typeId
+      type:typeId,
+      isDelete:false
     }).get()
   }
   ,addCommodity(){

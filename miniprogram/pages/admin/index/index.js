@@ -132,5 +132,11 @@ Page({
     wx.navigateTo({
       url: '../dataInfo/dataInfo',
     })
-  }
+  },
+  goSettingsPage(){
+    console.log('跳转到设置日报页')
+    wx.navigateTo({
+      url: '../setting/setting',
+    })
+  },
 })

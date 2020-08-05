@@ -35,4 +35,9 @@
       <view class="text-lg">员工管理</view>
     </view>
   </view>
+  <view class="padding-sm" bindtap="goSettingsPage" >
+    <view class="bg-gradual-pink padding radius text-center shadow-blur">
+      <view class="text-lg">设置</view>
+    </view>
+  </view>
 </view>

@@ -312,7 +312,7 @@ Page({
       })
       return false;
     }
-    if(!info.price){
+    if(!info.price && !info.priceTow && !info.priceThree){
       wx.showToast({
         title: '请输入商品价格',
         duration: 1000,
@@ -328,7 +328,11 @@ Page({
       })
       return false;
     }
-    this.data.info.price = parseFloat(this.data.info.price);
+    if(info.price){
+      this.data.info.price = parseFloat(this.data.info.price);
+    }else{
+      this.data.info.price = 0;
+    }
     if(info.priceTow){
       this.data.info.priceTow = parseFloat(this.data.info.priceTow);
     }else{

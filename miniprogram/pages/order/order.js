@@ -361,7 +361,9 @@ Page({
   },
   searchCommodity(typeId) {
     db.collection('commodity').where({
-      type: typeId
+      type: typeId,
+      isDelete:false,
+      invalid:false
     }).get({
       success: res => {
         this.setData({

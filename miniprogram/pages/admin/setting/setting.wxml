@@ -1,0 +1,4 @@
+	<view class="cu-form-group margin-top">
+		<view class="title">是否打烊(停止接单)</view>
+		<switch   checked="{{close}}" bindchange="close"></switch>
+	</view>

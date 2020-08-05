@@ -310,7 +310,7 @@ Page({
           wx.showToast({
             title: '正在跳转订单详情页',
             icon: 'success',
-            duration: 500,
+            duration: 1000,
           })
           this.addRecord(res.result.result._id ,order)
           // 删除购物车里已购买的商品
@@ -319,7 +319,7 @@ Page({
             wx.navigateTo({
               url: '../shopping-list-detail/shopping-list-detail?id='+res.result.result._id
             })
-          }, 500)
+          }, 1000)
         }
       }
     })
@@ -562,6 +562,10 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  // 判断商品是否改变价格
+  getCommodityPrice(){
+    // 暂时先不写
   },
   // 获取配送地址
   searchAddress(){
