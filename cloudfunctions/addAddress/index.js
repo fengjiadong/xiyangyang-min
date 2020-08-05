@@ -18,7 +18,8 @@ exports.main = async (event, context) => {
         phone: event.phone,
         type: event.type,
         isDelete:false,
-        createTime: new Date()
+        createTime: new Date(),
+        updateTime: new Date()
       }]
     })
   return {

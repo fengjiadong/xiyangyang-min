@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home-page/home-page",
+    "pages/admin/dataInfo/dataInfo",
     "pages/admin/stuff/stuff",
     "pages/admin/online/online",
     "pages/admin/online/orderInfo",
@@ -22,6 +23,7 @@
     "pages/admin/material/materialDetail",
     "pages/admin/online/refund",
     "pages/admin/stuff/stuffEdit"
+    
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

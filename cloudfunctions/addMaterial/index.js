@@ -14,7 +14,8 @@ exports.main = async (event, context) => {
         name: event.name,
         price: parseFloat(event.price),
         invalid: event.invalid,
-        dateTime: new Date(),
+        createTime: new Date(),
+        updateTime: new Date(),
         isDelete:false
       }
     })

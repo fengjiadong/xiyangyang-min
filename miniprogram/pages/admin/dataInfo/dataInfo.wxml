@@ -1,0 +1,28 @@
+<!--miniprogram/pages/admin/dataInfo/dataInfo.wxml-->
+<!-- {{dayOrderCount}}-{{dayPriceSum}} -->
+<view class="cu-form-group">
+		<view class="title">日期选择</view>
+		<picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
+			<view class="picker">
+				{{date}}
+			</view>
+		</picker>
+	</view>
+<view class="solids-bottom padding-xs flex align-center">
+	<!-- <view class="padding">22</view> -->
+  
+	<view class="flex-sub text-center">
+		<view class="padding">当日:未完成订单<text style="color:red">{{dayWWCorderCount}}</text>个,订单总额<text class="text-price text-red">{{dayWWCpriceSum}}</text></view>
+		<view class="padding">当日:已完成订单<text style="color:red">{{dayWCorderCount}}</text>个,订单总额<text class="text-price text-red">{{dayWCpriceSum}}</text></view>
+		<view class="padding">当日:已退回订单<text style="color:red">{{dayYTHorderCount}}</text>个,订单总额<text class="text-price text-red">{{dayYTHpriceSum}}</text></view>
+	</view>
+	
+</view>
+
+<view class="flex-sub text-center">
+  <view class="padding">如需核对当日账单请登录微信商户端</view>
+  <view class="padding">或在超级管理员微信中的【微信支付商家助手】中核对</view>
+		<view class="solid-bottom text-xxl padding">
+			当日微信商户总收入:<text class="text-price text-red">{{dayWCpriceSum+dayWCpriceSum}}</text>
+		</view>
+	</view>

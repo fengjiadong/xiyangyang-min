@@ -18,7 +18,8 @@ exports.main = async (event, context) => {
         orderNum: event.orderNum,
         commoditys: event.commoditys,
         address: event.address,
-        createTime: event.createTime,
+        createTime: new Date(),
+        updateTime: new Date(),
         time: event.time,
         phone: event.phone,
       }
