@@ -16,6 +16,7 @@ Page({
     }
     ],
     minPrice: 0, // 起送价
+    distributionPrice: 0,// 配送费
     isActive: false,
     deleteIs: false,
     totalPrice: 0, // 合计总价
@@ -68,22 +69,11 @@ Page({
     let list = this.data.shopList;
     list[index].isActive = !list[index].isActive;
     this.setData({
-      shopList: list,
-      isActive: false
+      shopList: list
     })
-    let priceList = this.data.priceList;
-
+    // 选中
     if (list[index].isActive === true) {
-      console.log(list[index].price);
-      priceList.push({
-        price: list[index].price,
-        num: list[index].number
-      });
-      this.setData({
-        priceList: priceList
-      })
       let total = 0;
-      // this.data.shopList
       this.data.shopList.forEach(ele => {
         if (ele.isActive) {
           total = total + ele.totalPrice;
@@ -94,9 +84,7 @@ Page({
         totalPrice: this.changeTwoDecimal_f(total)
       })
     } else if (list[index].isActive === false) {
-      console.log(this.data.shopList)
-      priceList.splice(index, 1);
-      console.log(priceList);
+      // 取消选中
       let total = 0;
 
       this.data.shopList.forEach(ele => {
@@ -106,17 +94,30 @@ Page({
       })
       this.setData({
         totalPrice: this.changeTwoDecimal_f(total),
-        priceList: priceList
       })
     }
+    let isActive = true;
+    let priceList =[]
+    for(let i=0;i< this.data.shopList.length;i++){
+      if(this.data.shopList[i].isActive){
+        priceList.push(this.data.shopList[i])
+      }else{
+        isActive = false
+      }
+    }
+    this.setData({
+      priceList:priceList,
+      isActive:isActive
+    })
 
   },
   // 全选
   isAllSelect() {
-    let isActive = this.data.isActive;
+    let isActive = true;
     let list = this.data.shopList;
     for (let i = 0; i < list.length; i++) {
       if (!list[i].isActive) {
+        isActive = false;
         let e = {
           currentTarget: {
             dataset: {
@@ -127,8 +128,20 @@ Page({
         this.isSelect(e)
       }
     };
+    if (isActive) {
+      for (let i = 0; i < list.length; i++) {
+        let e = {
+          currentTarget: {
+            dataset: {
+              index: i
+            }
+          }
+        }
+        this.isSelect(e)
+      }
+    }
     this.setData({
-      isActive: true
+      isActive: !isActive
     })
   },
   deletePayShoppingEntity(index) {
@@ -231,7 +244,8 @@ Page({
     db.collection("setting").get({
       success: res => {
         this.setData({
-          minPrice: res.data[0].price
+          minPrice: res.data[0].price,
+          distributionPrice: res.data[0].distributionPrice,
         })
         if (res.data[0].close) {
           wx.showToast({
@@ -245,7 +259,6 @@ Page({
         } else {
 
           // 未打烊，可以购买商品.
-          console.log(this.data.priceList)
           if (this.data.priceList.length === 0) {
             wx.showToast({
               title: '请选择商品',
@@ -253,9 +266,9 @@ Page({
               duration: 2000
             })
           } else {
-            if(this.data.totalPrice < this.data.minPrice){
+            if (this.data.totalPrice < this.data.minPrice) {
               wx.showToast({
-                title: '起送价最低'+this.data.minPrice+'元哦~',
+                title: '起送价最低' + this.data.minPrice + '元哦~',
                 icon: 'none',
                 duration: 2000
               })
@@ -458,7 +471,7 @@ Page({
     // payment
     switch (this.data.titltTabName) {
       case '上门自取':
-        console.log('上门自取')
+        // console.log('上门自取')
         if (this.data.onePhone === '') {
           wx.showToast({
             title: '请填写收货人电话',
@@ -467,9 +480,6 @@ Page({
           })
         } else {
           console.log(this.data.time, this.data.onePhone);
-          // wx.navigateTo({
-          //   url: '../shopping-list-detail/shopping-list-detail',
-          // });
           // 生成订单然后支付
           this.generate()
           this.setData({
@@ -478,11 +488,7 @@ Page({
         }
         break;
       case '外卖配送':
-        console.log('外卖配送')
-        // console.log(this.data.time, this.data.addressArray[address]);
-        // wx.navigateTo({
-        //   url: '../shopping-list-detail/shopping-list-detail',
-        // });
+        // console.log('外卖配送')
         // 生成订单然后支付
         this.generate()
         this.setData({
@@ -514,12 +520,15 @@ Page({
     order.status = '待商家确认'
     order.createTime = new Date()
     order.userId = userId
+    order.distributionPrice = this.data.distributionPrice
     if (this.data.titltTabName === '上门自取') {
       order.phone = this.data.onePhone
       order.time = this.data.time
       console.log(this.data.time, this.data.onePhone);
     } else {
       order.address = this.data.addressArray[this.data.address]
+      order.totalPrice = this.data.totalPrice + parseFloat(this.data.distributionPrice)
+      order.distributionPrice = parseFloat(this.data.distributionPrice)
     }
     this.payment(order)
     //  console.log(order)

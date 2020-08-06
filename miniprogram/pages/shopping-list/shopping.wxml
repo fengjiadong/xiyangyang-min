@@ -81,6 +81,7 @@
 			</view>
 		</view>
 		<view wx:if="{{titltTabName== '外卖配送'}}" class="padding-container">
+		 		<text class="text-red ">注：另收配送费{{distributionPrice}}元哦~</text>
 			<view class="write-box">
 				<view class="write-title">收获地址：</view>
 				<picker class="time-input" value="{{address}}"  range-key="address"  range="{{addressArray}}" bindchange="addressChange">

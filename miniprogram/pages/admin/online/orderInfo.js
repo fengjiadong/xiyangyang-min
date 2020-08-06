@@ -30,6 +30,7 @@ Page({
         res.data.avatarUrl = options.image
         res.data.nickName = options.nickName
         res.data.createTime = this.formatDate(res.data.createTime, 'yyyy-MM-dd hh:mm:ss')
+        res.data.finishTime = this.formatDate(res.data.finishTime, 'yyyy-MM-dd hh:mm:ss');
         this.setData({
           info: res.data
         })

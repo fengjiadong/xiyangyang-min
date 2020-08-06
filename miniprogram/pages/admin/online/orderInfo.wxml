@@ -66,6 +66,10 @@
 			<view class="detail-title">订单类型</view>
 			<view class="detail-text">{{info.type}}</view>
 		</view>
+			<view wx:if="{{info.type !== '上门自取'}}" class="detail-list-box-left">
+			<view class="detail-title">配送费</view>
+			<view class="detail-text">{{info.distributionPrice}}元</view>
+		</view>
 		<view wx:if="{{info.type !== '上门自取'}}" class="detail-list-box-left">
 			<view class="detail-title">联系人</view>
 			<view class="detail-text">{{info.address.name}}{{info.address.gender}}</view>

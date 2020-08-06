@@ -6,7 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    close:false
+    close:false,
+    distributionPrice:0,
+    price:0,
   },
 
   /**
@@ -18,7 +20,8 @@ Page({
         console.log(res)
         this.setData({
           close:res.data.close,
-          price: res.data.price
+          price: res.data.price,
+          distributionPrice:res.data.distributionPrice
         })
       }
     })
@@ -37,7 +40,8 @@ Page({
       name: "upSetting",
       data: {
         close: this.data.close,
-        price:  parseFloat(this.data.price)
+        price:  parseFloat(this.data.price),
+        distributionPrice: parseFloat(this.data.distributionPrice)
       },
       success(res) {
         if(res.result.result.stats.updated == 1){

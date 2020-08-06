@@ -9,12 +9,13 @@
 					<view class="list-name">{{item.name}}</view>
 					<view class="text-before">规格：<text class="text-words">{{item.glassType.name}} {{item.iceType}} {{item.sugarType}}</text></view>
 					<view class="text-before">加料：<text class="text-words" wx:for="{{item.specifications}}">{{item.name}} </text></view>
-					<view class="text-before">数量：<text class="text-words">{{item.number}}</text> 单价：<text class="text-words">{{item.price}}</text></view>
+					<view class="text-before">数量：<text class="text-words">{{item.number}}</text> 单价：<text class="text-words"> ¥{{item.price}}</text></view>
 					<view class="list-price">¥<text class="price-num">{{item.totalPrice}}</text></view>
 				</view>
 			</view>
 		</view>
-		<view class="total-price"><text class="text-words">合计 ¥ </text>{{order.totalPrice}}</view>
+		<text class="text-words" wx:if="{{order.distributionPrice}}">配送费 ¥{{order.distributionPrice}}</text>
+		<view class="total-price"><text class="text-words">合计</text>¥{{order.totalPrice}}</view>
 	</view>
 	<view class="write-module-box">
 		<view class="store-name">订单详情</view>

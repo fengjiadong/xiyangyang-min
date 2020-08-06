@@ -14,6 +14,7 @@ exports.main = async (event, context) => {
         userId: event.userId,
         openId: wxContext.OPENID,
         totalPrice: event.totalPrice,
+        distributionPrice: event.distributionPrice,
         status: event.status,
         orderNum: event.orderNum,
         commoditys: event.commoditys,
