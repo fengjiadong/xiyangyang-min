@@ -7,7 +7,9 @@
 			</swiper-item>
 		</block>
 	</swiper>
+	
 	<view class="type-choose-box">
+
 		<view class="type-choose-list" bindtap="goOrder">
 			<!-- <view class="type-back">
 				<view class="iconfont icon-kafei"></view>
@@ -25,5 +27,8 @@
 			<view class="type-text">无接触 更安心</view>
 		</view>
 	</view>
+		<view class="padding center-module-box">
+		 		<text class="text-red ">{{msg}}</text>
+		</view>
 	<view class="button" bindtap="goOrder">开始点单</view>
 </view>

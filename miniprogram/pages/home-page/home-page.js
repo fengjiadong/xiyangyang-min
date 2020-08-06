@@ -1,10 +1,12 @@
 // miniprogram/pages/home-page/home-page.js
+const db = wx.cloud.database()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    msg:'',
     background: ['/images/img/six.jpg', '/images/img/two.jpg', '/images/img/three.jpg','/images/img/one.jpg'],
   },
   // 跳转至点单页面
@@ -17,15 +19,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.cloud.callFunction({
-      name: 'test',
-      data: {},
-      success: res => {
-        console.log("云函数",res)
+    this.isClose();
+    
+  },
+  isClose(){
+    db.collection("setting").get({
+      success: res=>{
+        if(res.data[0].close){
+          // wx.showToast({
+          //   title: '本店已打烊~可以先逛逛加入购物车奥~',
+          // })
+          this.setData({
+            msg:'温馨提示： 本店已打烊~可以先逛逛加入购物车哦~'
+          })
+        }
       }
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -37,7 +47,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      this.isClose();
   },
 
   /**

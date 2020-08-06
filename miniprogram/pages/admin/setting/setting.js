@@ -17,7 +17,8 @@ Page({
       success: res =>{
         console.log(res)
         this.setData({
-          close:res.data.close
+          close:res.data.close,
+          price: res.data.price
         })
       }
     })
@@ -27,13 +28,30 @@ Page({
     this.setData({
       close: e.detail.value
     })
-    console.log(this.data.close)
+  },
+  save(){
+    wx.showLoading({
+      title: '正在保存设置',
+    })
     wx.cloud.callFunction({
       name: "upSetting",
       data: {
         close: this.data.close,
+        price:  parseFloat(this.data.price)
       },
       success(res) {
+        if(res.result.result.stats.updated == 1){
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 500
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 500)
+        }
       }
     })
   },
@@ -84,5 +102,11 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  updateValue(e) {
+    let name = e.currentTarget.dataset.name;
+    let nameMap = {}
+    nameMap[name] = e.detail && e.detail.value
+    this.setData(nameMap)
+  },
 })

@@ -2,3 +2,11 @@
 		<view class="title">是否打烊(停止接单)</view>
 		<switch   checked="{{close}}" bindchange="close"></switch>
 	</view>
+	 <view class="cu-form-group ">
+		<view class="title">订单起送金额</view>
+		<input placeholder="请输入起送金额" type="digit" value="{{price}}" bindinput="updateValue" data-name='price'></input>
+	</view>
+
+	<view class="padding-xl">
+	<button  class="btn bg-blue lg" bindtap="save">保存</button>
+  </view>

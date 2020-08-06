@@ -239,15 +239,17 @@ Page({
           imageUrl: res.data[0].image,
           name: res.data[0].name,
           detail: res.data[0].detail,
-          price: res.data[0].price
+          price: res.data[0].price?res.data[0].price:res.data[0].priceTow?res.data[0].priceTow:res.data[0].priceThree
         })
 
         let glassList = [];
-        let type = {
-          name: '常规',
-          price: res.data[0].price
+        if (res.data[0].price && res.data[0].price > 0) {
+          let price = {
+            name: '常规',
+            price: res.data[0].price
+          }
+          glassList.push(price)
         }
-        glassList.push(type)
         if (res.data[0].priceTow && res.data[0].priceTow > 0) {
           let typeTow = {
             name: '大份',

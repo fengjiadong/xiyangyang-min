@@ -28,17 +28,16 @@
           <!-- <view class="cu-avatar round lg" style="background-image: src({{item.image}});"></view> -->
           <image class="cu-avatar round lg" src="{{item.image}}"></image>
           <view class="content">
-            <view class="text-grey">{{item.name}}</view>
+            <view class="text-grey">{{item.name}}<text wx:if="{{item.invalid}}" class="cuIcon-infofill text-red">已失效</text></view>
             <view class="text-gray text-sm flex">
               <text class="text-cut">{{item.detail}}</text>
             </view>
           </view>
           <view class="action">
             <view class="text-grey text-xs">销量</view>
-            <view class="cu-tag round bg-grey sm">5</view>
+            <view class="cu-tag round bg-grey sm">{{item.salesVolume}}</view>
           </view>
         </view>
-       
       </view>
     </view>
   </scroll-view>

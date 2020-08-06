@@ -9,7 +9,7 @@
   position: relative;
   float: left;
   left: -60rpx;
-  top:-35rpx;
+  top:-20rpx;
 }
  .detail-list-box {
   display: flex;
@@ -19,14 +19,14 @@
 }
 
 .detail-title {
-  font-size: 14rpx;
+  font-size: 20rpx;
   color: #7B7B7B;
 }
 .detail-text {
   flex: 1;
   padding-left: 16px;
   text-align: right;
-  font-size: 12rpx;
+  font-size: 22rpx;
   color: #424242;
 }
 

@@ -97,15 +97,17 @@ Page({
     this.setData({
       sizeContentWindow: false,
       sizeName: name,
-      price:info.price,
+      price:info.price?info.price:info.priceTow?info.priceTow:info.priceThree,
       specifications:this.data.specifications
     })
     let glassList = [];
-    let type = {
-      name: '常规',
-      price: info.price
+    if (info.price && info.price > 0) {
+      let price = {
+        name: '常规',
+        price: info.price
+      }
+      glassList.push(price)
     }
-    glassList.push(type)
     if (info.priceTow && info.priceTow > 0) {
       let typeTow = {
         name: '大份',
@@ -349,7 +351,8 @@ Page({
 
   },
   getType() {
-    db.collection('type').get({
+    db.collection('type')
+    .orderBy('sort', 'ase').get({
       success: res => {
         this.setData({
           selectList: res.data

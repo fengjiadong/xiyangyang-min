@@ -28,19 +28,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    db.collection('admin').doc(options.id).get({
-      success: res=>{
-        console.log(res)
-        let gender = res.data.gender=='男'?0:1
-        let roleNum = res.data.roleNum ==0?1:0
-        this.setData({
-          info:res.data,
-          genderIndex:gender,
-          index:roleNum,
-          imgList:[res.data.image]
-        })
-      }
-    })
+    if(options.id){
+      // 找到管理员详情
+      db.collection('admin').doc(options.id).get({
+        success: res=>{
+          console.log(res)
+          let gender = res.data.gender=='男'?0:1
+          let roleNum = res.data.roleNum ==0?1:0
+          this.setData({
+            info:res.data,
+            genderIndex:gender,
+            index:roleNum,
+            imgList:[res.data.image]
+          })
+        }
+      })
+    }
+    
   },
   PickerChange(e) {
     // console.log(e);
@@ -214,5 +218,12 @@ Page({
     let nameMap = {}
     nameMap[name] = e.detail && e.detail.value
     this.setData(nameMap)
+  },
+  invalid(e){
+    this.data.info.invalid = !e.detail.value
+    this.setData({
+      info: this.data.info
+    })
+    console.log(this.data.info.invalid)
   }
 })

@@ -16,7 +16,29 @@ exports.main = async (event, context) => {
         updateTime: new Date()
       }
     })
+    if(event.status !== '订单已完成'){
+      return {
+        result: result
+      }
+    }
+    let results = await db.collection('order')   //集合名称
+    .doc(event.id).get()
+    let commoditys = results.data.commoditys;
+    let upRes = [];
+    for(let i =0;i < commoditys.length; i++ ){
+      let commdodity = await db.collection('commodity')   //集合名称
+       .doc(commoditys[i].commodityId).get()
+       commdodity.data.salesVolume = commdodity.data.salesVolume?commdodity.data.salesVolume+1:1
+       // 修改销量
+       let upCommidity = await db.collection('commodity')   //集合名称
+       .doc(commdodity.data._id).update({data: {salesVolume:commdodity.data.salesVolume,updateTime: new Date()}})
+       upRes.push(upCommidity)
+    }
   return {
-    result:result
+    commoditys: commoditys,
+    upRes: upRes,
+    result: result,
+    query: results
   }
 }
+

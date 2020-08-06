@@ -115,9 +115,16 @@ Page({
       }
     }
   },
+  // // 每种商品的销量
+  // salesVolume(){
+  //   console.log('每种商品的销量')
+  //   const _ = db.command
+  //   const $ = _.aggregate
+  // },
   // 获取商品类型
   getType() {
-    db.collection('type').get({
+    db.collection('type')
+    .orderBy('sort', 'ase').get({
       success: res => {
         this.setData({
           lists: res.data

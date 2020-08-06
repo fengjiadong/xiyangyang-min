@@ -6,12 +6,12 @@ cloud.init({
 const db = cloud.database()    //链接数据库
 // 云函数入口函数
 exports.main = async (event, context) => {
+  // 本函数弃用了
   const wxContext = cloud.getWXContext()
-  let result = await db.collection('setting')   //集合名称
-    .doc('3adec2825f2a9e43001870f53e337dff').update({
+  let result = await db.collection('commodity')   //集合名称
+    .doc(event.id).update({
       data: {
-        close:event.close,
-        price: parseFloat(event.price),
+        salesVolume:1,
         updateTime: new Date()
       }
     })
@@ -19,3 +19,4 @@ exports.main = async (event, context) => {
     result:result
   }
 }
+
