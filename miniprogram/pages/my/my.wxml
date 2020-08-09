@@ -36,7 +36,7 @@
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
 
-    <view  wx:if = "{{isAdmin}}" class="module-list-box" bindtap="goAdmin">
+    <view  wx:if = "{{isAdmin & !isDisable}}" class="module-list-box" bindtap="goAdmin">
 			<image class="taxi-image" src="../../images/img/position.png"></image>
 			<view class="title-list">商户端</view>
 			<view class="iconfont right-icon icon-backward"></view>

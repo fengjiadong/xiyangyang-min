@@ -314,6 +314,7 @@ Page({
     this.setData({
       sizeContentWindow: true,
     })
+    // this.getType();
   },
 
   /**
@@ -351,11 +352,17 @@ Page({
 
   },
   getType() {
+    wx.showLoading({
+      title: '正在加载',
+    })
     db.collection('type')
     .orderBy('sort', 'ase').get({
       success: res => {
         this.setData({
           selectList: res.data
+        })
+        wx.hideLoading({
+          success: (res) => {},
         })
         this.searchCommodity(this.data.selectList[0]._id)
         console.log('[数据库] [查询记录] 成1功: ', res)
@@ -363,6 +370,12 @@ Page({
     })
   },
   searchCommodity(typeId) {
+    wx.showLoading({
+      title: '正在加载',
+    })
+    this.setData({
+      foodTypeList: []
+    })
     db.collection('commodity').where({
       type: typeId,
       isDelete:false,
@@ -371,6 +384,9 @@ Page({
       success: res => {
         this.setData({
           foodTypeList: res.data
+        })
+        wx.hideLoading({
+          success: (res) => {},
         })
         console.log('[数据库] [查询记录] 成1功: ', res)
       }

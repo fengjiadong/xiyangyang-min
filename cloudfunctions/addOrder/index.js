@@ -16,6 +16,7 @@ exports.main = async (event, context) => {
         totalPrice: event.totalPrice,
         distributionPrice: event.distributionPrice,
         status: event.status,
+        remarks: event.remarks,
         orderNum: event.orderNum,
         commoditys: event.commoditys,
         address: event.address,

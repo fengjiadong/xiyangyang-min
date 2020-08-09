@@ -20,6 +20,7 @@ Page({
    */
   onLoad: function (options) {
     this.isClose();
+    // console.log('日期',)
     
   },
   isClose(){

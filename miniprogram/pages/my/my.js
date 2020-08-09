@@ -13,7 +13,8 @@ Page({
     },
     logged: false,
     openId: "",
-    isAdmin:false
+    isAdmin:false,
+    isDisable:false
   },
   // 调转至购物车
   goShopTaxi() {
@@ -53,7 +54,24 @@ Page({
   
     // db
   },
-
+  isDisable(){
+    if(new Date() < new Date('2020-08-17 00:00:00')){
+      db.collection("setting").get({
+        success: res=>{
+          if(res.data[0].Disable){
+            this.setData({
+              isDisable:true
+            })
+          }
+        }
+      })
+    }else{
+      this.setData({
+        isDisable:true
+      })
+    }
+    
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -65,6 +83,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.isDisable();
     let openId = wx.getStorageSync('openId');
 
     let info = wx.getStorageSync('userInfo');
@@ -89,6 +108,7 @@ Page({
           this.setData({
             isAdmin:true
           })
+          
           wx.setStorageSync('admin', res.data[0])
         }
       }

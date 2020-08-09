@@ -79,6 +79,10 @@
 				<view class="write-title">预留电话：</view>
 				<input value="{{onePhone}}" bindinput="getOneValue" type="number" class="time-input" placeholder="请填写收货人电话" placeholder-class="zhan-input"></input>
 			</view>
+			<view class="write-box">
+				<view class="write-title">留言备注：</view>
+				<input value="{{remarks}}" bindinput="remarks" class="time-input" placeholder="备注" placeholder-class="zhan-input"></input>
+			</view>
 		</view>
 		<view wx:if="{{titltTabName== '外卖配送'}}" class="padding-container">
 		 		<text class="text-red ">注：另收配送费{{distributionPrice}}元哦~</text>
@@ -89,6 +93,10 @@
 						{{addressArray[address].address}}
 					</view>
 				</picker>
+			</view>
+			<view class="write-box">
+				<view class="write-title">留言备注：</view>
+				<input value="{{remarks}}" bindinput="remarks" class="time-input" placeholder="备注" placeholder-class="zhan-input"></input>
 			</view>
 		</view>
 		<!-- <view class="immediately-buy" catchtap="immediateBuy">立即支付</view> -->

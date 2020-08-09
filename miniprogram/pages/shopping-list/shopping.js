@@ -37,6 +37,7 @@ Page({
     priceList: [],
     onePhone: '', // 自取电话
     twoPhone: '', //外卖配送电话 
+    remarks:'', //留言
     logged: false,
     openId: '',
     isClose: false
@@ -327,6 +328,11 @@ Page({
       onePhone: e.detail.value
     })
   },
+  remarks(e){
+    this.setData({
+      remarks: e.detail.value
+    })
+  },
   // 获取外卖配送电话
   getTwoValue(e) {
     this.setData({
@@ -521,6 +527,7 @@ Page({
     order.createTime = new Date()
     order.userId = userId
     order.distributionPrice = this.data.distributionPrice
+    order.remarks = this.data.remarks
     if (this.data.titltTabName === '上门自取') {
       order.phone = this.data.onePhone
       order.time = this.data.time

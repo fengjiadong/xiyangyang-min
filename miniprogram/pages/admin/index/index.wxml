@@ -13,6 +13,13 @@
       <!-- <view class="margin-top-sm text-Abc"></view> -->
     </view>
   </view>
+  <view class="padding-sm" bindtap="goTypePage">
+    <view class="bg-gradual-red padding radius text-center shadow-blur">
+      <view class="text-lg">分类管理(待开放)</view>
+       <view class="text-lg"></view>
+      <!-- <view class="margin-top-sm text-Abc"></view> -->
+    </view>
+  </view>
   <view class="padding-sm" bindtap="goDataInfoPage">
     <view class="bg-gradual-orange padding radius text-center shadow-blur">
       <view class="text-lg">商家日报</view>

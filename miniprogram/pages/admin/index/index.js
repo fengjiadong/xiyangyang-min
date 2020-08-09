@@ -139,4 +139,10 @@ Page({
       url: '../setting/setting',
     })
   },
+  goSettingsPage(){
+    console.log('跳转到分类管理页')
+    wx.navigateTo({
+      url: '../type/type',
+    })
+  },
 })
