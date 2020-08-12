@@ -11,7 +11,7 @@
      <view class="padding-xl radius shadow-warp bg-white margin-top" wx:for="{{pendingList}}" data-id="{{item._id}}" data-info="{{item}}"  bindtap="orderInfo">
         	<view class="write-module-box">
               <view class="detail-img">
-               <image class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
+               <image mode='aspectFill' lazy-load='true' class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
               </view>
               <view class="detail-list-box">
                  <view class="detail-title">微信用户 </view>
@@ -37,7 +37,7 @@
      <view class="padding-xl radius shadow-warp bg-white margin-top" wx:for="{{processingList}}" data-id="{{item._id}}" data-info="{{item}}"  bindtap="orderInfo">
         	<view class="write-module-box">
               <view class="detail-img">
-               <image class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
+               <image mode='aspectFill' lazy-load='true' class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
               </view>
               <view class="detail-list-box">
                  <view class="detail-title">微信用户 </view>
@@ -63,7 +63,7 @@
      <view class="padding-xl radius shadow-warp bg-white margin-top" wx:for="{{processedList}}" data-id="{{item._id}}" data-info="{{item}}"  bindtap="orderInfo">
         	<view class="write-module-box">
               <view class="detail-img">
-               <image class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
+               <image mode='aspectFill' lazy-load='true' class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
               </view>
               <view class="detail-list-box">
                  <view class="detail-title">微信用户 </view>
@@ -90,7 +90,7 @@
      <view class="padding-xl radius shadow-warp bg-white margin-top" wx:for="{{takeOwnList}}" data-id="{{item._id}}" data-info="{{item}}"  bindtap="orderInfo">
         	<view class="write-module-box">
               <view class="detail-img">
-               <image class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
+               <image mode='aspectFill' lazy-load='true' class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
               </view>
               <view class="detail-list-box">
                  <view class="detail-title">微信用户 </view>
@@ -118,7 +118,7 @@
      <view class="padding-xl radius shadow-warp bg-white margin-top" wx:for="{{finishList}}" data-id="{{item._id}}" data-info="{{item}}"  bindtap="orderInfo">
         	<view class="write-module-box">
               <view class="detail-img">
-               <image class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
+               <image mode='aspectFill' lazy-load='true' class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
               </view>
               <view class="detail-list-box">
                  <view class="detail-title">微信用户 </view>
@@ -146,7 +146,7 @@
      <view class="padding-xl radius shadow-warp bg-white margin-top" wx:for="{{refundList}}" data-id="{{item._id}}" data-info="{{item}}"  bindtap="orderInfo">
         	<view class="write-module-box">
               <view class="detail-img">
-               <image class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
+               <image mode='aspectFill' lazy-load='true' class="cu-avatar xl radius shadow-warp round margin-left" src="{{item.avatarUrl}}" ></image>
               </view>
               <view class="detail-list-box">
                  <view class="detail-title">微信用户 </view>

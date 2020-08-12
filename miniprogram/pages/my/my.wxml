@@ -2,14 +2,14 @@
 
 
   <view  wx:if = "{{logged}}" class="center-image-box">
-    <image class="image-my" src="{{userInfo.avatarUrl}}" ></image>
+    <image mode='aspectFill' lazy-load='true' class="image-my" src="{{userInfo.avatarUrl}}" ></image>
   </view>
   <view wx:if = "{{logged}}" class="my-title">{{userInfo.nickName}}</view>
 
   <!-- <view  class="center-image-box" bindtap="goLogin"> -->
       
      <view wx:if = "{{!logged}}" class="center-image-box" bindtap="goLogin">
-       <image class="image-my" src="../../images/img/no-list.png" ></image>
+       <image mode='aspectFill' lazy-load='true' class="image-my" src="../../images/img/no-list.png" ></image>
      </view>
       <view wx:if = "{{!logged}}"  class="my-title" bindtap="goLogin">点击登录</view>
   <!-- </view> -->
@@ -20,24 +20,24 @@
 	<view class="center-module-box">
 		<view class="module-list-box" bindtap="goShopTaxi">
 			<!-- <view class="iconfont title-before-icon icon-V"></view> -->
-			<image class="taxi-image" src="../../images/tabbar/shop-active.jpg"></image>
+			<image mode='aspectFill' lazy-load='true' class="taxi-image" src="../../images/tabbar/shop-active.jpg"></image>
 			<view class="title-list">购物车</view>
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
 		<view  wx:if = "{{logged}}" class="module-list-box" bindtap="goHistoryList">
 			<!-- <view class="iconfont title-before-icon icon-59"></view> -->
-			<image class="taxi-image" src="../../images/img/time.png"></image>
+			<image mode='aspectFill' lazy-load='true' class="taxi-image" src="../../images/img/time.png"></image>
 			<view class="title-list">订单历史</view>
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
 		<view  wx:if = "{{logged}}" class="module-list-box" bindtap="goAddressList">
-			<image class="taxi-image" src="../../images/img/position.png"></image>
+			<image mode='aspectFill' lazy-load='true' class="taxi-image" src="../../images/img/position.png"></image>
 			<view class="title-list">收货地址</view>
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
 
     <view  wx:if = "{{isAdmin & !isDisable}}" class="module-list-box" bindtap="goAdmin">
-			<image class="taxi-image" src="../../images/img/position.png"></image>
+			<image mode='aspectFill' lazy-load='true' class="taxi-image" src="../../images/img/position.png"></image>
 			<view class="title-list">商户端</view>
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>

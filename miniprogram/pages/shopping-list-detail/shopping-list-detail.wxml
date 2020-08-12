@@ -4,7 +4,7 @@
 		<view class="store-name">青春遇上喜羊羊（镇平店）</view>
 		<view class="list-box">
 			<view class="list-every" wx:for="{{foodList}}" wx:key="key">
-				<image class="list-image" src="{{item.image}}"></image>
+				<image mode='aspectFill' lazy-load='true' class="list-image" src="{{item.image}}"></image>
 				<view class="right-box">
 					<view class="list-name">{{item.name}}</view>
 					<view class="text-before">规格：<text class="text-words">{{item.glassType.name}} {{item.iceType}} {{item.sugarType}}</text></view>

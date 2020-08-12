@@ -5,7 +5,7 @@
 	<view class="cu-list menu-avatar">
 		<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{list}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
 		
-			 <image class="cu-avatar round lg" src="{{item.image}}" ></image>
+			 <image mode='aspectFill' lazy-load='true' class="cu-avatar round lg" src="{{item.image}}" ></image>
 			<view class="content">
 				<view class="text-grey">{{item.name}}<text wx:if="{{item.invalid}}" class="cuIcon-infofill text-red">已失效</text></view>
 				<view class="text-gray text-sm">

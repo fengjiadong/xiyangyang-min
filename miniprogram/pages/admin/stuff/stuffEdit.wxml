@@ -12,7 +12,7 @@
 	<view class="cu-form-group">
 		<view class="grid col-4 grid-square flex-sub">
 			<view class="bg-img" wx:for="{{imgList}}" wx:key="{{imgIndex}}" bindtap="ViewImage" data-url="{{imgList[imgIndex]}}">
-				<image src='{{imgList[imgIndex]}}' mode='aspectFill'></image>
+				<image lazy-load='true' src='{{imgList[imgIndex]}}' mode='aspectFill'></image>
 				<view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
 					<text class="cuIcon-close"></text>
 				</view>

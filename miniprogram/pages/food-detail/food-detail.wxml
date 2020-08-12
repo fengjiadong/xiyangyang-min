@@ -1,7 +1,7 @@
 <!--miniprogram/pages/food-detail/food-detail.wxml-->
 <view class="food-detail-container">
 	<view class="food-image-box">
-		<image class="food-image" src="{{imageUrl}}"></image>
+		<image mode='aspectFill' lazy-load='true' class="food-image" src="{{imageUrl}}"></image>
 	</view>
 	<view class="detail-container">
 		<view class="title-box">

@@ -3,7 +3,7 @@
   
   <view class="top-text">登录后才能访问奥~</view>
   <view class="image-box">
-	     <image class="image-pic" src="../../images/img/no-list.png"></image>
+	     <image mode='aspectFill' lazy-load='true' class="image-pic" src="../../images/img/no-list.png"></image>
   </view>
   <button class="login-button" bindtap="goLogin" size="default">点击跳转登录页</button>
 </view>
@@ -13,7 +13,7 @@
 			<view wx:if="{{item.isActive === false}}" class="select-box" bindtap="isSelect" data-index="{{index}}"></view>
 			<view wx:else class="iconfont icon-duihao2 icon-active" bindtap="isSelect" data-index="{{index}}"></view>
 			<!-- <view  class="select-box select-box-active" bindtap="isSelect" data-index="{{index}}"></view> -->
-			<image class="shop-image" src="{{item.image}}"></image>
+			<image mode='aspectFill' lazy-load='true' class="shop-image" src="{{item.image}}"></image>
 			<view class="right-info-box">
 				<view class="top-box">
 					<view class="title-name">{{item.name}}</view>
@@ -104,6 +104,6 @@
 	</view>
 	<view class="close-button" bindtap="hidden">
 		<!-- <text class="text-tan">+</text> -->
-		<image class="close-image" src="../../images/img/close.png"></image>
+		<image mode='aspectFill' lazy-load='true' class="close-image" src="../../images/img/close.png"></image>
 	</view>
 </view>

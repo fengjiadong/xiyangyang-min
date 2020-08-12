@@ -5,7 +5,7 @@
 		<swiper class="swiper-bottom" indicator-dots="true" autoplay="true" circular="true">
 			<block wx:for="{{background}}" wx:key="*this">
 				<swiper-item>
-					<image class="swiper-item" src="{{item}}"></image>
+					<image mode='aspectFill' lazy-load='true' class="swiper-item" src="{{item}}"></image>
 				</swiper-item>
 			</block>
 		</swiper>
@@ -19,7 +19,7 @@
 		<view class="right-select-content">
 		<!-- 对应的商品，最多加载二十条 -->
 			<view class="food-list" wx:for="{{foodTypeList}}" wx:key="key" bindtap="goDetail" data-id="{{item._id}}" data-index="{{index}}" data-name="{{item.name}}">
-				<image class="food-image" src="{{item.image}}"></image>
+				<image mode='aspectFill' lazy-load='true' class="food-image" src="{{item.image}}"></image>
 				<view class="right-content">
 					<view class="food-name">{{item.name}}</view>
 					<view class="food-detail">{{item.detail}}</view>
@@ -70,6 +70,6 @@
 	</view>
 	<view class="close-button" bindtap="hiddenwindow">
 		<!-- <text class="text-tan">+</text> -->
-		<image class="close-image" src="../../images/img/close.png"></image>
+		<image mode='aspectFill' lazy-load='true' class="close-image" src="../../images/img/close.png"></image>
 	</view>
 </view>
