@@ -1,32 +1,51 @@
-// miniprogram/pages/admin/material/materialDetail.js
+// miniprogram/pages/admin/typeManager/typeDetail.js
+const db = wx.cloud.database()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id:'',
-    name:'',
-    price:0,
-    invalid:false,
-    isDelete:false
+    sorts:[],
+    index: 0,
+    info:{
+      name:'',
+      invalid:false,
+      isDelete:false
+    }
   },
-
+  PickerChange(e) {
+    console.log(e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     if(options.id){
-      this.setData({
-        id:options.id,
-        name:options.name,
-        price:options.price,
-        invalid:options.invalid==='true'
+      wx.showLoading({
+        title: '正在加载',
+      })
+      
+      db.collection('type').doc(options.id).get({
+        success: res=>{
+          console.log(res)
+          this.setData({
+            info:res.data
+          })
+          wx.hideLoading()
+        }
       })
     }
   },
-
+  updateValue(e) {
+    let name = e.currentTarget.dataset.name;
+    let nameMap = {}
+    nameMap[name] = e.detail && e.detail.value
+    this.setData(nameMap)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -38,7 +57,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**
@@ -47,7 +65,13 @@ Page({
   onHide: function () {
 
   },
-
+  invalid(e){
+    this.data.info.invalid = !e.detail.value
+    this.setData({
+      info: this.data.info
+    })
+    console.log(this.data.info.invalid)
+  },
   /**
    * 生命周期函数--监听页面卸载
    */
@@ -76,12 +100,13 @@ Page({
 
   },
   add(){
+    console.log(this.data.info)
     wx.showLoading({
       title: '正在添加..',
     })
     wx.cloud.callFunction({
-      name: 'addMaterial',
-      data: this.data,
+      name: 'addType',
+      data: this.data.info,
       success: res => {
         console.log(res)
         wx.hideLoading({
@@ -106,9 +131,10 @@ Page({
     wx.showLoading({
       title: '加载中..',
     })
+    console.log(this.data.info)
     wx.cloud.callFunction({
-      name: 'upMaterial',
-      data: this.data,
+      name: 'upType',
+      data: this.data.info,
       success: res => {
         console.log(res)
         if(res.result.result.stats.updated > 0){
@@ -126,21 +152,10 @@ Page({
       }
     })
   },
-  updateValue(e) {
-    let name = e.currentTarget.dataset.name;
-    let nameMap = {}
-    nameMap[name] = e.detail && e.detail.value
-    this.setData(nameMap)
-  },
-  invalid(e){
-    this.setData({
-      invalid: !e.detail.value
-    })
-    console.log(this.data.invalid)
-  },
   delete(){
+    this.data.info.isDelete = true
     this.setData({
-      isDelete: true
+      info: this.data.info
     })
     this.save();
   }

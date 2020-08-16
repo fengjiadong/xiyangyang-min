@@ -13,7 +13,7 @@
       <!-- <view class="margin-top-sm text-Abc"></view> -->
     </view>
   </view>
-  <view class="padding-sm" bindtap="goTypePage">
+  <view class="padding-sm" bindtap="goTypeManagerPage">
     <view class="bg-gradual-red padding radius text-center shadow-blur">
       <view class="text-lg">分类管理(待开放)</view>
        <view class="text-lg"></view>

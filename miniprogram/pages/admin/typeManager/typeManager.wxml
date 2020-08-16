@@ -1,0 +1,21 @@
+<scroll-view scroll-y="true" class="page show">
+<view class="cu-list menu ">
+	<view class="cu-item arrow " data-index="{{index}}" wx:for="{{types}}" bindtap="upType">
+		<view class="content" >
+			<text class="cuIcon-btn text-green"></text>
+			<view wx:if="{{!item.invalid}}" class="cu-tag bg-blue round">有效</view>
+			<view wx:else class="cu-tag bg-red round">无效</view>
+			<text class="text-grey">  {{item.name}}   数量 {{item.count?item.count:0}}个 总价格 ￥{{item.sum?item.sum:0}}
+			</text>
+			
+		</view>
+	</view>
+</view>
+<view class="padding bg-white">
+  <view class="cu-tag radius">共{{types.length}}个商品分类。</view>
+	 <view class="padding-xl">
+    <button class="btn cu-btn bg-blue lg shadow" bindtap="addType">添加</button>
+    </view>
+</view>
+
+</scroll-view>

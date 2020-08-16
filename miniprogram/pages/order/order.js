@@ -355,7 +355,10 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
-    db.collection('type')
+    db.collection('type').where({
+      isDelete:false,
+      invalid: false
+    })
     .orderBy('sort', 'ase').get({
       success: res => {
         this.setData({
