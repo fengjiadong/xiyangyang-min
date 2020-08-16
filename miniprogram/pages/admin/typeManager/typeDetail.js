@@ -11,7 +11,8 @@ Page({
     info:{
       name:'',
       invalid:false,
-      isDelete:false
+      isDelete:false,
+      sort:0
     }
   },
   PickerChange(e) {
@@ -38,6 +39,8 @@ Page({
           wx.hideLoading()
         }
       })
+    } else {
+      this.getCount()
     }
   },
   updateValue(e) {
@@ -57,6 +60,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    
   },
 
   /**
@@ -64,6 +68,14 @@ Page({
    */
   onHide: function () {
 
+  },
+  getCount(){
+  db.collection("type").count({
+     success : res =>{
+       console.log(res)
+       this.data.index = res.total;
+     }
+   })
   },
   invalid(e){
     this.data.info.invalid = !e.detail.value
@@ -100,6 +112,7 @@ Page({
 
   },
   add(){
+    this.data.info.sort = this.data.index;
     console.log(this.data.info)
     wx.showLoading({
       title: '正在添加..',

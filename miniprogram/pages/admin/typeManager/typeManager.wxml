@@ -1,21 +1,33 @@
-<scroll-view scroll-y="true" class="page show">
-<view class="cu-list menu ">
-	<view class="cu-item arrow " data-index="{{index}}" wx:for="{{types}}" bindtap="upType">
-		<view class="content" >
-			<text class="cuIcon-btn text-green"></text>
-			<view wx:if="{{!item.invalid}}" class="cu-tag bg-blue round">有效</view>
-			<view wx:else class="cu-tag bg-red round">无效</view>
-			<text class="text-grey">  {{item.name}}   数量 {{item.count?item.count:0}}个 总价格 ￥{{item.sum?item.sum:0}}
-			</text>
-			
+
+<scroll-view scroll-y class="page show">
+  	<view class="bg-white solid-bottom text-xs padding">
+  		<text class="text-gray">左滑编辑或移动分类信息</text>
+  	</view>
+	<view class="cu-list menu-avatar">
+		<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{types}}" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+		
+			<view class="content">
+				<view class="text-grey">{{item.name}}<text wx:if="{{item.invalid}}" class="cuIcon-infofill text-red">已失效</text></view>
+				<view class="text-gray text-sm">
+					商品数量:{{item.count?item.count:0}}
+					商品合计价格:￥{{item.sum?item.sum:0}}
+          </view>
+			</view>
+			<view class="action">
+				<view class="text-grey text-xs">{{item.role}}</view>
+				<!-- <view class="cu-tag round bg-grey sm">5</view> -->
+			</view>
+			<view class="move">
+				<view class="bg-blue" bindtap="upType" data-index="{{index}}">编辑</view>
+				<view class="bg-green" bindtap="move" data-type="up" data-index="{{index}}" >上移</view>
+				<view class="bg-cyan" bindtap="move" data-type="down" data-index="{{index}}"  >下移</view>
+			</view>
 		</view>
 	</view>
-</view>
-<view class="padding bg-white">
+	<view class="padding bg-white">
   <view class="cu-tag radius">共{{types.length}}个商品分类。</view>
 	 <view class="padding-xl">
     <button class="btn cu-btn bg-blue lg shadow" bindtap="addType">添加</button>
     </view>
 </view>
-
 </scroll-view>

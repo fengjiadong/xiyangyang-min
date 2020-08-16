@@ -55,7 +55,7 @@ Page({
     // db
   },
   isDisable(){
-    if(new Date() < new Date('2020-08-17 00:00:00')){
+    if(new Date() < new Date('2020-08-22 00:00:00')){
       db.collection("setting").get({
         success: res=>{
           if(res.data[0].Disable){

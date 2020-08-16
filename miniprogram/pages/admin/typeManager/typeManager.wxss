@@ -1,3 +1,7 @@
 .btn:not([size='mini']) {
   width: 100%;
 }
+
+.cu-list.menu-avatar>.cu-item .content {
+  left: 30rpx;
+}

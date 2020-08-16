@@ -16,7 +16,7 @@ exports.main = async (event, context) => {
         createTime: new Date(),
         updateTime: new Date(),
         isDelete:false,
-        sort:0
+        sort:event.sort
       }
     })
   return {
