@@ -9,6 +9,8 @@ Page({
     close:false,
     distributionPrice:0,
     price:0,
+    reduction: 0,
+    full: 0
   },
 
   /**
@@ -21,7 +23,9 @@ Page({
         this.setData({
           close:res.data.close,
           price: res.data.price,
-          distributionPrice:res.data.distributionPrice
+          distributionPrice:res.data.distributionPrice,
+          full:res.data.full,
+          reduction:res.data.reduction
         })
       }
     })
@@ -33,6 +37,19 @@ Page({
     })
   },
   save(){
+    if(!this.data.full){
+        this.data.full = 0;
+    }
+    if(!this.data.reduction){
+      this.data.reduction = 0;
+    }
+    if(parseFloat(this.data.full) <= parseFloat(this.data.reduction)){
+   wx.showToast({
+     title: '满减金额冲突',
+     icon:'none'
+   })
+      return;
+    }
     wx.showLoading({
       title: '正在保存设置',
     })
@@ -41,7 +58,9 @@ Page({
       data: {
         close: this.data.close,
         price:  parseFloat(this.data.price),
-        distributionPrice: parseFloat(this.data.distributionPrice)
+        distributionPrice: parseFloat(this.data.distributionPrice),
+        full:parseFloat(this.data.full),
+        reduction:parseFloat(this.data.reduction)
       },
       success(res) {
         if(res.result.result.stats.updated == 1){

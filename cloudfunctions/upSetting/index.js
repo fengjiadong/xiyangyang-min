@@ -13,6 +13,8 @@ exports.main = async (event, context) => {
         close:event.close,
         price: parseFloat(event.price),
         distributionPrice: parseFloat(event.distributionPrice),
+        full: parseFloat(event.full),
+        reduction: parseFloat(event.reduction),
         updateTime: new Date()
       }
     })

@@ -67,7 +67,7 @@ Page({
       })
     }else{
       this.setData({
-        isDisable:true
+        isDisable:false
       })
     }
     

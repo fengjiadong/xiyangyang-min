@@ -10,6 +10,12 @@
 		<view class="title">配送费</view>
 		<input placeholder="请输入配送金额" type="digit" value="{{distributionPrice}}" bindinput="updateValue" data-name='distributionPrice'></input>
 	</view>
+	 <view class="cu-form-group ">
+		<view class="title">满</view>
+			<input placeholder="请输入满额" type="digit" value="{{full}}" bindinput="updateValue" data-name='full'></input>
+		<view class="title">减</view>
+		<input placeholder="请输入减额" type="digit" value="{{reduction}}" bindinput="updateValue" data-name='reduction'></input>
+	</view>
 	<view class="padding-xl">
 	<button  class="btn bg-blue lg" bindtap="save">保存</button>
   </view>
