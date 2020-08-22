@@ -84,7 +84,7 @@
 
 .right-content {
   flex: 1;
-  padding-left: 36rpx;
+  padding-left: 18rpx;
 }
 
 .food-name {
@@ -97,7 +97,7 @@
 }
 
 .food-detail {
-  min-height: 50px;
+  min-height: 80rpx;
   padding-bottom: 4px;
   font-size: 24rpx;
   color: #7b7b7b;
@@ -122,12 +122,26 @@
   font-size: 22rpx;
   color: #7B7B7B;
 }
-
+.price-none {
+  font-size: 22rpx;
+  color: #7b7b7b;
+  text-decoration: line-through;
+}
+.price-logo {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 20rpx;
+}
+.zhe-kou {
+  padding-left: 4rpx;
+  font-size: 24rpx;
+  color: #FF0000;
+}
 .size-button {
   position: relative;
   top: 0;
   float: right;
-  width: 120rpx;
+  width: 100rpx;
   height: 36rpx;
   line-height: 36rpx;
   text-align: center;

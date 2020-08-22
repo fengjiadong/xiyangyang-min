@@ -25,7 +25,10 @@
 					<view class="food-detail">{{item.detail}}</view>
 					<view class="food-price">¥
 						<text class="price-number">{{item.price?item.price:item.priceTow?item.priceTow:item.priceThree}}</text>
-						<text class="price-after">/{{item.price?'常规':item.priceTow?'大杯':'超大杯'}}</text>
+						<!-- <text class="price-after">/{{item.price?'常规':item.priceTow?'大杯':'超大杯'}}</text> -->
+						<text class="price-none">¥{{linePrice}}</text>
+						<image class="price-logo" src="/images/img/price-logo.png"></image>
+						<text class="zhe-kou">{{zheKou}}折</text>
 						<view  class="size-button" catchtap="sizeContent" data-index="{{index}}" data-name="{{item.name}}">规格</view>
 					</view>
 				</view>
