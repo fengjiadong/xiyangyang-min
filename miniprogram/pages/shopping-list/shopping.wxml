@@ -1,11 +1,11 @@
 <!--miniprogram/pages/shopping-list/shopping.wxml-->
 <view wx:if="{{!logged}}">
-  
-  <view class="top-text">登录后才能访问奥~</view>
-  <view class="image-box">
-	     <image mode='aspectFill' lazy-load='true' class="image-pic" src="../../images/img/no-list.png"></image>
-  </view>
-  <button class="login-button" bindtap="goLogin" size="default">点击跳转登录页</button>
+
+	<view class="top-text">登录后才能访问奥~</view>
+	<view class="image-box">
+		<image mode='aspectFill' lazy-load='true' class="image-pic" src="../../images/img/no-list.png"></image>
+	</view>
+	<button class="login-button" bindtap="goLogin" size="default">点击跳转登录页</button>
 </view>
 <view wx:else class="window-no-content {{sizeContentWindow===false?'window-have-content':''}}">
 	<view class="shop-container">
@@ -19,14 +19,14 @@
 					<view class="title-name">{{item.name}}</view>
 					<view class="delete-button" bindtap="deleteFood" data-index="{{index}}">删除</view>
 				</view>
-			 	<view class="center-box" wx:if="{{item.selectedType !== '羊羊加料'}}">
-				 {{item.iceType}},{{item.sugarType}},{{item.glassType.name}}
+				<view class="center-box" wx:if="{{item.selectedType !== '羊羊加料'}}">
+					{{item.iceType}},{{item.sugarType}},{{item.glassType.name}}
 				</view>
 				<view class="center-box" wx:if="{{item.selectedType === '羊羊加料'}}">
-				{{item.selectedType}}
+					{{item.selectedType}}
 				</view>
 				<view class="center-box">
-				 	<p wx:for="{{item.specifications}}"> {{item.name}}</p>
+					<p wx:for="{{item.specifications}}"> {{item.name}}</p>
 				</view>
 				<view class="bottom-box">
 					<view class="price-box">
@@ -44,17 +44,28 @@
 		</view>
 	</view>
 	<view class="bottom-price-box">
-		<view wx:if="{{isActive ===false}}" class="all-select-box " bindtap="isAllSelect"></view>
-		<view wx:else class="iconfont icon-duihao2 icon-all-active" bindtap="isAllSelect"></view>
-		<view class="all-select-text">全选</view>
-		<view class="second-all-box">
-			<view class="have-choose-food">已选择{{priceList.length}}份商品</view>
-			<view class="second-box">
-				<view class="total-text">合计：</view>
-				<view class="total-price-box">¥ {{totalPrice}}</view>
-			</view>
+		<view class="pei-song">
+			<view class="song-title">配送费</view>
+			<view class="song-price">￥{{peiSongPrice}}</view>
 		</view>
-		<view class="buy-button" bindtap="buy">购买</view>
+		<view class="pei-song">
+			<view class="song-title">满减优惠</view>
+			<view class="song-price minus">-￥{{minusPrice}}</view>
+		</view>
+		<view class="three-price-box">
+			<view wx:if="{{isActive ===false}}" class="all-select-box " bindtap="isAllSelect"></view>
+			<view wx:else class="iconfont icon-duihao2 icon-all-active" bindtap="isAllSelect"></view>
+			<view class="all-select-text">全选</view>
+			<view class="second-all-box">
+				<view class="have-choose-food">已选择{{priceList.length}}份商品</view>
+				<view class="second-box">
+					<view class="total-text">合计：</view>
+					<view class="total-price-box">¥ {{totalPrice}}</view>
+				</view>
+			</view>
+			<view class="buy-button" bindtap="buy">购买</view>
+		</view>
+
 	</view>
 </view>
 
@@ -85,10 +96,10 @@
 			</view>
 		</view>
 		<view wx:if="{{titltTabName== '外卖配送'}}" class="padding-container">
-		 		<text class="text-red ">注：另收配送费{{distributionPrice}}元哦~</text>
+			<text class="text-red ">注：另收配送费{{distributionPrice}}元哦~</text>
 			<view class="write-box">
 				<view class="write-title">收获地址：</view>
-				<picker class="time-input" value="{{address}}"  range-key="address"  range="{{addressArray}}" bindchange="addressChange">
+				<picker class="time-input" value="{{address}}" range-key="address" range="{{addressArray}}" bindchange="addressChange">
 					<view class="picker">
 						{{addressArray[address].address}}
 					</view>
@@ -100,7 +111,7 @@
 			</view>
 		</view>
 		<!-- <view class="immediately-buy" catchtap="immediateBuy">立即支付</view> -->
-    <view class="immediately-buy" bindtap="immediateBuy">立即支付</view>
+		<view class="immediately-buy" bindtap="immediateBuy">立即支付</view>
 	</view>
 	<view class="close-button" bindtap="hidden">
 		<!-- <text class="text-tan">+</text> -->

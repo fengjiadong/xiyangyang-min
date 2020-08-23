@@ -128,12 +128,16 @@
 .bottom-price-box {
   position: fixed;
   bottom: 0;
-  display: flex;
-  align-items: center;
+
   /* width: calc(100% - 48px); */
   width: 100%;
   padding: 20px 24px;
   background-color: #fff;
+}
+
+.three-price-box {
+  display: flex;
+  align-items: center;
 }
 
 .all-select-text {
@@ -285,6 +289,7 @@
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.3);
 }
+
 .close-image {
   width: 18px;
   height: 18px;
@@ -299,15 +304,18 @@
   font-size: 28rpx;
   color: #1F0606;
 }
+
 .image-box {
   width: 182px;
   height: 208px;
   margin: 0 auto 50px;
 }
+
 .image-pic {
   width: 100%;
   height: 100%;
 }
+
 .login-button {
   width: 90%;
   height: 44px;
@@ -320,7 +328,21 @@
   background-color: #04ADEF;
 
 }
+
 .center-box {
   font-size: 28rpx;
   color: #999;
+}
+
+.pei-song {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+  color: #424242;
+}
+
+.minus {
+  color: #FF0000;
 }

@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    peiSongPrice: 3, // 配送费
+    minusPrice: 2,// 满减
     shopList: [{
       // id: '123',
       // image: '/images/img/taxi-one.png',
