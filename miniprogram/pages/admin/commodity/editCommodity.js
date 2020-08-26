@@ -18,7 +18,8 @@ Page({
       detail:'',
       priceTow:0,
       priceThree:0,
-      isDelete:false
+      isDelete:false,
+      discount:null
     },
     types:[],
     index:0,
@@ -281,6 +282,7 @@ Page({
           isDelete:res.data[0].isDelete,
           priceTow:parseFloat(res.data[0].priceTow),
           priceThree:parseFloat(res.data[0].priceThree),
+          discount:parseFloat(res.data[0].discount),
           name:res.data[0].name,
           image:res.data[0].image,
           id:res.data[0]._id
@@ -342,6 +344,11 @@ Page({
       this.data.info.priceThree = parseFloat(this.data.info.priceThree);
     }else{
       this.data.info.priceThree = 0;
+    }
+    if(info.discount){
+      this.data.info.discount = parseFloat(this.data.info.discount);
+    }else{
+      this.data.info.discount = 0;
     }
     this.setData({
       info:this.data.info

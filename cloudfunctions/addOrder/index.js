@@ -20,6 +20,7 @@ exports.main = async (event, context) => {
         orderNum: event.orderNum,
         commoditys: event.commoditys,
         address: event.address,
+        reduction: event.reduction, // 满减的金额
         createTime: new Date(),
         updateTime: new Date(),
         time: event.time,

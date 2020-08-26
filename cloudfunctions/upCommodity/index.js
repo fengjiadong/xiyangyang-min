@@ -15,6 +15,7 @@ exports.main = async (event, context) => {
         price: event.price,
         priceTow: event.priceTow,
         priceThree: event.priceThree,
+        discount: event.discount,
         detail: event.detail,
         invalid: event.invalid,
         isDelete: event.isDelete,

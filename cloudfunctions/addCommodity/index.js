@@ -22,6 +22,7 @@ exports.main = async (event, context) => {
         isDelete: event.isDelete,
         name: event.name,
         image: event.image,
+        discount: event.discount,
         createTime: new Date(),
         updateTime: new Date()
       }

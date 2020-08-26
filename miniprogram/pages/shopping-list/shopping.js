@@ -6,8 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    settings:{},
     peiSongPrice: 3, // 配送费
-    minusPrice: 2,// 满减
+    reduction: 0, // 减去的金额
     shopList: [{
       // id: '123',
       // image: '/images/img/taxi-one.png',
@@ -39,7 +40,7 @@ Page({
     priceList: [],
     onePhone: '', // 自取电话
     twoPhone: '', //外卖配送电话 
-    remarks:'', //留言
+    remarks: '', //留言
     logged: false,
     openId: '',
     isClose: false
@@ -67,52 +68,38 @@ Page({
 
   // 是否选中
   isSelect(e) {
-    console.log(e);
     const index = e.currentTarget.dataset.index;
     let list = this.data.shopList;
     list[index].isActive = !list[index].isActive;
+    console.log(list[index])
     this.setData({
       shopList: list
     })
-    // 选中
-    if (list[index].isActive === true) {
-      let total = 0;
-      this.data.shopList.forEach(ele => {
-        if (ele.isActive) {
-          total = total + ele.totalPrice;
-        }
-      })
-      console.log(total);
-      this.setData({
-        totalPrice: this.changeTwoDecimal_f(total)
-      })
-    } else if (list[index].isActive === false) {
-      // 取消选中
-      let total = 0;
 
-      this.data.shopList.forEach(ele => {
-        if (ele.isActive) {
-          total = total + ele.totalPrice;
-        }
-      })
-      this.setData({
-        totalPrice: this.changeTwoDecimal_f(total),
-      })
-    }
+    let total = 0;
+    this.data.shopList.forEach(ele => {
+      if (ele.isActive) {
+        total = total + ele.totalPrice;
+      }
+    })
+
+    this.setData({
+      totalPrice: this.changeTwoDecimal_f(total),
+    })
     let isActive = true;
-    let priceList =[]
-    for(let i=0;i< this.data.shopList.length;i++){
-      if(this.data.shopList[i].isActive){
+    let priceList = []
+    for (let i = 0; i < this.data.shopList.length; i++) {
+      if (this.data.shopList[i].isActive) {
         priceList.push(this.data.shopList[i])
-      }else{
+      } else {
         isActive = false
       }
     }
     this.setData({
-      priceList:priceList,
-      isActive:isActive
+      priceList: priceList,
+      isActive: isActive
     })
-
+    this.fullReduction()
   },
   // 全选
   isAllSelect() {
@@ -188,6 +175,16 @@ Page({
               that.setData({
                 shopList: list,
               })
+              let total = 0;
+              that.data.shopList.forEach(ele => {
+                if (ele.isActive) {
+                  total = total + ele.totalPrice;
+                }
+              })
+          
+              that.setData({
+                totalPrice: that.changeTwoDecimal_f(total),
+              })
             }
           })
 
@@ -220,6 +217,7 @@ Page({
       shopList: list
     })
     this.upShopping(list[index]);
+    this.fullReduction()
   },
   // 数量增加
   addNumber(e) {
@@ -240,6 +238,7 @@ Page({
       shopList: list
     })
     this.upShopping(list[index]);
+    this.fullReduction()
   },
   //购买
   buy() {
@@ -330,7 +329,7 @@ Page({
       onePhone: e.detail.value
     })
   },
-  remarks(e){
+  remarks(e) {
     this.setData({
       remarks: e.detail.value
     })
@@ -529,6 +528,7 @@ Page({
     order.createTime = new Date()
     order.userId = userId
     order.distributionPrice = this.data.distributionPrice
+    order.reduction = this.data.reduction // 满减的金额
     order.remarks = this.data.remarks
     if (this.data.titltTabName === '上门自取') {
       order.phone = this.data.onePhone
@@ -576,6 +576,14 @@ Page({
     this.setData({
       openId: openId,
       logged: logged
+    })
+
+    db.collection("setting").get({
+      success: res=>{
+          this.setData({
+            settings:res.data[0]
+          })
+      }
     })
 
   },
@@ -670,6 +678,34 @@ Page({
         success: (res) => { },
       })
     }, 500)
+  },
+  // 计算满减
+  fullReduction(){
+    console.log(this.data.settings)
+
+    let total = 0;
+    let totalFull = 0;
+    this.data.shopList.forEach(ele => {
+      if (ele.isActive) {
+        total = total + ele.totalPrice;
+        if (!ele.discount || ele.discount == 0) {
+          totalFull = totalFull+ ele.totalPrice;
+        }
+      }
+    })
+    if(totalFull >= this.data.settings.full){
+      total = total - this.data.settings.reduction;
+      this.setData({
+        totalPrice: this.changeTwoDecimal_f(total),
+        reduction:  this.data.settings.reduction
+      })
+    }else{
+      this.setData({
+        totalPrice: this.changeTwoDecimal_f(total),
+        reduction:  0
+      })
+    }
+   
   },
   uuid(len, radix) {
     var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');

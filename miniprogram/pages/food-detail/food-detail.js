@@ -11,31 +11,32 @@ Page({
     price: 0,
     detail: '',
     specifications: [],
+    discount: 0,
     specificationsPrice: 0,
     glassList: [{
-        name: '常规',
-        price: 0
-      },
-      {
-        name: '大份',
-        price: 20
-      }
+      name: '常规',
+      price: 0
+    },
+    {
+      name: '大份',
+      price: 20
+    }
     ],
     sugarList: [{ // 糖度选择
-        name: '正常糖'
-      },
-      {
-        name: '七分糖'
-      },
-      {
-        name: '五分糖'
-      },
-      {
-        name: '三分糖'
-      },
-      {
-        name: '不加糖'
-      },
+      name: '正常糖'
+    },
+    {
+      name: '七分糖'
+    },
+    {
+      name: '五分糖'
+    },
+    {
+      name: '三分糖'
+    },
+    {
+      name: '不加糖'
+    },
     ],
     iceList: [ // 冰类型选择
       {
@@ -94,9 +95,9 @@ Page({
       })
     } else {
       let noselectList = that.data.foodType;
-      for(let i=0; i<=noselectList.length;i++) {
-        if(noselectList[i] == that.data.specifications[index].name) {
-          noselectList.splice(i,1)
+      for (let i = 0; i <= noselectList.length; i++) {
+        if (noselectList[i] == that.data.specifications[index].name) {
+          noselectList.splice(i, 1)
         }
       }
       console.log(noselectList)
@@ -145,7 +146,7 @@ Page({
         specifications.push(list[i]);
       }
     }
-   
+
     let shopping = {}
     shopping.commodityId = this.data.id;
     shopping.name = this.data.name;
@@ -157,6 +158,7 @@ Page({
     shopping.sugarType = this.data.sugarType;
     shopping.price = this.data.price;
     shopping.specificationsPrice = this.data.specificationsPrice;
+    shopping.discount = this.data.discount;
     console.log(shopping)
     wx.cloud.callFunction({
       name: "addShopping",
@@ -192,7 +194,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
@@ -234,39 +236,42 @@ Page({
       _id: id
     }).get({
       success: res => {
-        this.setData({
-          id: id,
-          imageUrl: res.data[0].image,
-          name: res.data[0].name,
-          detail: res.data[0].detail,
-          price: res.data[0].price?res.data[0].price:res.data[0].priceTow?res.data[0].priceTow:res.data[0].priceThree
-        })
-
+       
+        let discount = res.data[0].discount;
         let glassList = [];
         if (res.data[0].price && res.data[0].price > 0) {
           let price = {
             name: '常规',
-            price: res.data[0].price
+            price: discount && discount > 0 ? this.changeTwoDecimal_f(res.data[0].price * (discount / 10)) : res.data[0].price
           }
           glassList.push(price)
         }
         if (res.data[0].priceTow && res.data[0].priceTow > 0) {
           let typeTow = {
             name: '大份',
-            price: res.data[0].priceTow
+            price: discount && discount > 0 ? this.changeTwoDecimal_f(res.data[0].priceTow * (discount / 10)) : res.data[0].priceTow
           }
           glassList.push(typeTow)
         }
         if (res.data[0].priceThree && res.data[0].priceThree > 0) {
           let typeThree = {
             name: '超大份',
-            price: res.data[0].priceThree
+            price: discount && discount > 0 ? this.changeTwoDecimal_f(res.data[0].priceThree * (discount / 10)) : res.data[0].priceThree
           }
           glassList.push(typeThree)
         }
         console.log(glassList)
         this.setData({
           glassList: glassList
+        })
+       let price =  res.data[0].price && res.data[0].price > 0 ? res.data[0].price : res.data[0].priceTow && res.data[0].priceTow > 0 ? res.data[0].priceTow : res.data[0].priceThree
+        this.setData({
+          id: id,
+          imageUrl: res.data[0].image,
+          name: res.data[0].name,
+          detail: res.data[0].detail,
+          price:discount && discount > 0 ?this.changeTwoDecimal_f(price * (discount / 10)):price,
+          discount: res.data[0].discount
         })
       }
     })
@@ -309,24 +314,21 @@ Page({
       url: '../login/login',
     })
   },
-  changeTwoDecimal_f(x) { 
-    　　var f_x = parseFloat(x); 
-      　　if (isNaN(f_x)) 
-      　　{ 
-      　　　　return 0; 
-      　　} 
-      　　var f_x = Math.round(x*100)/100; 
-      　　var s_x = f_x.toString(); 
-      　　var pos_decimal = s_x.indexOf('.'); 
-      　　if (pos_decimal < 0) 
-      　　{ 
-      　　　　pos_decimal = s_x.length; 
-      　　s_x += '.'; 
-      　　} 
-      　　while (s_x.length <= pos_decimal + 2) 
-      　　{ 
-      　　　　s_x += '0'; 
-      　　} 
-    　　return parseFloat(s_x); 
-      }
+  changeTwoDecimal_f(x) {
+    var f_x = parseFloat(x);
+    if (isNaN(f_x)) {
+      return 0;
+    }
+    var f_x = Math.round(x * 100) / 100;
+    var s_x = f_x.toString();
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+      pos_decimal = s_x.length;
+      s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+      s_x += '0';
+    }
+    return parseFloat(s_x);
+  }
 })

@@ -279,13 +279,14 @@ Page({
     shopping.price = this.data.price;
     shopping.specificationsPrice = this.data.specificationsPrice;
     shopping.selectedType = this.data.selectedType.name
+    shopping.discount = this.data.selectedCommoity.discount;
     console.log(shopping)
     wx.cloud.callFunction({
       name: "addShopping",
       data: shopping,
       success(res) {
         wx.hideLoading()
-        //存入购物车
+        //跳转购物车
         wx.switchTab({
           url: '../shopping-list/shopping',
         })
@@ -387,6 +388,16 @@ Page({
       invalid:false
     }).get({
       success: res => {
+        for(let i = 0;i < res.data.length ;i++){
+          let discount = res.data[i].discount;
+          if(discount && discount > 0){
+            res.data[i].originalPrice = res.data[i].price &&res.data[i].price > 0? res.data[i].price:res.data[i].priceTow &&res.data[i].priceTow>0 ? res.data[i].priceThree :0;
+            res.data[i].price = res.data[i].price && res.data[i].price > 0 ? this.changeTwoDecimal_f(res.data[i].price * (discount/10)):0;
+            
+            res.data[i].priceTow = res.data[i].priceTow && res.data[i].priceThrpriceTowee > 0 ?this.changeTwoDecimal_f(res.data[i].priceTow * (discount/10)):0;
+            res.data[i].priceThree = res.data[i].priceThree && res.data[i].priceThree > 0 ?this.changeTwoDecimal_f(res.data[i].priceThree * (discount/10)):0;
+          }
+        }
         this.setData({
           foodTypeList: res.data
         })

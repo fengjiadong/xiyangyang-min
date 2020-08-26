@@ -20,6 +20,7 @@ exports.main = async (event, context) => {
         isActive: false,
         specifications: event.specifications,
         image: event.image,
+        discount: event.discount,
         iceType: event.iceType,
         glassType: event.glassType,
         sugarType: event.sugarType,
