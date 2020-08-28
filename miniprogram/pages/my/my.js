@@ -13,8 +13,8 @@ Page({
     },
     logged: false,
     openId: "",
-    isAdmin:false,
-    isDisable:false
+    isAdmin: false,
+    isDisable: false
   },
   // 调转至购物车
   goShopTaxi() {
@@ -35,11 +35,16 @@ Page({
     })
   },
 
-
+  // 商家电话
+  goPhone() {
+    wx.makePhoneCall({
+      phoneNumber: '15083377719' //商家电话号码
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     let info = wx.getStorageSync('userInfo');
     let logged = false;
     if (info) {
@@ -51,38 +56,38 @@ Page({
       openId: openId,
       logged: logged
     })
-  
+
     // db
   },
-  isDisable(){
-    if(new Date() < new Date('2020-08-22 00:00:00')){
+  isDisable() {
+    if (new Date() < new Date('2020-08-22 00:00:00')) {
       db.collection("setting").get({
-        success: res=>{
-          if(res.data[0].Disable){
+        success: res => {
+          if (res.data[0].Disable) {
             this.setData({
-              isDisable:true
+              isDisable: true
             })
           }
         }
       })
-    }else{
+    } else {
       this.setData({
-        isDisable:false
+        isDisable: false
       })
     }
-    
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.isDisable();
     let openId = wx.getStorageSync('openId');
 
@@ -98,17 +103,17 @@ Page({
     })
     let userId = wx.getStorageSync('userId');
     db.collection('admin').where({
-      userId:userId,
-      invalid:false,
-      isDelete:false
+      userId: userId,
+      invalid: false,
+      isDelete: false
     }).get({
       success: res => {
         console.log(res)
-        if(res.data.length > 0){
+        if (res.data.length > 0) {
           this.setData({
-            isAdmin:true
+            isAdmin: true
           })
-          
+
           wx.setStorageSync('admin', res.data[0])
         }
       }
@@ -118,35 +123,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
   goAdmin() {

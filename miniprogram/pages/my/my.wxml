@@ -35,6 +35,11 @@
 			<view class="title-list">收货地址</view>
 			<view class="iconfont right-icon icon-backward"></view>
 		</view>
+		<view  wx:if = "{{logged}}" class="module-list-box" bindtap="goPhone">
+			<image mode='aspectFill' lazy-load='true' class="taxi-image" src="../../images/img/phone.png"></image>
+			<view class="title-list">商家电话</view>
+			<view class="iconfont right-icon icon-backward"></view>
+		</view>
 
     <view  wx:if = "{{isAdmin & !isDisable}}" class="module-list-box" bindtap="goAdmin">
 			<image mode='aspectFill' lazy-load='true' class="taxi-image" src="../../images/img/position.png"></image>
