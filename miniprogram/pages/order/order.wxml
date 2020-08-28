@@ -11,6 +11,13 @@
 		</swiper>
 		<!-- <view class="order-text">点单</view> -->
 	</view>
+	<!-- 满减提示 -->
+	<view class="hint-tip-box">
+	  <view >本店满减提示：</view>
+    <view class="price-hint">25减2</view>
+    <view class="price-hint">35减4</view>
+    <view class="price-hint">50减6</view>
+	</view>
 	<view class="order-list-container">
 		<view class="left-select-list">
 		<!-- 类型 -->

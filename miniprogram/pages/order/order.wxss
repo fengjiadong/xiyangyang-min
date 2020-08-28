@@ -99,7 +99,7 @@
 .food-detail {
   min-height: 80rpx;
   padding-bottom: 4px;
-  font-size: 24rpx;
+  font-size: 20rpx;
   color: #7b7b7b;
   line-height: 28rpx;
   display: -webkit-box;
@@ -115,15 +115,16 @@
 }
 
 .price-number {
-  padding: 0 4px 0 4rpx;
-  font-size: 32rpx;
+  /* padding: 0 4px 0 4rpx; */
+  font-size: 28rpx;
 }
 .price-after {
   font-size: 22rpx;
   color: #7B7B7B;
 }
 .price-none {
-  font-size: 22rpx;
+  padding-left: 6rpx;
+  font-size: 16rpx;
   color: #7b7b7b;
   text-decoration: line-through;
 }
@@ -134,7 +135,7 @@
 }
 .zhe-kou {
   padding-left: 4rpx;
-  font-size: 24rpx;
+  font-size: 16rpx;
   color: #FF0000;
 }
 .size-button {
@@ -277,4 +278,20 @@
 .text-tan {
   display: block;
   /* line-height: 45px; */
+}
+.hint-tip-box {
+  display: flex;
+  padding: 0 20rpx 20rpx;
+  font-size: 24rpx;
+  color: #04ADEF;
+  background-color: #ffffff;
+}
+.price-hint {
+  height: 40rpx;
+  padding: 0 18rpx;
+  margin-left: 30rpx;
+  font-size: 22rpx;
+  line-height: 38rpx;
+  border: 1px solid #04ADEF;
+  border-radius: 8rpx;
 }
