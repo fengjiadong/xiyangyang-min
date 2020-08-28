@@ -346,3 +346,17 @@
 .minus {
   color: #FF0000;
 }
+.no-list-box {
+  padding-top: 154rpx;
+}
+.no-list-text {
+  padding-top: 90rpx;
+  font-size: 36rpx;
+  color: #424242;
+  text-align: center;
+}
+.no-image-box {
+  width: 182px;
+  height: 208px;
+  margin: 0 auto;
+}

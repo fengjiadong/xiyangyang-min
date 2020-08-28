@@ -4,7 +4,7 @@
 }
 
 .swiper-bottom {
-  height: 190px;
+  height: 384rpx;
   margin-bottom: 46px;
 }
 
@@ -28,8 +28,8 @@
 }
 
 .type-back {
-  width: 80px;
-  height: 80px;
+  width: 160rpx;
+  height: 160rpx;
   margin: 0 auto;
   /* line-height: 80px; */
   border-radius: 50%;
@@ -48,7 +48,7 @@
 
 .type-title {
   padding-top: 20px;
-  font-size: 40rpx;
+  font-size: 46rpx;
   color: #1F0606;
   font-weight: bold;
 }

@@ -14,7 +14,7 @@
 
 .swiper-item {
   width:100%;
-  height: 190px;
+  height: 389rpx;
 }
 .order-text {
   width: 132rpx;
@@ -34,6 +34,7 @@
 
 .left-select-list {
   width: 170rpx;
+  font-size: 28rpx;
 }
 
 .right-select-content {
@@ -79,7 +80,7 @@
 
 .food-image {
   width: 196rpx;
-  height: 186rpx;
+  height: 147rpx;
 }
 
 .right-content {
@@ -247,6 +248,7 @@
 }
 
 .price-tip {
+  padding-right: 4rpx;
   font-size: 24rpx;
 }
 

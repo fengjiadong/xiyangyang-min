@@ -5,7 +5,7 @@
 }
 .food-image-box {
   width: 100%;
-  height: 270px;
+  height: 540rpx;
 }
 
 .food-image {
@@ -26,7 +26,6 @@
   padding-bottom: 10px;
   font-size: 32rpx;
   color: #424242;
-  font-weight: bold;
 }
 
 .food-price {
@@ -37,6 +36,7 @@
 .price-number {
   padding: 0 4px 0 4rpx;
   font-size: 46rpx;
+  font-weight: bold;
 }
 
 .price-after {
@@ -56,7 +56,7 @@
 .food-detail-title {
   padding-top: 12px;
   padding-bottom: 10px;
-  font-size: 32rpx;
+  font-size: 28rpx;
   color: #424242;
 }
 .type-title {
@@ -122,7 +122,8 @@
 }
 
 .price-tip {
-  font-size: 12px;
+  font-size: 24rpx;
+  padding-right: 4rpx;
 }
 
 .shop-taxi {
@@ -137,6 +138,22 @@
 }
 
 .have-select-text {
-  font-size: 12px;
+  font-size: 22rpx;
   color: #7B7B7B;
+}
+.price-logo {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 20rpx;
+}
+.zhe-kou {
+  padding-left: 4rpx;
+  font-size: 24rpx;
+  color: #FF0000;
+}
+.price-none {
+  padding-left: 6rpx;
+  font-size: 24rpx;
+  color: #7b7b7b;
+  text-decoration: line-through;
 }
