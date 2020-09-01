@@ -42,6 +42,16 @@
       <view class="text-lg">员工管理</view>
     </view>
   </view>
+   <view class="padding-sm" bindtap="goIndexImagePage">
+    <view class="bg-gradual-green padding radius text-center shadow-blur" >
+      <view class="text-lg">首页轮播图管理</view>
+    </view>
+  </view>
+   <view class="padding-sm" bindtap="goOrderImagePage">
+    <view class="bg-gradual-orange padding radius text-center shadow-blur" >
+      <view class="text-lg">点单页轮播图管理</view>
+    </view>
+  </view>
   <view class="padding-sm" bindtap="goSettingsPage" >
     <view class="bg-gradual-pink padding radius text-center shadow-blur">
       <view class="text-lg">设置</view>

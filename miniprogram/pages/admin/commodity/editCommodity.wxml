@@ -8,7 +8,7 @@
 			{{imgList.length}}/1
 		</view>
 	</view>
-  	<view class="cu-form-group">
+  <view class="cu-form-group">
 		<view class="grid col-4 grid-square flex-sub">
 			<view class="bg-img" wx:for="{{imgList}}" wx:key="{{imgIndex}}" bindtap="ViewImage" data-url="{{imgList[imgIndex]}}">
 				<image mode='aspectFill' lazy-load='true' src='{{imgList[imgIndex]}}' mode='aspectFill'></image>

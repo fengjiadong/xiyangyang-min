@@ -60,6 +60,7 @@ Page({
     foodType: [],
     sugarType: '正常糖',
     iceType: '正常冰',
+    originalPrice:0 // 原价
   },
   // 杯型选择
   glassSelect(e) {
@@ -70,7 +71,8 @@ Page({
     that.setData({
       selectedGlass: indexOne,
       glassType: that.data.glassList[indexOne].name,
-      price: this.changeTwoDecimal_f(this.changeTwoDecimal_f(that.data.glassList[indexOne].price) + this.data.specificationsPrice)
+      price: this.changeTwoDecimal_f(this.changeTwoDecimal_f(that.data.glassList[indexOne].price) + this.data.specificationsPrice),
+      originalPrice:that.data.glassList[indexOne].originalPrice,
     })
   },
   // 小料规格选择
@@ -242,21 +244,24 @@ Page({
         if (res.data[0].price && res.data[0].price > 0) {
           let price = {
             name: '常规',
-            price: discount && discount > 0 ? this.changeTwoDecimal_f(res.data[0].price * (discount / 10)) : res.data[0].price
+            price: discount && discount > 0 ? this.changeTwoDecimal_f(res.data[0].price * (discount / 10)) : res.data[0].price,
+            originalPrice: res.data[0].price
           }
           glassList.push(price)
         }
         if (res.data[0].priceTow && res.data[0].priceTow > 0) {
           let typeTow = {
             name: '大份',
-            price: discount && discount > 0 ? this.changeTwoDecimal_f(res.data[0].priceTow * (discount / 10)) : res.data[0].priceTow
+            price: discount && discount > 0 ? this.changeTwoDecimal_f(res.data[0].priceTow * (discount / 10)) : res.data[0].priceTow,
+            originalPrice: res.data[0].priceTow
           }
           glassList.push(typeTow)
         }
         if (res.data[0].priceThree && res.data[0].priceThree > 0) {
           let typeThree = {
             name: '超大份',
-            price: discount && discount > 0 ? this.changeTwoDecimal_f(res.data[0].priceThree * (discount / 10)) : res.data[0].priceThree
+            price: discount && discount > 0 ? this.changeTwoDecimal_f(res.data[0].priceThree * (discount / 10)) : res.data[0].priceThree,
+            originalPrice: res.data[0].priceThree
           }
           glassList.push(typeThree)
         }
@@ -270,6 +275,7 @@ Page({
           imageUrl: res.data[0].image,
           name: res.data[0].name,
           detail: res.data[0].detail,
+          originalPrice: price,
           price:discount && discount > 0 ?this.changeTwoDecimal_f(price * (discount / 10)):price,
           discount: res.data[0].discount
         })

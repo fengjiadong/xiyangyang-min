@@ -21,7 +21,22 @@ Page({
   onLoad: function (options) {
     this.isClose();
     // console.log('日期',)
+    this.getIndexImage()
     
+  },
+  // 获取首页轮播图
+  getIndexImage(){
+    db.collection("image").where({
+      type:'index'
+    }).get({
+      success: res => {
+        console.log(res)
+        this.setData({
+          background: res.data
+        })
+        wx.hideLoading() //让提示框隐藏、消失
+      }
+    })
   },
   isClose(){
     db.collection("setting").get({

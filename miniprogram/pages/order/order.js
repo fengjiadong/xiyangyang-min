@@ -6,9 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    settings:{},
+    // full:0,
+    // reduction:0,
     zheKou: '8.67',
     linePrice: '22',
-    background: ['cloud://xiyangyang-l5zon.7869-xiyangyang-l5zon-1302640380/image/five.jpg', '/images/img/four.jpg', '/images/img/seven.jpg'],
+    background: [],
     price:0, //显示在弹窗里的
     selected: 0,
     specificationsPrice:0,
@@ -73,6 +76,31 @@ Page({
     sugarType: '正常糖',
     iceType: '正常冰',
   },
+  // 获取轮播图
+  getIndexImage(){
+    db.collection("image").where({
+      type:'shopping'
+    }).get({
+      success: res => {
+        console.log(res)
+        this.setData({
+          background: res.data
+        })
+        wx.hideLoading() //让提示框隐藏、消失
+      }
+    })
+  },
+  // 得到满减
+  getSetings(){
+    db.collection("setting").get({
+      success: res=>{
+          this.setData({
+            settings:res.data[0]
+          })
+      }
+    })
+  },
+
   // 饮料类型选择
   typeSelect(e) {
     console.log(e);
@@ -299,8 +327,11 @@ Page({
    */
   onLoad: function (options) {
     // 获取type
+    this.getIndexImage();
     this.getType();
     this.getSpecifications();
+    this.getSetings();
+
   },
 
   /**

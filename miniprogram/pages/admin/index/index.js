@@ -145,4 +145,16 @@ Page({
       url: '../typeManager/typeManager',
     })
   },
+  goIndexImagePage(){
+    console.log('跳转到首页轮播图管理页')
+    wx.navigateTo({
+      url: '../imageManager/indexImage?type=index',
+    })
+  },
+  goOrderImagePage(){
+    console.log('跳转到点单页轮播图管理页')
+    wx.navigateTo({
+      url: '../imageManager/indexImage?type=shopping',
+    })
+  },
 })

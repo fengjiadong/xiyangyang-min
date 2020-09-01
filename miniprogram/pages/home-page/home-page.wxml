@@ -3,7 +3,7 @@
 	<swiper class="swiper-bottom" indicator-dots="true" autoplay="true" circular="true">
 		<block wx:for="{{background}}" wx:key="*this">
 			<swiper-item>
-				<image class="swiper-item" src="{{item}}"></image>
+				<image class="swiper-item" src="{{item.fileId}}"></image>
 			</swiper-item>
 		</block>
 	</swiper>

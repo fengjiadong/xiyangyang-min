@@ -1,0 +1,26 @@
+<!-- 图片上传开始 -->
+<view class="cu-bar bg-white margin-top">
+	<view class="action">
+		图片上传
+	</view>
+	<view class="action">
+		<text  bindtap="ChooseImage" class="cuIcon-cameraadd">上传</text>
+	</view>
+</view>
+<!-- <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
+				<text class="cuIcon-cameraadd"></text>
+			</view> -->
+
+<view wx:for="{{imageList}}">
+	<view class="cu-bar bg-white margin-top">
+		<view class="action">
+			<text class="cuIcon-title text-blue"></text>首页轮播图
+		</view>
+		<view class="padding flex flex-direction margin-tb-sm">
+			<button class="cu-btn round shadow bg-red " bindtap="deleteImage" data-index="{{index}}">删除</button>
+		</view>
+	</view>
+  <image class="bg-img bg-mask padding-tb-xl" src="{{item.fileId}}" style="height: 398rpx;width:100%"></image>
+	<!-- <view class="bg-img bg-mask padding-tb-xl" style="background-image: url('{{item.fileId}}');height: 414rpx;">
+	</view> -->
+</view>
