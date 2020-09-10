@@ -69,7 +69,7 @@ Page({
         }
         this.setData({
           dayWCorderCount:res.data.length,
-          dayWCpriceSum:priceSum
+          dayWCpriceSum: parseFloat(priceSum.toFixed(2))
         })
       }
     })
@@ -83,12 +83,17 @@ Page({
       success: res=>{
         console.log(res)
         let priceSum = 0;
-        for(let i =0;i< res.data.length;i++){
-          priceSum+=res.data[i].totalPrice
+        for(let i =0;i < res.data.length;i++){
+          priceSum += res.data[i].totalPrice
+          console.log(res.data[i].totalPrice)
         }
+        console.log(priceSum)
+        let dayCount = this.data.dayWCpriceSum+parseFloat(priceSum.toFixed(2))
         this.setData({
           dayWWCorderCount:res.data.length,
-          dayWWCpriceSum:priceSum
+          dayWWCpriceSum: parseFloat(priceSum.toFixed(2)),
+          dayCount : parseFloat(dayCount.toFixed(2))
+          
         })
       }
     })
@@ -107,7 +112,7 @@ Page({
         }
         this.setData({
           dayYTHorderCount:res.data.length,
-          dayYTHpriceSum:priceSum
+          dayYTHpriceSum:parseFloat(priceSum.toFixed(2))
         })
       }
     })

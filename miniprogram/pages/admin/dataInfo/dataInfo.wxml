@@ -2,7 +2,7 @@
 <!-- {{dayOrderCount}}-{{dayPriceSum}} -->
 <view class="cu-form-group">
 		<view class="title">日期选择</view>
-		<picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
+		<picker mode="date" value="{{date}}" start="2020-09-01" end="2025-09-01" bindchange="DateChange">
 			<view class="picker">
 				{{date}}
 			</view>
@@ -23,6 +23,6 @@
   <view class="padding">如需核对当日账单请登录微信商户端</view>
   <view class="padding">或在超级管理员微信中的【微信支付商家助手】中核对</view>
 		<view class="solid-bottom text-xxl padding">
-			当日微信商户总收入:<text class="text-price text-red">{{dayWCpriceSum+dayWWCpriceSum}}</text>
+			当日微信商户总收入:<text class="text-price text-red">{{dayCount}}</text>
 		</view>
 	</view>

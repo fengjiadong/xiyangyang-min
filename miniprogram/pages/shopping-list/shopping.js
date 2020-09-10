@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    settings:{},
+    settings: {},
     peiSongPrice: 3, // 配送费
     reduction: 0, // 减去的金额
     shopList: [{
@@ -43,7 +43,9 @@ Page({
     remarks: '', //留言
     logged: false,
     openId: '',
-    isClose: false
+    isClose: false,
+    payStatus: 0, // 支付状态，0未在支付状态、1正在支付、2支付成功
+    successOrderId: ''
   },
   // 从数据库得到购物车
   getShopping() {
@@ -181,7 +183,7 @@ Page({
                   total = total + ele.totalPrice;
                 }
               })
-          
+
               that.setData({
                 totalPrice: that.changeTwoDecimal_f(total),
               })
@@ -268,14 +270,7 @@ Page({
               duration: 2000
             })
           } else {
-            if (this.data.totalPrice < this.data.minPrice) {
-              wx.showToast({
-                title: '起送价最低' + this.data.minPrice + '元哦~',
-                icon: 'none',
-                duration: 2000
-              })
-              return;
-            }
+
             this.setData({
               sizeContentWindow: false
             })
@@ -354,25 +349,26 @@ Page({
   },
   // 在数据库中生成订单然后跳转到详情页
   toOrderInfo(order) {
+    this.setData({
+      payStatus: 2
+    })
     wx.cloud.callFunction({
       name: 'addOrder',
       data: order,
       success: res => {
         console.log('订单已生成:', res)
         if (res.result.result._id) {
-          wx.showToast({
-            title: '正在跳转订单详情页',
-            icon: 'success',
-            duration: 1000,
-          })
           this.addRecord(res.result.result._id, order)
           // 删除购物车里已购买的商品
           this.deletePayShopping()
-          setTimeout(function () {
-            wx.navigateTo({
-              url: '../shopping-list-detail/shopping-list-detail?id=' + res.result.result._id
-            })
-          }, 1000)
+          this.setData({
+            successOrderId: res.result.result._id
+          })
+        } else {
+          // 支付成功了，但是存数据库失败了，请对本页面截图，然后联系商户退款.
+          wx.showToast({
+            title: '订单生产失败，请联系商家.',
+          })
         }
       }
     })
@@ -394,7 +390,6 @@ Page({
         wx.hideLoading({
           complete: (res) => { },
         })
-
       },
       fail(res) {
         wx.hideLoading({
@@ -404,11 +399,50 @@ Page({
       }
     })
   },
-  // 微信支付
+  // 异步查询支付状态
+  queryPayStatus(order, count) {
+    console.log(count + '异步处理：' + this.data.payStatus)
+    if (this.data.payStatus === 1) {
+      // 执行查询方法
+      // 如果查询到支付成功，那么就创建工单信息
+      let that = this;
+      wx.cloud.callFunction({
+        name: "zhifu",
+        data: {
+          isQuery: true,
+          orderid: order.orderNum,
+          nonceStr: order.orderNum //调用自己的uuid函数
+        },
+        success(res) {
+          if (res.result.returnCode === 'SUCCESS') {
+            console.log("异步查询结果:", res.result.tradeStateDesc + "-" + res.result.tradeState)
+            if (res.result.tradeState === 'SUCCESS') {
+              console.log('支付成功！')
+              that.toOrderInfo(order);
+            } else {
+              setTimeout(function () {
+                that.queryPayStatus(order, ++count);
+              }, 2000)
+            }
+          } else {
+            setTimeout(function () {
+              that.queryPayStatus(order, ++count);
+            }, 1000)
+          }
+        }
+      });
+
+    }
+  },
+  // 微信支付-调用微信底层
   pay(payData, order) {
     var that = this;
+    that.setData({
+      payStatus: 1
+    })
     const payment = payData.payment //这里注意，上一个函数的result中直接整合了这里要用的参数，直接展开即可使用
     console.log(payment)
+    // that.queryPayStatus(order)
     wx.requestPayment({
       appId: payment.appId,
       nonceStr: payment.nonceStr,
@@ -418,9 +452,22 @@ Page({
       timeStamp: payment.timeStamp,
       success(res) {
         console.log('pay success', res)
+        wx.showToast({
+          title: '正在加载',
+          icon: 'success',
+          duration: 2000,
+        })
         //跳转到支付成功页面
         console.log('支付成功~', order)
-        that.toOrderInfo(order)
+        that.setData({
+          payStatus: 2
+        })
+       
+        setTimeout(function () {
+          wx.navigateTo({
+            url: '../shopping-list-detail/shopping-list-detail?id=' + that.data.successOrderId
+          })
+        }, 2000)
       },
       fail(res) {
         // console.error('pay fail', res)
@@ -431,26 +478,28 @@ Page({
           duration: 1000,
           mask: false
         })
+        that.setData({
+          payStatus: 0
+        })
       }
     })
+    this.queryPayStatus(order, 0)
   },
-  // 微信支付
+  // 微信支付-第一步，调用云函数得到相关的参数，然后调用pay方法.
   payment(order) {
     console.log('开始调用微信支付')
     wx.showLoading({
       title: '加载中',
     })
-    // this.toOrderInfo(order);
-    // return;
     let that = this;
     var uuid = order.orderNum //调用自己的uuid函数
-    // var uuid = this.uuid(32,32)
     var body = "喜羊羊-茶饮"
     console.log("uuid", uuid)
     wx.cloud.callFunction({
       name: "zhifu",
       data: {
         body: body,
+        isQuery: false,
         orderid: uuid,
         money: order.totalPrice, //支付金额
         nonceStr: uuid //调用自己的uuid函数
@@ -495,6 +544,14 @@ Page({
         }
         break;
       case '外卖配送':
+        if (this.data.totalPrice < this.data.minPrice) {
+          wx.showToast({
+            title: '起送价最低' + this.data.minPrice + '元哦~',
+            icon: 'none',
+            duration: 2000
+          })
+          return;
+        }
         // console.log('外卖配送')
         // 生成订单然后支付
         this.generate()
@@ -579,10 +636,10 @@ Page({
     })
 
     db.collection("setting").get({
-      success: res=>{
-          this.setData({
-            settings:res.data[0]
-          })
+      success: res => {
+        this.setData({
+          settings: res.data[0]
+        })
       }
     })
 
@@ -680,7 +737,7 @@ Page({
     }, 500)
   },
   // 计算满减
-  fullReduction(){
+  fullReduction() {
     console.log(this.data.settings)
 
     let total = 0;
@@ -689,23 +746,23 @@ Page({
       if (ele.isActive) {
         total = total + ele.totalPrice;
         if (!ele.discount || ele.discount == 0) {
-          totalFull = totalFull+ ele.totalPrice;
+          totalFull = totalFull + ele.totalPrice;
         }
       }
     })
-    if(totalFull >= this.data.settings.full){
+    if (totalFull >= this.data.settings.full) {
       total = total - this.data.settings.reduction;
       this.setData({
         totalPrice: this.changeTwoDecimal_f(total),
-        reduction:  this.data.settings.reduction
+        reduction: this.data.settings.reduction
       })
-    }else{
+    } else {
       this.setData({
         totalPrice: this.changeTwoDecimal_f(total),
-        reduction:  0
+        reduction: 0
       })
     }
-   
+
   },
   uuid(len, radix) {
     var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
